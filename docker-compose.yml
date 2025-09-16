@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: hangman-postgres
+    environment:
+      POSTGRES_DB: hangman
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - hangman_data:/var/lib/postgresql/data
+    restart:
+      always
+
+volumes:
+  hangman_data:
