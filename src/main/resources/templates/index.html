@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Document</title>
 </head>
 <body>
-    <p>Testing word: <span th:text="${word}">_ _ _</span></p>
+    <div class="left">
+        <img id="hangman" src="/images/0.png" alt="Виселица" width="250">
+        <div id="word">_ _ _ _ _</div>
+    </div>
+    <div class="right" id="letters">
+    </div>
+    <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

@@ -1,0 +1,113 @@
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 0;
+    min-height: 100vh;
+
+
+    background: linear-gradient(270deg, #6dd5ed, #2193b0, #ff7eb3, #6dd5ed);
+    background-size: 600% 600%;
+    animation: gradientShift 15s ease infinite;
+
+    color: #fff;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.left, .right {
+    background: none;
+    box-shadow: none;
+    padding: 20px;
+}
+
+
+.left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.left img {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+#word {
+    font-size: 36px;
+    letter-spacing: 10px;
+    font-weight: bold;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+.right {
+    flex: 1;
+    display: grid;
+
+   grid-template-columns: repeat(6, 1fr);
+   gap: 12px;
+   max-width: 400px;
+   padding: 5px;
+   justify-items: center;
+    justify-content: center;
+       max-width: 420px;
+       margin: 0 auto;
+       padding: 10px;
+}
+
+.letter-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    backdrop-filter: blur(5px);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.letter-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.letter-btn:disabled {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .right {
+        max-width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    }
+
+    .left img {
+        max-width: 250px;
+    }
+
+    #word {
+        font-size: 28px;
+        letter-spacing: 6px;
+    }
+}

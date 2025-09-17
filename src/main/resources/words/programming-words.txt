@@ -1,0 +1,48 @@
+# Programming and technology related words
+
+# Programming languages
+java
+python
+javascript
+kotlin
+scala
+rust
+golang
+
+# Concepts
+algorithm
+function
+variable
+object
+class
+method
+interface
+polymorphism
+inheritance
+abstraction
+encapsulation
+
+# Technologies
+database
+framework
+library
+container
+microservice
+kubernetes
+docker
+jenkins
+git
+maven
+gradle
+
+# Web technologies
+html
+css
+bootstrap
+angular
+react
+vue
+node
+express
+spring
+hibernate
