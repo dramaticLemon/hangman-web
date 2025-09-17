@@ -26,8 +26,19 @@ public class GameDto {
         );
     }
 
-    public String getCurrentState() { return currentState; }
-    public int getRemainingTries() { return remainingTries; }
-    public GameStatus getStatus() { return status; }
-    public String getWord() { return word; }
+    public String getCurrentState() {
+        return currentState;
+    }
+
+    public int getRemainingTries() {
+        return remainingTries;
+    }
+
+    public GameStatus getStatus() {
+        return status;
+    }
+
+    public String getWord() {
+        return word;
+    }
 }

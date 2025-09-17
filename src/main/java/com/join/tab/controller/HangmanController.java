@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@RestController
 @RequestMapping("/api/hangman")
 public class HangmanController {
 
@@ -51,7 +52,7 @@ public class HangmanController {
             response.put("currentState", result.getCurrentState());
             response.put("remainingTries", result.getRemainingTries());
             response.put("status", result.getStatus());
-            response.put("wasCorrect", result.wasCorrect());
+            response.put("wasCorrect", result.isWasCorrect());
 
             if (result.getWord() != null) {
                 response.put("word", result.getWord());

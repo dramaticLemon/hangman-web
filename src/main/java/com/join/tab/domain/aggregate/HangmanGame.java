@@ -6,8 +6,8 @@ import com.join.tab.domain.event.GameStartedEvent;
 import com.join.tab.domain.event.LetterGuessedEvent;
 import com.join.tab.domain.exception.InvalidGameStatusException;
 import com.join.tab.domain.exception.LetterAlreadyGuessedException;
-import com.join.tab.domain.model.GameId;
-import com.join.tab.domain.model.Letter;
+import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.model.valueobject.Letter;
 import com.join.tab.domain.model.Word;
 import com.join.tab.domain.enums.GameStatus;
 
@@ -51,7 +51,7 @@ public class HangmanGame {
 
     public GuessResult guessResult(Letter letter) {
         validateGameInProgress();
-        validateLetterNotGuesse(letter);
+        validateLetterNotGuessed(letter);
 
         guessedLetters.add(letter);
         boolean isCorrect = word.contains(letter.getValue());
@@ -82,7 +82,7 @@ public class HangmanGame {
         }
     }
 
-    private void validateLetterNotGuesse(Letter letter) {
+    private void validateLetterNotGuessed (Letter letter) {
         if (hasGuessedLetter(letter)) {
             throw new LetterAlreadyGuessedException(letter.getValue());
         }
@@ -171,4 +171,45 @@ public class HangmanGame {
     public void clearEvents() {
         events.clear();
     }
+
+    // value object for guess result
+    public static class GuessResult {
+
+        private final String currentState;
+        private final int remainingTries;
+        private final GameStatus gameStatus;
+        private final boolean wasCorrect;
+        private final boolean wasAlreadyGuessed;
+
+        public GuessResult(
+                String currentState, int remainingTries, GameStatus gameStatus,
+                boolean wasCorrect, boolean wasAlreadyGuessed) {
+            this.currentState = currentState;
+            this.remainingTries = remainingTries;
+            this.gameStatus = gameStatus;
+            this.wasCorrect = wasCorrect;
+            this.wasAlreadyGuessed = wasAlreadyGuessed;
+        }
+
+        public String getCurrentState () {
+            return currentState;
+        }
+
+        public int getRemainingTries () {
+            return remainingTries;
+        }
+
+        public GameStatus getGameStatus () {
+            return gameStatus;
+        }
+
+        public boolean isWasCorrect () {
+            return wasCorrect;
+        }
+
+        public boolean isWasAlreadyGuessed () {
+            return wasAlreadyGuessed;
+        }
+    }
+
 }

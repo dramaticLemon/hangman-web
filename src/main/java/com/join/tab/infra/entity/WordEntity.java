@@ -5,17 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "words", indexes = {
         @Index(name = "idx_word_length", columnList = "length"),
         @Index(name = "idx_word_category", columnList = "category")
 })
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class WordEntity {
@@ -47,7 +43,7 @@ public class WordEntity {
     @PrePersist
     @PreUpdate
     private void validateAndNormalize() {
-        if (value == null) {
+        if (value != null) {
             this.value = value.toLowerCase().trim();
             this.length = this.value.length();
 
@@ -66,5 +62,53 @@ public class WordEntity {
 
     public enum DiffucultyLevel {
         EASY, MEDIUM, HARD;
+    }
+
+    public Long getId () {
+        return id;
+    }
+
+    public void setId (Long id) {
+        this.id = id;
+    }
+
+    public String getValue () {
+        return value;
+    }
+
+    public void setValue (String value) {
+        this.value = value;
+    }
+
+    public Integer getLength () {
+        return length;
+    }
+
+    public void setLength (Integer length) {
+        this.length = length;
+    }
+
+    public String getCategory () {
+        return category;
+    }
+
+    public void setCategory (String category) {
+        this.category = category;
+    }
+
+    public DiffucultyLevel getDifficultlyLevel () {
+        return difficultlyLevel;
+    }
+
+    public void setDifficultlyLevel (DiffucultyLevel difficultlyLevel) {
+        this.difficultlyLevel = difficultlyLevel;
+    }
+
+    public Boolean getActive () {
+        return isActive;
+    }
+
+    public void setIsActive (Boolean active) {
+        isActive = active;
     }
 }

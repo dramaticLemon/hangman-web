@@ -2,7 +2,8 @@ package com.join.tab.controller;
 
 import com.join.tab.application.service.WordManagementService;
 import com.join.tab.infra.service.WordLoadersService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin/words")
-@Slf4j
 public class WordManagementController {
+
+    private static final Logger log = LoggerFactory.getLogger(WordManagementController.class);
 
     private final WordManagementService wordManagementService;
 

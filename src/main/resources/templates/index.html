@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <title>Document</title>
+    <title>Hangman</title>
 </head>
 <body>
     <div class="left">
-        <img id="hangman" src="/images/0.png" alt="Виселица" width="250">
+        <img id="hangman" src="/images/0.png" alt="Hangman" width="250">
         <div id="word">_ _ _ _ _</div>
+    </div>
+    <div id="game-over" style="display:none; text-align:center; margin-top:20px;">
+        <p id="game-over-message" style="font-size:1.5em; font-weight:bold;"></p>
+        <button id="restart-btn" onclick="restartGame()">Continue</button>
     </div>
     <div class="right" id="letters">
     </div>

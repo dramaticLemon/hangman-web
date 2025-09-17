@@ -1,8 +1,8 @@
 package com.join.tab.infra.repository.memory;
 
 import com.join.tab.domain.aggregate.HangmanGame;
-import com.join.tab.domain.model.GameId;
-import com.join.tab.domain.model.Letter;
+import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.model.valueobject.Letter;
 import com.join.tab.domain.model.Word;
 import com.join.tab.domain.repository.GameRepository;
 import com.join.tab.domain.enums.GameStatus;
@@ -31,7 +31,7 @@ public class InMemoryGameRepository implements GameRepository {
     }
 
     @Override
-    public Optional<HangmanGame> findById(GameId gameId) throws IllegalAccessException {
+    public Optional<HangmanGame> findById(GameId gameId){
         GameData gameData = games.get(gameId);
         if (gameData == null) {
             return Optional.empty();

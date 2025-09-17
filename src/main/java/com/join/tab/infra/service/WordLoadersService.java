@@ -3,7 +3,8 @@ package com.join.tab.infra.service;
 import com.join.tab.infra.entity.WordEntity;
 import com.join.tab.infra.repository.jpa.WordJpaRepository;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
@@ -22,11 +23,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 @Service
-@Slf4j
 public class WordLoadersService {
+    private static final Logger log = LoggerFactory.getLogger(WordLoadersService.class);
 
     private final WordJpaRepository wordJpaRepository;
-    private final Pattern validWordPattern = Pattern.compile("\"^[a-zA-Z]{3,50}$\"");
+    private final Pattern validWordPattern = Pattern.compile("^[a-zA-Z]{3,50}$");
     private final Set<String> bannedWords = Set.of(
             "badword1", "badword2"
     );

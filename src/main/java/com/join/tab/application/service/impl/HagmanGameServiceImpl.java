@@ -2,14 +2,16 @@ package com.join.tab.application.service.impl;
 
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.exception.GameNotFoundException;
-import com.join.tab.domain.model.GameId;
-import com.join.tab.domain.model.Letter;
+import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.model.valueobject.Letter;
 import com.join.tab.domain.repository.GameRepository;
 import com.join.tab.domain.service.GameFactory;
 import com.join.tab.application.dto.GameDto;
 import com.join.tab.application.dto.GuessDto;
 import com.join.tab.application.service.HangmanGameService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class HagmanGameServiceImpl implements HangmanGameService {
 
     private final GameRepository gameRepository;
@@ -41,7 +43,7 @@ public class HagmanGameServiceImpl implements HangmanGameService {
                 .orElseThrow(() -> new GameNotFoundException("Game not found for session: " + sessionId));
 
         Letter domainLetter = new Letter(letter);
-        HangmanGame.GuessResult result = game.guessLetter(domainLetter);
+        HangmanGame.GuessResult result = game.guessResult(domainLetter);
 
         gameRepository.save(game);
 

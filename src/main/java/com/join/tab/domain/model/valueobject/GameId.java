@@ -1,11 +1,9 @@
-package com.join.tab.domain.model;
+package com.join.tab.domain.model.valueobject;
 
-import lombok.Getter;
 
 import java.util.Objects;
 
 // value object
-@Getter
 public class GameId {
     private final String value;
 
@@ -16,6 +14,9 @@ public class GameId {
         this.value = value;
     }
 
+    public String getValue() {
+        return this.value;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

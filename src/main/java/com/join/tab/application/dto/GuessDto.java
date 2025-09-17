@@ -28,15 +28,33 @@ public class GuessDto {
                 result.getRemainingTries(),
                 result.getGameStatus(),
                 word,
-                result.wasCorrect(),
+                result.isWasCorrect(),
                 ' ' // You'd need to pass the guessed letter here
         );
     }
 
-    public String getCurrentState() { return currentState; }
-    public int getRemainingTries() { return remainingTries; }
-    public GameStatus getStatus() { return status; }
-    public String getWord() { return word; }
-    public boolean wasCorrect() { return wasCorrect; }
-    public char getGuessedLetter() { return guessedLetter; }
+    public String getCurrentState() {
+        return this.currentState;
+    }
+
+    public int getRemainingTries() {
+        return this.remainingTries;
+    }
+
+    public GameStatus getStatus() {
+        return this.status;
+    }
+
+    public String getWord() {
+        return this.word;
+    }
+
+    public boolean isWasCorrect() {
+        return this.wasCorrect;
+    }
+
+    public char getGuessedLetter() {
+        return this.guessedLetter;
+    }
+
 }

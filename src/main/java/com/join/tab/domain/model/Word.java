@@ -5,17 +5,19 @@ import lombok.Getter;
 import java.util.Objects;
 
 // domain models
-@Getter
 public class Word {
     private final String value;
 
-    public Word(String value) throws IllegalAccessException {
+    public Word(String value) {
         if (value == null || value.trim().isEmpty()) {
-            throw new IllegalAccessException("Word cannot be null or empty");
+            throw new IllegalArgumentException("Word cannot be null or empty");
         }
         this.value = value;
     }
 
+    public String getValue() {
+        return this.value;
+    }
     public int getLength() {
         return value.length();
     }

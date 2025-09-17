@@ -1,11 +1,8 @@
-package com.join.tab.domain.model;
-
-import lombok.Getter;
+package com.join.tab.domain.model.valueobject;
 
 import java.util.Objects;
 
 // value object
-@Getter
 public class Letter {
     private final char value;
 
@@ -16,6 +13,9 @@ public class Letter {
         this.value = Character.toLowerCase(value);
     }
 
+    public char getValue() {
+        return this.value;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,6 +1,7 @@
 package com.join.tab.infra.repository.memory;
 
 import com.join.tab.domain.model.Word;
+import com.join.tab.domain.repository.WordRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;

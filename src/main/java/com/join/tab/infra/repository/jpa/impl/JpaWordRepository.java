@@ -4,16 +4,21 @@ import com.join.tab.domain.model.Word;
 import com.join.tab.domain.repository.WordRepository;
 import com.join.tab.infra.entity.WordEntity;
 import com.join.tab.infra.repository.jpa.WordJpaRepository;
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.Random;
 
 @Repository
-@Slf4j
+@Primary
 public class JpaWordRepository implements WordRepository {
 
+    private static final Logger log = LoggerFactory.getLogger(JpaWordRepository.class);
     private final WordJpaRepository jpaRepository;
     private final Random random = new Random();
 
