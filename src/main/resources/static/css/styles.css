@@ -30,8 +30,10 @@ body {
 /* NAV */
 .navbar {
     width: 100%;
+    position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: black;
     padding: 10px 0;
     margin-top: 50px;
@@ -67,12 +69,12 @@ body {
 /* ====================================== */
 
 .scene {
-    margin-top: 300px;
-    margin-bottom: 400px;
+    margin-top: 100px;
+    margin-bottom: 200px;
     display: flex;
-    justify-content: center; /* Центрирует элементы по горизонтали */
-    align-items: center; /* Выравнивает элементы по верху */
-    gap: 120px;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
 }
 
 /* LEFT PART */
@@ -89,7 +91,7 @@ body {
 }
 
 .image-container img {
-    max-width: 300px;
+    max-width: 550px;
     display: block;
 }
 
@@ -230,7 +232,7 @@ body {
     gap: 80px;
     width: max-content;
     position: relative;
-    top: -100px;
+    top: -70px;
 }
 
 .letter-btn {
@@ -274,6 +276,26 @@ body {
     background: rgba(0,0,0,0.8);
     color: rgba(100,100,100,0.8);
     cursor: not-allowed;
+}
+
+.letter-btn.language-btn {
+    position: absolute; /* кнопка вне потока */
+    right: 20px;        /* отступ от правого края */
+    top: 50%;
+    transform: translateY(-50%); /* вертикальное выравнивание */
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    background: rgba(255,255,255,0.1);
+    color: rgb(59, 57, 52);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.letter-btn.language-btn:hover {
+    background: rgba(255,255,255,0.2);
 }
 
 #game-over {
