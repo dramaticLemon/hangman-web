@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const englishLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     const uaLetters = 'АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'.split('');
     let currentLetters = englishLetters; // current
+    let usedLetters = new Set();
 
     const wordEl = document.getElementById('word');
     const hangmanEl = document.getElementById('hangman');
@@ -12,17 +13,29 @@ window.addEventListener('DOMContentLoaded', () => {
     const gameOverMessage = document.getElementById('game-over-message');
     const lettersContainer = document.getElementById('letters');
     const languageBtn = document.querySelector('.language-btn');
-    const lettersInner = document.getElementById('letters-inner');    // ======== Render letter buttons ========
+    const lettersInner = document.getElementById('letters-inner');
 
-    function renderLetterButtons(lettersToRender) {
-        lettersContainer.innerHTML = '';
-        lettersToRender.forEach(letter => {
+    // ======== Render letter buttons ========
+    function renderLetterButtons(letters) {
+        const lettersGrid = document.querySelector('.letters-grid');
+        lettersGrid.innerHTML = ''; // очищаем старые кнопки
+
+        letters.forEach(letter => {
             const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.innerText = letter;
-            btn.className = 'letter-btn';
-            btn.addEventListener('click', () => guessLetter(letter, btn));
-            lettersContainer.appendChild(btn);
+            btn.textContent = letter;
+            btn.classList.add('letter-btn');
+
+            if (usedLetters.has(letter)) {
+                btn.disabled = true;
+            }
+
+            btn.addEventListener('click', () => {
+                guessLetter(letter, btn);
+                usedLetters.add(letter);
+                btn.disabled = true;
+            });
+
+            lettersGrid.appendChild(btn);
         });
     }
 
@@ -228,6 +241,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // ======== Guess letter logic ========
     async function guessLetter(letter, btn) {
+        usedLetters.add(letter);
         btn.disabled = true;
 
         try {
