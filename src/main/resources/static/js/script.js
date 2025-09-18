@@ -73,13 +73,6 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.letter-btn').forEach(btn => btn.disabled = false);
     }
 
-    // show modal window
-    function showGameOverMessage(message) {
-        disableAllButtons();
-        gameOverMessage.innerText = message;
-        gameOverEl.style.display = 'flex';
-    }
-
     // start new game
     async function startGame() {
         try {
@@ -265,6 +258,13 @@ window.addEventListener('DOMContentLoaded', () => {
         } catch (e) {
             console.error('Error:', e);
         }
+    }
+
+    // show modal window
+    function showGameOverMessage(message) {
+        disableAllButtons();
+        gameOverMessage.innerText = message;
+        gameOverEl.style.display = 'flex';
     }
 
     // ======== Flash spotlight ========

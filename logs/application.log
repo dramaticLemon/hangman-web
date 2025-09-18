@@ -2373,3 +2373,1224 @@
 2025-09-18 16:58:39 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-09-18 16:58:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-09-18 16:58:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:04:35 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 36333 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:04:35 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:04:35 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:04:35 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:04:35 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:04:35 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:04:35 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 1 JPA repository interface.
+2025-09-18 17:04:35 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:04:35 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:04:35 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:04:35 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:04:35 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 568 ms
+2025-09-18 17:04:36 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:04:36 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:04:36 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:04:36 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:04:36 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:04:36 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@50ae5cac
+2025-09-18 17:04:36 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:04:36 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:04:36 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:04:36 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:04:36 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:04:36 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:04:37 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:04:37 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:04:37 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:04:37 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:04:37 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.211 seconds (process running for 2.383)
+2025-09-18 17:04:37 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:04:37 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:04:37 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:04:38 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:04:38 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:04:38 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-09-18 17:04:38 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:04:38 INFO  c.join.tab.application.dto.GameDto - octopus
+2025-09-18 17:04:38 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:04:38 INFO  c.join.tab.application.dto.GameDto - dolphin
+2025-09-18 17:05:00 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:05:00 INFO  c.join.tab.application.dto.GameDto - turtle
+2025-09-18 17:14:54 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:14:54 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:14:54 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:14:54 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:14:54 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:17:55 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 36817 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:17:55 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:17:55 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:17:55 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:17:55 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:17:55 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:17:55 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 1 JPA repository interface.
+2025-09-18 17:17:55 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:17:55 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:17:55 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:17:55 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:17:55 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 599 ms
+2025-09-18 17:17:55 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:17:56 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:17:56 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:17:56 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:17:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:17:56 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@23537e70
+2025-09-18 17:17:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:17:56 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:17:56 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:17:56 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:17:56 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:17:56 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:17:57 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:17:57 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:17:57 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:17:57 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:17:57 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.248 seconds (process running for 2.416)
+2025-09-18 17:17:57 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:17:57 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:17:57 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:17:59 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:17:59 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:17:59 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:17:59 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:17:59 INFO  c.join.tab.application.dto.GameDto - dragonfly
+2025-09-18 17:18:00 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:18:00 INFO  c.join.tab.application.dto.GameDto - friend
+2025-09-18 17:18:27 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:18:27 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:18:27 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:18:27 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:18:27 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:21:34 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 36996 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:21:34 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:21:34 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:21:34 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:21:34 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:21:34 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:21:34 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-09-18 17:21:34 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:21:34 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:21:34 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:21:34 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:21:34 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 550 ms
+2025-09-18 17:21:34 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:21:34 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:21:34 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:21:35 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:21:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:21:35 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7df2a5b0
+2025-09-18 17:21:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:21:35 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:21:35 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:21:35 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:21:35 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:21:35 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:21:36 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:21:36 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:21:36 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:21:36 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:21:36 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.138 seconds (process running for 2.304)
+2025-09-18 17:21:36 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:21:36 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:21:36 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:21:42 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:21:42 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:21:42 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:21:42 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:21:42 INFO  c.join.tab.application.dto.GameDto - spring
+2025-09-18 17:21:42 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:21:42 INFO  c.join.tab.application.dto.GameDto - government
+2025-09-18 17:21:45 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:21:45 INFO  c.join.tab.application.dto.GameDto - dog
+2025-09-18 17:21:47 INFO  c.join.tab.application.dto.GameDto - dog
+2025-09-18 17:21:47 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:21:47 INFO  c.join.tab.application.dto.GameDto - git
+2025-09-18 17:21:50 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:21:50 INFO  c.join.tab.application.dto.GameDto - jellyfish
+2025-09-18 17:21:54 INFO  c.join.tab.application.dto.GameDto - jellyfish
+2025-09-18 17:21:54 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:21:54 INFO  c.join.tab.application.dto.GameDto - door
+2025-09-18 17:22:05 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:22:05 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:22:05 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:22:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:22:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:27:36 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 37314 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:27:36 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:27:36 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:27:36 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:27:36 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:27:37 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:27:37 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interface.
+2025-09-18 17:27:37 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:27:37 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:27:37 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:27:37 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:27:37 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 560 ms
+2025-09-18 17:27:37 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:27:37 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:27:37 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:27:37 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:27:37 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:27:37 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@56d369e3
+2025-09-18 17:27:37 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:27:37 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:27:37 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:27:38 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:27:38 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:27:38 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:27:38 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:27:38 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:27:38 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:27:38 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:27:38 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.224 seconds (process running for 2.452)
+2025-09-18 17:27:38 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:27:38 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:27:38 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:27:41 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:27:41 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:27:41 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:27:41 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:27:41 INFO  c.join.tab.application.dto.GameDto - jellyfish
+2025-09-18 17:27:41 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:27:41 INFO  c.join.tab.application.dto.GameDto - cow
+2025-09-18 17:27:49 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:27:49 INFO  c.join.tab.application.dto.GameDto - html
+2025-09-18 17:28:03 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:28:03 INFO  c.join.tab.application.dto.GameDto - library
+2025-09-18 17:28:05 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:28:05 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:28:05 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:28:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:28:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:38:45 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 37603 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:38:45 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:38:45 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:38:46 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:38:46 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:38:46 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:38:46 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interface.
+2025-09-18 17:38:46 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:38:46 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:38:46 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:38:46 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:38:46 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 619 ms
+2025-09-18 17:38:46 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:38:46 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:38:46 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:38:46 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:38:46 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:38:47 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@23537e70
+2025-09-18 17:38:47 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:38:47 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:38:47 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:38:47 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:38:47 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:38:47 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:38:48 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:38:48 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:38:48 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:38:48 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:38:48 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.477 seconds (process running for 2.652)
+2025-09-18 17:38:48 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:38:48 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:38:48 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:38:54 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:38:54 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:38:54 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:38:54 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:38:54 INFO  c.join.tab.application.dto.GameDto - node
+2025-09-18 17:38:54 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:38:54 INFO  c.join.tab.application.dto.GameDto - rust
+2025-09-18 17:39:05 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:39:05 INFO  c.join.tab.application.dto.GameDto - beautiful
+2025-09-18 17:39:20 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:39:20 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:39:20 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:39:20 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:39:20 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:39:55 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 37678 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:39:55 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:39:55 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:39:55 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:39:55 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:39:56 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:39:56 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-09-18 17:39:56 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:39:56 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:39:56 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:39:56 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:39:56 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 556 ms
+2025-09-18 17:39:56 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:39:56 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:39:56 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:39:56 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:39:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:39:56 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@420a53ba
+2025-09-18 17:39:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:39:56 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:39:56 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:39:57 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:39:57 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:39:57 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:39:57 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:39:57 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:39:57 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:39:57 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:39:57 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.156 seconds (process running for 2.329)
+2025-09-18 17:39:57 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:39:57 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:39:57 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:40:01 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:40:01 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:40:01 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:40:01 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:40:01 INFO  c.join.tab.application.dto.GameDto - turtle
+2025-09-18 17:40:01 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:40:01 INFO  c.join.tab.application.dto.GameDto - vue
+2025-09-18 17:40:11 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:40:11 INFO  c.join.tab.application.dto.GameDto - variable
+2025-09-18 17:41:05 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:41:05 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:41:05 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:41:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:41:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:42:43 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 37789 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:42:43 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:42:43 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:42:43 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:42:43 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:42:43 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:42:43 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 1 JPA repository interface.
+2025-09-18 17:42:43 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:42:43 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:42:43 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:42:43 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:42:43 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 591 ms
+2025-09-18 17:42:43 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:42:43 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:42:43 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:42:43 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:42:43 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:42:44 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1429554
+2025-09-18 17:42:44 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:42:44 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:42:44 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:42:44 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:42:44 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:42:44 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:42:45 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:42:45 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:42:45 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:42:45 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:42:45 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.468 seconds (process running for 2.648)
+2025-09-18 17:42:45 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:42:45 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:42:45 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:42:47 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:42:47 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:42:47 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:42:47 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:42:47 INFO  c.join.tab.application.dto.GameDto - python
+2025-09-18 17:42:47 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:42:47 INFO  c.join.tab.application.dto.GameDto - pig
+2025-09-18 17:43:02 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:43:02 INFO  c.join.tab.application.dto.GameDto - sheep
+2025-09-18 17:43:19 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:43:19 INFO  c.join.tab.application.dto.GameDto - hibernate
+2025-09-18 17:45:01 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:45:01 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:45:01 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:45:01 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:45:01 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:45:04 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 37944 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:45:04 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:45:04 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:45:04 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:45:04 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:45:04 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:45:04 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 1 JPA repository interface.
+2025-09-18 17:45:05 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:45:05 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:45:05 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:45:05 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:45:05 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 730 ms
+2025-09-18 17:45:05 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:45:05 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:45:05 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:45:05 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:45:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:45:05 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7df2a5b0
+2025-09-18 17:45:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:45:05 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:45:05 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:45:05 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:45:06 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:45:06 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:45:06 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:45:06 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:45:06 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:45:06 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:45:06 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.336 seconds (process running for 2.498)
+2025-09-18 17:45:06 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:45:06 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:45:06 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:45:11 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:45:11 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:45:11 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:45:11 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:45:11 INFO  c.join.tab.application.dto.GameDto - wonderful
+2025-09-18 17:45:12 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:45:12 INFO  c.join.tab.application.dto.GameDto - goat
+2025-09-18 17:45:22 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:45:22 INFO  c.join.tab.application.dto.GameDto - house
+2025-09-18 17:45:25 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:45:25 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:45:25 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:45:25 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:45:25 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:47:24 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 38085 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:47:24 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:47:24 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:47:25 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:47:25 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:47:25 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:47:25 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interface.
+2025-09-18 17:47:25 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:47:25 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:47:25 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:47:25 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:47:25 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 603 ms
+2025-09-18 17:47:25 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:47:25 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:47:25 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:47:25 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:47:25 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:47:25 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7df2a5b0
+2025-09-18 17:47:25 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:47:26 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:47:26 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:47:26 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:47:26 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:47:26 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:47:26 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:47:26 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:47:27 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:47:27 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:47:27 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.327 seconds (process running for 2.499)
+2025-09-18 17:47:27 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:47:27 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:47:27 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:48:14 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:48:14 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:48:14 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:48:14 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:48:14 INFO  c.join.tab.application.dto.GameDto - beetle
+2025-09-18 17:48:14 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:48:14 INFO  c.join.tab.application.dto.GameDto - encapsulation
+2025-09-18 17:48:59 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:48:59 INFO  c.join.tab.application.dto.GameDto - container
+2025-09-18 17:49:34 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:49:34 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:49:34 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:49:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:49:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:51:33 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 38250 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:51:33 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:51:33 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:51:34 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:51:34 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:51:34 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:51:34 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-09-18 17:51:34 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:51:34 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:51:34 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:51:34 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:51:34 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 549 ms
+2025-09-18 17:51:34 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:51:34 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:51:34 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:51:34 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:51:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:51:34 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1429554
+2025-09-18 17:51:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:51:34 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:51:34 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:51:35 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:51:35 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:51:35 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:51:35 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:51:35 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:51:36 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:51:36 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:51:36 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.238 seconds (process running for 2.409)
+2025-09-18 17:51:36 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:51:36 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:51:36 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:51:47 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:51:47 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:51:47 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:51:47 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:51:47 INFO  c.join.tab.application.dto.GameDto - html
+2025-09-18 17:51:47 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:51:47 INFO  c.join.tab.application.dto.GameDto - beautiful
+2025-09-18 17:52:50 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:52:50 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:52:50 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:52:50 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:52:50 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:55:05 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 38405 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:55:05 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:55:05 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:55:05 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:55:05 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:55:06 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:55:06 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 1 JPA repository interface.
+2025-09-18 17:55:06 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:55:06 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:55:06 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:55:06 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:55:06 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 578 ms
+2025-09-18 17:55:06 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:55:06 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:55:06 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:55:06 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:55:06 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:55:06 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7df2a5b0
+2025-09-18 17:55:06 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:55:06 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:55:06 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:55:07 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:55:07 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:55:07 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:55:07 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:55:07 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:55:07 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:55:07 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:55:07 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.225 seconds (process running for 2.43)
+2025-09-18 17:55:07 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:55:07 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:55:07 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:55:10 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:55:10 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:55:10 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-09-18 17:55:10 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:55:10 INFO  c.join.tab.application.dto.GameDto - git
+2025-09-18 17:55:10 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:55:10 INFO  c.join.tab.application.dto.GameDto - dictionary
+2025-09-18 17:55:44 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:55:44 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:55:44 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:55:44 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:55:44 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:57:20 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 38534 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:57:20 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:57:20 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:57:20 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:57:20 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:57:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:57:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-09-18 17:57:20 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:57:20 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:57:20 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:57:20 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:57:20 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 560 ms
+2025-09-18 17:57:20 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:57:20 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:57:20 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:57:20 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:57:20 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:57:21 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@29154e2f
+2025-09-18 17:57:21 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:57:21 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:57:21 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:57:21 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:57:21 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:57:21 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:57:21 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:57:21 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:57:22 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:57:22 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:57:22 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.178 seconds (process running for 2.348)
+2025-09-18 17:57:22 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:57:22 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:57:22 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:57:27 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:57:27 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:57:27 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-09-18 17:57:27 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:57:27 INFO  c.join.tab.application.dto.GameDto - house
+2025-09-18 17:57:28 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:57:28 INFO  c.join.tab.application.dto.GameDto - beetle
+2025-09-18 17:57:51 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:57:52 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:57:52 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:57:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:57:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:58:28 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 38606 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:58:28 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:58:28 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:58:28 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:58:28 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:58:28 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:58:28 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-09-18 17:58:29 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:58:29 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:58:29 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:58:29 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:58:29 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 563 ms
+2025-09-18 17:58:29 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:58:29 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:58:29 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:58:29 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:58:29 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:58:29 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6c68980e
+2025-09-18 17:58:29 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:58:29 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:58:29 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:58:29 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:58:29 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:58:29 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:58:30 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:58:30 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:58:30 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:58:30 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:58:30 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.166 seconds (process running for 2.331)
+2025-09-18 17:58:30 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:58:30 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:58:30 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:58:56 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:58:56 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:58:56 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-09-18 17:58:56 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:58:56 INFO  c.join.tab.application.dto.GameDto - ant
+2025-09-18 17:58:56 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:58:56 INFO  c.join.tab.application.dto.GameDto - maven
+2025-09-18 17:59:28 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 17:59:28 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 17:59:28 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:59:28 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 17:59:28 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 17:59:31 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 38675 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 17:59:31 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 17:59:31 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 17:59:31 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 17:59:31 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 17:59:31 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 17:59:31 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-09-18 17:59:31 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 17:59:31 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 17:59:31 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 17:59:31 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 17:59:31 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 526 ms
+2025-09-18 17:59:31 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 17:59:31 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 17:59:31 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 17:59:32 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 17:59:32 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 17:59:32 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2a8281b7
+2025-09-18 17:59:32 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 17:59:32 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 17:59:32 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 17:59:32 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 17:59:32 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 17:59:32 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 17:59:32 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 17:59:32 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 17:59:33 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 17:59:33 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 17:59:33 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.065 seconds (process running for 2.227)
+2025-09-18 17:59:33 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:59:33 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 17:59:33 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 17:59:36 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 17:59:36 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 17:59:36 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 17:59:36 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:59:36 INFO  c.join.tab.application.dto.GameDto - interface
+2025-09-18 17:59:36 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 17:59:36 INFO  c.join.tab.application.dto.GameDto - interface
+2025-09-18 18:00:03 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 18:00:03 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 18:00:03 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 18:00:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 18:00:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 18:48:58 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 40435 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 18:48:58 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 18:48:58 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 18:48:58 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 18:48:58 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 18:48:58 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 18:48:58 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-09-18 18:48:58 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 18:48:59 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 18:48:59 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 18:48:59 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 18:48:59 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 688 ms
+2025-09-18 18:48:59 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 18:48:59 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 18:48:59 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 18:48:59 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 18:48:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 18:48:59 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2a8281b7
+2025-09-18 18:48:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 18:48:59 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 18:48:59 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 18:48:59 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 18:48:59 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 18:48:59 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 18:49:00 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 18:49:00 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 18:49:00 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 18:49:00 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 18:49:00 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.423 seconds (process running for 2.637)
+2025-09-18 18:49:00 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 18:49:00 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 18:49:00 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 18:49:03 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 18:49:03 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 18:49:03 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 18:49:03 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 18:49:03 INFO  c.join.tab.application.dto.GameDto - garden
+2025-09-18 18:49:04 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 18:49:04 INFO  c.join.tab.application.dto.GameDto - container
+2025-09-18 18:49:35 INFO  c.join.tab.application.dto.GameDto - container
+2025-09-18 18:49:35 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 18:49:35 INFO  c.join.tab.application.dto.GameDto - fox
+2025-09-18 18:50:37 INFO  c.join.tab.application.dto.GameDto - fox
+2025-09-18 18:50:37 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 18:50:37 INFO  c.join.tab.application.dto.GameDto - ladybug
+2025-09-18 18:51:14 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 18:51:14 INFO  c.join.tab.application.dto.GameDto - hand
+2025-09-18 18:51:34 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 18:51:34 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 18:51:34 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 18:51:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 18:51:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 19:09:26 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 41925 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 19:09:26 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 19:09:26 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 19:09:26 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 19:09:26 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 19:09:26 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 19:09:26 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 1 JPA repository interface.
+2025-09-18 19:09:27 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 19:09:27 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 19:09:27 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 19:09:27 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 19:09:27 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 571 ms
+2025-09-18 19:09:27 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 19:09:27 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 19:09:27 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 19:09:27 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 19:09:27 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 19:09:27 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5aca00dd
+2025-09-18 19:09:27 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 19:09:27 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 19:09:27 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 19:09:27 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 19:09:28 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 19:09:28 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 19:09:28 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 19:09:28 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 19:09:28 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 19:09:28 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 19:09:28 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.48 seconds (process running for 2.654)
+2025-09-18 19:09:28 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 19:09:28 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 19:09:28 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 19:10:15 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 19:10:15 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 19:10:15 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 19:10:18 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 19:10:18 INFO  c.join.tab.application.dto.GameDto - rabbit
+2025-09-18 19:10:18 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 19:10:18 INFO  c.join.tab.application.dto.GameDto - chicken
+2025-09-18 19:13:01 INFO  c.join.tab.application.dto.GameDto - chicken
+2025-09-18 19:13:01 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 19:13:01 INFO  c.join.tab.application.dto.GameDto - javascript
+2025-09-18 20:35:43 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 20:35:43 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 20:35:43 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:35:43 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 20:35:43 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 20:39:25 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 44866 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 20:39:25 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 20:39:25 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 20:39:25 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 20:39:25 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 20:39:25 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 20:39:25 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 1 JPA repository interface.
+2025-09-18 20:39:26 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 20:39:26 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 20:39:26 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 20:39:26 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 20:39:26 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 583 ms
+2025-09-18 20:39:26 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 20:39:26 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 20:39:26 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 20:39:26 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 20:39:26 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 20:39:26 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@58518a3
+2025-09-18 20:39:26 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 20:39:26 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 20:39:26 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 20:39:26 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 20:39:27 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:39:27 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 20:39:27 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 20:39:27 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 20:39:27 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 20:39:27 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 20:39:27 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.229 seconds (process running for 2.416)
+2025-09-18 20:39:27 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:39:27 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:39:27 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 20:39:39 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 20:39:39 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 20:39:39 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 20:39:39 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:39:39 INFO  c.join.tab.application.dto.GameDto - git
+2025-09-18 20:39:39 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:39:39 INFO  c.join.tab.application.dto.GameDto - hand
+2025-09-18 20:39:59 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:39:59 INFO  c.join.tab.application.dto.GameDto - tiger
+2025-09-18 20:40:06 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 20:40:06 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 20:40:06 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:40:06 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 20:40:06 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 20:44:20 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 45055 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 20:44:20 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 20:44:20 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 20:44:20 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 20:44:20 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 20:44:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 20:44:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 27 ms. Found 1 JPA repository interface.
+2025-09-18 20:44:20 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 20:44:20 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 20:44:20 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 20:44:20 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 20:44:20 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 634 ms
+2025-09-18 20:44:20 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 20:44:20 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 20:44:20 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 20:44:21 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 20:44:21 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 20:44:21 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5aca00dd
+2025-09-18 20:44:21 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 20:44:21 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 20:44:21 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 20:44:21 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 20:44:21 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:44:21 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 20:44:22 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 20:44:22 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 20:44:22 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 20:44:22 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 20:44:22 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.36 seconds (process running for 2.718)
+2025-09-18 20:44:22 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:44:22 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:44:22 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 20:44:23 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 20:44:23 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 20:44:23 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 20:44:23 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:44:23 INFO  c.join.tab.application.dto.GameDto - encapsulation
+2025-09-18 20:44:23 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:44:23 INFO  c.join.tab.application.dto.GameDto - sheep
+2025-09-18 20:45:11 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 20:45:11 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 20:45:11 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:45:11 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 20:45:11 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 20:47:18 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 45202 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 20:47:18 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 20:47:18 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 20:47:18 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 20:47:18 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 20:47:18 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 20:47:18 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interface.
+2025-09-18 20:47:18 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 20:47:18 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 20:47:18 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 20:47:18 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 20:47:18 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 565 ms
+2025-09-18 20:47:18 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 20:47:18 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 20:47:18 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 20:47:18 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 20:47:18 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 20:47:18 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2a8281b7
+2025-09-18 20:47:18 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 20:47:18 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 20:47:18 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 20:47:19 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 20:47:19 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:47:19 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 20:47:19 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 20:47:19 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 20:47:19 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 20:47:19 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 20:47:19 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.169 seconds (process running for 2.343)
+2025-09-18 20:47:20 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:47:20 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:47:20 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 20:47:23 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 20:47:23 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 20:47:23 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-09-18 20:47:23 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:47:23 INFO  c.join.tab.application.dto.GameDto - door
+2025-09-18 20:47:23 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:47:23 INFO  c.join.tab.application.dto.GameDto - bird
+2025-09-18 20:47:49 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 20:47:49 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 20:47:49 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:47:49 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 20:47:49 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 20:49:12 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 45298 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 20:49:12 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 20:49:12 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 20:49:12 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 20:49:12 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 20:49:12 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 20:49:13 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interface.
+2025-09-18 20:49:13 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 20:49:13 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 20:49:13 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 20:49:13 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 20:49:13 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 561 ms
+2025-09-18 20:49:13 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 20:49:13 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 20:49:13 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 20:49:13 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 20:49:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 20:49:13 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@39125f34
+2025-09-18 20:49:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 20:49:13 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 20:49:13 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 20:49:14 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 20:49:14 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:49:14 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 20:49:14 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 20:49:14 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 20:49:14 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 20:49:14 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 20:49:14 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.162 seconds (process running for 2.336)
+2025-09-18 20:49:14 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:49:14 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:49:14 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 20:49:20 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 20:49:20 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 20:49:20 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 20:49:20 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:49:20 INFO  c.join.tab.application.dto.GameDto - dictionary
+2025-09-18 20:49:20 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:49:20 INFO  c.join.tab.application.dto.GameDto - penguin
+2025-09-18 20:50:13 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 20:50:13 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 20:50:13 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:50:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 20:50:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 20:54:13 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 45465 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 20:54:13 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 20:54:13 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 20:54:13 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 20:54:13 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 20:54:13 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 20:54:13 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interface.
+2025-09-18 20:54:13 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 20:54:13 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 20:54:13 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 20:54:13 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 20:54:13 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 566 ms
+2025-09-18 20:54:13 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 20:54:13 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 20:54:13 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 20:54:14 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 20:54:14 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 20:54:14 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5aca00dd
+2025-09-18 20:54:14 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 20:54:14 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 20:54:14 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 20:54:14 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 20:54:14 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:54:14 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 20:54:14 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 20:54:14 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 20:54:15 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 20:54:15 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 20:54:15 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.159 seconds (process running for 2.331)
+2025-09-18 20:54:15 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:54:15 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:54:15 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 20:54:17 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 20:54:17 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 20:54:17 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 20:54:17 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:54:17 INFO  c.join.tab.application.dto.GameDto - computer
+2025-09-18 20:54:21 INFO  c.join.tab.application.dto.GameDto - computer
+2025-09-18 20:54:23 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 20:54:23 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 20:54:23 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:54:23 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 20:54:23 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 20:58:30 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 45968 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 20:58:30 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 20:58:30 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 20:58:30 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 20:58:30 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 20:58:30 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 20:58:30 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-09-18 20:58:30 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 20:58:30 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 20:58:30 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 20:58:30 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 20:58:30 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 560 ms
+2025-09-18 20:58:30 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 20:58:30 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 20:58:31 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 20:58:31 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 20:58:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 20:58:31 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@29154e2f
+2025-09-18 20:58:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 20:58:31 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 20:58:31 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 20:58:31 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 20:58:31 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:58:31 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 20:58:32 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 20:58:32 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 20:58:32 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 20:58:32 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 20:58:32 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.146 seconds (process running for 2.318)
+2025-09-18 20:58:32 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:58:32 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 20:58:32 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 20:58:36 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 20:58:36 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 20:58:36 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 20:58:36 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:58:36 INFO  c.join.tab.application.dto.GameDto - bootstrap
+2025-09-18 20:58:36 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:58:36 INFO  c.join.tab.application.dto.GameDto - school
+2025-09-18 20:58:51 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:58:51 INFO  c.join.tab.application.dto.GameDto - bear
+2025-09-18 20:59:06 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 20:59:06 INFO  c.join.tab.application.dto.GameDto - tiger
+2025-09-18 20:59:09 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 20:59:09 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 20:59:09 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 20:59:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 20:59:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-18 21:00:48 INFO  com.join.tab.HangmanWebApplication - Starting HangmanWebApplication using Java 24 with PID 46284 (/Users/plarium/_on/dev/hangman-web/target/classes started by plarium in /Users/plarium/_on/dev/hangman-web)
+2025-09-18 21:00:48 DEBUG com.join.tab.HangmanWebApplication - Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-18 21:00:48 INFO  com.join.tab.HangmanWebApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-18 21:00:48 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-18 21:00:48 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-18 21:00:48 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 21:00:48 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interface.
+2025-09-18 21:00:48 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-18 21:00:48 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-18 21:00:48 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-18 21:00:48 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-18 21:00:48 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 580 ms
+2025-09-18 21:00:48 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 21:00:49 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-18 21:00:49 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-18 21:00:49 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 21:00:49 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-18 21:00:49 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1429554
+2025-09-18 21:00:49 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-18 21:00:49 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 21:00:49 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-18 21:00:49 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 21:00:49 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 21:00:49 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 21:00:50 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18 21:00:50 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+2025-09-18 21:00:50 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-09-18 21:00:50 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2025-09-18 21:00:50 INFO  com.join.tab.HangmanWebApplication - Started HangmanWebApplication in 2.24 seconds (process running for 2.418)
+2025-09-18 21:00:50 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 21:00:50 DEBUG org.hibernate.SQL - select count(we1_0.id) from words we1_0 where we1_0.is_active
+2025-09-18 21:00:50 INFO  c.j.t.i.service.WordLoadersService - Words already exists in database : 107 active words
+2025-09-18 21:00:55 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 21:00:55 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-18 21:00:55 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-18 21:00:55 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 21:00:55 INFO  c.join.tab.application.dto.GameDto - cow
+2025-09-18 21:00:56 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 21:00:56 INFO  c.join.tab.application.dto.GameDto - inheritance
+2025-09-18 21:00:59 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 21:00:59 INFO  c.join.tab.application.dto.GameDto - sun
+2025-09-18 21:01:15 DEBUG org.hibernate.SQL - SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1
+2025-09-18 21:01:15 INFO  c.join.tab.application.dto.GameDto - birthday
+2025-09-18 21:01:17 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-18 21:01:17 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-09-18 21:01:17 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 21:01:17 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-18 21:01:17 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
