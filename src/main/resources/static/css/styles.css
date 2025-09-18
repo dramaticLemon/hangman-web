@@ -74,7 +74,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 80px;
+    gap: 20px;
 }
 
 /* LEFT PART */
@@ -250,6 +250,8 @@ body {
     justify-items: center;
     height: 450px;
     overflow: hidden;
+    padding: 20px;
+     padding-bottom: 75px;
 }
 
 .letter-btn:hover {

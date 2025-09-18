@@ -110,7 +110,6 @@ window.addEventListener('DOMContentLoaded', () => {
             () => `rgb(${200*random()|0},${200*random()|0},${200})`
         ];
 
-        // Косинусная интерполяция (плавное движение)
         function interpolation(a, b, t) {
             return (1 - cos(PI * t)) / 2 * (b - a) + a;
         }
