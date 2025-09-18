@@ -26,10 +26,7 @@ import org.slf4j.LoggerFactory;
  */
 @Controller
 public class HomeController {
-    private static final Logger log = LoggerFactory.getLogger(HomeController.class);
-    private final HangmanGameService gameService;
-
-    /**
+    private static final Logger log = LoggerFactory.getLogger(HomeController.class); private final HangmanGameService gameService; /**
      * Creates a new HomeController with a given HangmanService.
      *
      * @param gameService the service that manages Hangman game logic.
@@ -55,7 +52,6 @@ public class HomeController {
      */
     @GetMapping("/api")
     public String index(Model model, HttpSession session) {
-        log.info("Initial home page");
         GameDto game = gameService.getCurrentGame(session.getId());
 
         if (game == null) {

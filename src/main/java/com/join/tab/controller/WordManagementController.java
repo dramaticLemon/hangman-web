@@ -28,6 +28,17 @@ public class WordManagementController {
         this.wordManagementService = wordManagementService;
     }
 
+    /**
+     * Retrieves statistics about the word available int Hangman game.
+     *
+     * Steps performed:
+     * 1. Gets the total number of word via {@link WordManagementService#getWordCount()}.
+     * 2. Gets the list of available categories via {@link WordManagementService#getAvailableCategories()}.
+     * 3. Returns HTTP 200 ok with the statistics if successful.
+     * 4. Returns HTTP 500 Internal Server Error with an error message if an unexpected error message
+     *
+     * @return a {@link ResponseEntity} containing word statistics or an error message
+     */
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Object>> getWordStats() {
         try {
@@ -43,6 +54,24 @@ public class WordManagementController {
         }
     }
 
+    /**
+     * Uploads a file containing words to add tho the Hangman game.
+     *
+     * Steps performed:
+     * 1. Check if the uploaded file is empty and return HTTP 400 Bad Request if it is.
+     * 2. Process the file and loads words into the specified category using {@link WordLoadersService}.
+     * 3. Prepares a response containing:
+     *  - "loaded": number of words successfully loaded
+     *  - "skipped: number of words skipped
+     *  - "error: any errors encountered during processing
+     *  - "success": whether the upload was successful
+     * 4. Returns HTTP 200 ok with the upload result if successful.
+     * 5. Returns HTTP 500 Internal Server Error with an error message if an unexpected error occurs.
+     *
+     * @param file the file containing word to upload
+     * @param category the category to assign the uploaded words (default is "general")
+     * @return a {@link ResponseEntity} containing the upload result or an error message
+     */
     @PostMapping("/upload")
     public ResponseEntity<Map<String, Object>> uploadWords(
             @RequestParam("file")MultipartFile file,
@@ -70,6 +99,19 @@ public class WordManagementController {
         }
     }
 
+    /**
+     * Add a single word to the Hangman game repository.
+     *
+     * Steps performed:
+     * 1. Uses {@link WordManagementService#addWord(String, String)} to add the word to the specified category.
+     * 2. Returns HTTP 200 ok with a success message if the word was added successfully.
+     * 3. Returns HTTP 400 Bad Request if the word is invalid or already exists.
+     * 4. Returns HTTP 500 Internal Server Error with an error message if an unexpected error occur.
+     *
+     * @param word the word to add
+     * @param category the category to assign the word (default is "general")
+     * @return a {@link ResponseEntity} containing the result of the operation
+     */
     @PostMapping("/add")
     public ResponseEntity<Map<String, Object>> addWord(
             @RequestParam String word,
@@ -97,7 +139,19 @@ public class WordManagementController {
         }
     }
 
-    @DeleteMapping("/{wod}")
+    /**
+     * Removes a word from the Hangman game dictionary
+     *
+     * Steps performed:
+     * 1. Uses {@link WordManagementService#removeWord(String)} to remove the specified word.
+     * 2. Returns HTTP 200 ok with a success message if the word was removed successfully.
+     * 3. Returns HTTP 400 Bad Request if the word was not found.
+     * 4. Returns HTTP 500 Internal Server error with an error message if an unexpected error occurs.
+     *
+     * @param word the word to remove
+     * @return a {@link ResponseEntity} containing the result of the operation
+     */
+    @DeleteMapping("/{word}")
     public ResponseEntity<Map<String, Object>> removeWord(
             @PathVariable String word) {
         try {
@@ -121,6 +175,16 @@ public class WordManagementController {
         }
     }
 
+    /**
+     * Reloads all words in the Hangman game dictionary.
+     *
+     * Steps performed:
+     * 1. Call {@link WordManagementService#reloadAllWords()} to refresh the word list.
+     * 2. 200 ok with a success message and the total number of word after reload.
+     * 3. 500 Internal Server Error with an error message if an unexpected error occur.
+     *
+     * @return a {@link ResponseEntity} containing the reload result and total word count or an error message
+     */
     @PostMapping("/reload")
     public ResponseEntity<Map<String, Object>> reloadWords() {
         try {
@@ -138,6 +202,17 @@ public class WordManagementController {
         }
     }
 
+    /**
+     * Checks if a word exists in the Hangman game dictionary.
+     *
+     * Steps performed:
+     * 1. Uses {@link WordManagementService#wordExists(String)} to check if the word is present.
+     * 2. 200 ok with the word and a boolean indicating existence.
+     * 3. 500 Internal Server Error with an error message if an unexpected error occur.
+     *
+     * @param word the word to check.
+     * @return a {@link ResponseEntity} containing the word and its existence status or an error message.
+     */
     @GetMapping("/exists/{word}")
     public ResponseEntity<Map<String, Object>> checkWordExists(@PathVariable String word) {
         try {
@@ -154,6 +229,21 @@ public class WordManagementController {
         }
     }
 
+    /**
+     * Process an uploaded file containing word and adds them to the specified category.
+     *
+     * Steps performed:
+     * 1. Reads the uploaded file line by line using UTF-8 encoding.
+     * 2. Ignores empty lines and lines starting with "#" (treated as comments).
+     * 3. Trims each line and attempts to add as a word to the specified category via {@link WordManagementService#addWord(String, String)}
+     * 4. Tracks the number of words successfully loaded adn skipped.
+     * 5. Returns a {@link WordLoadersService.WordLoadResult} containing the result.
+     *
+     * @param file the uploaded file containing words.
+     * @param category the category to assign the words.
+     * @return a {@link WordLoadersService.WordLoadResult} with counts of loaded and skipped words
+     * @throws IOException if an I/O error occurs while reading the file.
+     */
     private WordLoadersService.WordLoadResult processUpdatedFile(
             MultipartFile file, String category) throws IOException {
         WordLoadersService.WordLoadResult result = new WordLoadersService.WordLoadResult();

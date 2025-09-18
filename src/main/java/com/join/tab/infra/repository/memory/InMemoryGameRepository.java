@@ -14,11 +14,24 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * In-memory implementation of {@link GameRepository}.
+ *
+ * Stores Hangman games in a concurrent hash map, suitable for testing or
+ * temporary storage without a persistent database.
+ *
+ * Provides basic CRUD operations for saving, retrieving, and deleting games.
+ * Uses an internal ({@link GameData}) class to hold the game states.
+ */
 @Repository
 public class InMemoryGameRepository implements GameRepository {
 
     private final Map<GameId, GameData> games = new ConcurrentHashMap<>();
 
+    /**
+     * Saves or updates a Hangman game in memory.
+     * @param game the game to save.
+     */
     @Override
     public void save(HangmanGame game) {
         GameData gameData = new GameData(
@@ -30,6 +43,11 @@ public class InMemoryGameRepository implements GameRepository {
         games.put(game.getGameId(), gameData);
     }
 
+    /**
+     * Finds a game by its ID.
+     * @param gameId the ID the game to find
+     * @return an {@link Optional} containing the game if found, otherwise empty
+     */
     @Override
     public Optional<HangmanGame> findById(GameId gameId){
         GameData gameData = games.get(gameId);
@@ -49,12 +67,16 @@ public class InMemoryGameRepository implements GameRepository {
         return Optional.of(game);
     }
 
+    /**
+     * Delete a game by its ID.
+     * @param gameId the ID of the game to delete
+     */
     @Override
     public void delete(GameId gameId) {
         games.remove(gameId);
     }
 
-    // Internal data class for persistence
+    /** Internal data class to store game state in memory **/
     private static class GameData {
         private final String word;
         private final Set<Letter> guessedLetters;

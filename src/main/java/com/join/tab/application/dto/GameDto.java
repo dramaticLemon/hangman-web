@@ -5,6 +5,12 @@ import com.join.tab.domain.enums.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Data Transfer Object (DTO) representing the state of a Hangman game.
+ *
+ * Encapsulates information about the current state of the word, remaining tries,
+ * game status, and (optionally) the full word when the game has finished.
+ */
 public class GameDto {
     private final static Logger log = LoggerFactory.getLogger(GameDto.class);
 
@@ -13,6 +19,12 @@ public class GameDto {
     private final GameStatus status;
     private final String word; // Only exposed when game is finished
 
+    /**
+     * Data Transfer Object (DTO) representing the state of a Hangman game.
+     *
+     * Encapsulates information about the current state of the word, remaining tries,
+     * game status, and (optionally) the full word when the game has finished.
+     */
     public GameDto (String currentState, int remainingTries, GameStatus status, String word) {
         this.currentState = currentState;
         this.remainingTries = remainingTries;
@@ -20,7 +32,14 @@ public class GameDto {
         this.word = word;
     }
 
-    public static GameDto fromDomain (HangmanGame game) {
+    /**
+     * Creates a GameDto from a domain {@link HangmanGame} object.
+     * The full word is only included if the game is finished.
+     *
+     * @param game the HangmanGame domain object
+     * @return a GameDto representing the current game state
+     */
+    public static GameDto fromDomain(HangmanGame game) {
         log.info(game.getWord());
         String word = game.isInProgress() ? null : game.getWord();
         return new GameDto(

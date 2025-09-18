@@ -7,6 +7,24 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+/**
+ * JPA entity representing a word in the Hangman game database.
+ *
+ * Stores the word value, its length, category, difficulty level, and active status.
+ * Include validation and normalization logic before persisting or updating.
+ *
+ * Database mapping:
+ * - Table name: "words"
+ * - Indexes:
+ *  - idx_word_length on "length"
+ *  - idx_word_category on "category"
+ *
+ *  Features:
+ *  - Enforces non-black, alphabetic word value of 3 - 50 characters.
+ *  - Automatically calculates word length and normalizes value to lowercase.
+ *  - Determined difficulty level based on word length if not explicitly set.
+ *  - Supports options category and active status.
+ */
 @Entity
 @Table(name = "words", indexes = {
         @Index(name = "idx_word_length", columnList = "length"),
@@ -16,30 +34,45 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WordEntity {
 
+    /**
+     * Unique identifier for the word.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * The word value.
+     * Must be alphabetic, 3-50 char, and unique.
+     */
     @Column(name = "value", nullable = false, unique = true, length = 50)
     @NotBlank(message = "Word value cannot be blank")
     @Size(min = 3, max = 50, message = "Word must be between 3 and 50 characters")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "Word must contain only letters")
     private String value;
 
+    /** Length of the word, automatically set based on value **/
     @Column(name = "length", nullable = false)
     private Integer length;
 
+    /** Optional category fo the word, max 30 char **/
     @Column(name = "category", length = 30)
     @Size(max = 30, message = "Category must not exceed 30 characters")
     private String category;
 
+    /** Difficulty level of the word (EASY, MEDIUM, HARD). **/
     @Column(name = "difficulty_level")
     @Enumerated(EnumType.STRING)
-    private DiffucultyLevel difficultlyLevel;
+    private DifficultyLevel difficultlyLevel;
 
+    /** Whether the word is active and available for use. Defaults to true. **/
     @Column(name = "is_active")
     private Boolean isActive = true;
 
+    /**
+     * Lifecycle callback to normalize the word and set derived fields
+     * before persisting ur updating.
+     */
     @PrePersist
     @PreUpdate
     private void validateAndNormalize() {
@@ -54,13 +87,20 @@ public class WordEntity {
         }
     }
 
-    private DiffucultyLevel determineDifficultyLevel(int wordLength) {
-        if (wordLength <= 4) return DiffucultyLevel.EASY;
-        if (wordLength <= 7) return DiffucultyLevel.MEDIUM;
-        return DiffucultyLevel.HARD;
+    /**
+     * Determines difficulty level based on word length
+     *
+     * @param wordLength the length of the word
+     * @return the corresponding {@link DifficultyLevel}
+     */
+    private DifficultyLevel determineDifficultyLevel(int wordLength) {
+        if (wordLength <= 4) return DifficultyLevel.EASY;
+        if (wordLength <= 7) return DifficultyLevel.MEDIUM;
+        return DifficultyLevel.HARD;
     }
 
-    public enum DiffucultyLevel {
+    /** Enum representation word difficulty levels. **/
+    public enum DifficultyLevel {
         EASY, MEDIUM, HARD;
     }
 
@@ -96,11 +136,11 @@ public class WordEntity {
         this.category = category;
     }
 
-    public DiffucultyLevel getDifficultlyLevel () {
+    public DifficultyLevel getDifficultlyLevel () {
         return difficultlyLevel;
     }
 
-    public void setDifficultlyLevel (DiffucultyLevel difficultlyLevel) {
+    public void setDifficultlyLevel (DifficultyLevel difficultlyLevel) {
         this.difficultlyLevel = difficultlyLevel;
     }
 

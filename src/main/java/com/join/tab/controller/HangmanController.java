@@ -25,6 +25,22 @@ public class HangmanController {
         this.gameService = gameService;
     }
 
+    /**
+     * Start a new Hangman game for the current HTTP session.
+     *
+     * Steps performed:
+     * 1. Uses the session ID to start a new game via the {@link HangmanGameService}.
+     * 2. Prepares a response containing:
+     *      - "currentState": the current state of the word being guessed
+     *      - "remainingTries": number of remaining guesses
+     *      - "status": current game status
+     * 3. Returns HTTP 200 ok with the game details is successful.
+     * 4. Returns HTTP 500 Internal Server Error with an error message if something goes wrong.
+     *
+     *
+     * @param session the current HTTP session.
+     * @return a {@link ResponseEntity} containing game details or an error message.
+     */
     @PostMapping("/start")
     public ResponseEntity<Map<String, Object>> startGame(HttpSession session) {
         try {
@@ -41,6 +57,27 @@ public class HangmanController {
         }
     }
 
+    /**
+     * Processes a letter guess for the current Hangman game associated with the HTTp session.
+     *
+     * Steps performed:
+     * 1. Retrieves the session ID and guessed letter form the request.
+     * 2. Calls {@link HangmanGameService#guessLetter(String, char)} to process the guess.
+     * 3. Prepares a response containing:
+     *  - "currentState": the current state of the word being guessed
+     *  - "remainingTries": number of remaining guesses
+     *  - "status" current game status
+     *  - "wasCorrect": whether the guess was correct
+     *  - "word" the complete word if the game is correct
+     * 4. Returns HTTP 200 OK with the guess result if successful.
+     * 5. Returns HTTP 404 Not Found if no game exists for the session.
+     * 6. Returns HTTP 400 Bad Request if the letter was already guessed.
+     * 7. Returns HTTP 500 Internal Server Error if an unexpected error occurs.
+     *
+     * @param letter the letter being guessed.
+     * @param session the current HTTP session.
+     * @return a {@link ResponseEntity} containing the guess result or an error message.
+     */
     @PostMapping("/guess")
     public ResponseEntity<Map<String, Object>> guessLetter(
             @RequestParam char letter,
@@ -73,6 +110,23 @@ public class HangmanController {
         }
     }
 
+    /**
+     * Retrieves the current status of the Hangman game for the HTTP session.
+     *
+     * Steps performed:
+     * 1: Uses the session ID to get the current game via {@link HangmanGameService#getCurrentGame(String)}.
+     * 2. If no game exists, returns HTTP 404 Not Found with an error message.
+     * 3. Prepares a response containing:
+     *  - "currentState": the current state of the word being guessed
+     *  - "remainingTries": number of remaining guessed
+     *  - "status: current game status
+     *  - "word: the complete word if the game is finished
+     *  4. Returns HTTP 200 OK with the game status if successful.
+     *  5. Returns HTTP 500 Internal Server Error is an unexpected error occurs.
+     *
+     * @param session the current HTTP session
+     * @return a {@link ResponseEntity} containing the game status or an error message
+     */
     @GetMapping("/status")
     public ResponseEntity<Map<String, Object>> getGameStatus(HttpSession session) {
         try {
@@ -100,6 +154,17 @@ public class HangmanController {
         }
     }
 
+    /**
+     * Ends the current Hangman game for the HTTP session.
+     *
+     * Steps performed:
+     * 1. Uses the session ID to end the game via {@link HangmanGameService#endGame(String)}.
+     * 2. Returns HTTP 200 ok with a success message if the game is ended successfully.
+     * 3, Returns HTTP 500 Internal Server Error with an error message if an unexpected error message.
+     *
+     * @param session the current HTTP session
+     * @return a {@link ResponseEntity} containing a success message or an error message
+     */
     @DeleteMapping("/end")
     public ResponseEntity<Map<String, Object>> endGame(HttpSession session) {
         try {

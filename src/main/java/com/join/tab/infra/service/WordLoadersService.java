@@ -36,6 +36,14 @@ public class WordLoadersService {
         this.wordJpaRepository = wordJpaRepository;
     }
 
+    /**
+     * Loads default word into the database when the application starts.
+     *
+     * Triggered on {@link ApplicationReadyEvent}.
+     * If the database has no active words, it loads words from predefined files
+     * and assigns them to appropriate categories.
+     * Otherwise, logs the existing number of active words.
+     */
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
     public void loadWordsOnStartup() {
@@ -51,6 +59,19 @@ public class WordLoadersService {
         }
     }
 
+    /**
+     * Loads word from a file into the database under the specified category
+     *
+     * Each line in the represents a word. Lines thet are empty or duplicated
+     * are skipped. Errors encountered during processing are colleted in the result.
+     *
+     * This method is transactional, so all successfully processed are persisted
+     * automatically.
+     *
+     * @param filePath the path to the file on the classpath
+     * @param category the category to assign to the words
+     * @return a {@link WordLoadResult} containing counts of loaded, skipped words and any errors
+     */
     @Transactional
     public WordLoadResult loadWordsFromFile(String filePath, String category) {
         WordLoadResult result = new WordLoadResult();
@@ -94,6 +115,25 @@ public class WordLoadersService {
         return result;
     }
 
+    /**
+     * Processes a single word from a file and attempts to save in the database.
+     *
+     * The method performs the following checks:
+     * - Skips empty lines and lines starting with '#'.
+     * - Validates word format (alphabetic only, proper length).
+     * - Skips duplicates within the current batch.
+     * - Skips words already present in the database.
+     * - Skips banned words.
+     *
+     * Successfully validated words are saved as {@link WordEntity} in the database.
+     * Updates the provided {@link  WordLoadResult} with counts of loaded, skipped words and errors.
+     *
+     * @param word the word to process
+     * @param category the category to assign to the word
+     * @param lineNumber the line number in the source file (used for error reporting)
+     * @param processedWords a set of words already processed in the current batch
+     * @param result the {@link WordLoadResult} object to track success, skips, and errors
+     */
     private void processWord(String word, String category, int lineNumber,
                              Set<String> processedWords, WordLoadResult result) {
         try {
@@ -142,6 +182,16 @@ public class WordLoadersService {
         }
     }
 
+    /**
+     * Check if a word is valid based on format and length.
+     *
+     * A valid word:
+     * - is not null
+     * - matches the allowed pettern (letters only)
+     * - has length between 3 and 50 char
+     * @param word the word to validate
+     * @return {@code true} if the word is valid, {@code false} otherwise
+     */
     private boolean isValidWord(String word) {
         return word != null
                 && validWordPattern.matcher(word).matches()
@@ -149,6 +199,17 @@ public class WordLoadersService {
                 && word.length() <= 50;
     }
 
+    /**
+     * Creates a new {@link WordEntity} for persistence.
+     *
+     * Sets the word value, category, and marks it as active.
+     * The length and difficulty level will be automatically set by
+     * the {@code @PrePersist} method in {@link WordEntity}.
+     *
+     * @param word the word value
+     * @param category the category to assign
+     * @return a new {@link WordEntity} ready for saving
+     */
     private WordEntity createWordEntity(String word, String category) {
         WordEntity entity = new WordEntity();
         entity.setValue(word);
@@ -159,9 +220,20 @@ public class WordLoadersService {
         return entity;
     }
 
+    /**
+     * Reloads words from predefined files into the database.
+     *
+     * The method performs the following steps:
+     * 1. Deactivates all existing words in the database.
+     * 2. Loads fresh words from default, programming, and animals word files.
+     *
+     * This method is transactional, so all changes are applied atomically.
+     * It ensures the database has an up-to-date set of words while preserving
+     * inactive words for historical or rollback purposes.
+     */
     @Transactional
     public void reloadWordFromFiles() {
-        log.info("Reloading word form files...");
+        log.info("Reloading word from files...");
 
         // Deactivate all existing words
         List<WordEntity> allWords = wordJpaRepository.findAll();
@@ -175,6 +247,12 @@ public class WordLoadersService {
 
     }
 
+    /**
+     * Represents the result of loading words from a file or source.
+     *
+     * Tracks the number of successfully loaded words, skipped words,
+     * and any errors encountered during processing.
+     */
     public static class WordLoadResult {
         private int loadedCount = 0;
         private int skippedCount = 0;

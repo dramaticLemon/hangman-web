@@ -16,6 +16,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Aggregate root representing a Hangman game.
+ *
+ * Encapsulate the game state, guessed letters. mistake count, and domain events.
+ * Provides constructors for starting a new game or loading an existing game form a repository.
+ *
+ * Key features:
+ * - Track the word to guess, guessed letters, mistakes, and game status.
+ * - Publishes domain events such as {@link GameStartedEvent}, {@link LetterGuessedEvent}, and {@link GameEndedEvent}.
+ * - Supports gameplay operations like guessing letters and retrieving the current word state.
+ *
+ * Usage:
+ * <pre>
+ *     HangmanGame game = new HangmanGame(new GameId("ex123"), new Word("ex"));
+ * </pre>
+ */
 public class HangmanGame {
     private static final int MAX_MISTAKES = 6;
 
@@ -26,7 +42,12 @@ public class HangmanGame {
     private int mistakeCount;
     private GameStatus status;
 
-    // constructor for new game
+    /**
+     * Creates a new Hangman game with a fresh word.
+     *
+     * @param gameId the unique ID for the game.
+     * @param word the word to guess in the game.
+     */
     public HangmanGame(GameId gameId, Word word) {
         this.gameId = gameId;
         this.word = word;
@@ -38,7 +59,15 @@ public class HangmanGame {
         addEvent(new GameStartedEvent(gameId, word.getValue()));
     }
 
-    // Constructor for loading existing game (from repository)
+    /**
+     * Loads an existing Hangman game (e.g., from repo) with this current state.
+     *
+     * @param gameId the unique ID of the game
+     * @param word the word to guess
+     * @param guessedLetters the set of letters already guessed
+     * @param mistakeCount the number of incorrect guessed so far
+     * @param status the current status of game.
+     */
     public HangmanGame (GameId gameId, Word word, Set<Letter> guessedLetters,
                         int mistakeCount, GameStatus status) {
         this.gameId = gameId;
@@ -49,6 +78,21 @@ public class HangmanGame {
         this.status = status;
     }
 
+    /**
+     * Process a player's guess for a letter in the current game.
+     *
+     * Steps performed:
+     * 1. Validated that the game is still in progress and the letter was not guessed before.
+     * 2. Adds the letter to the set of guessed letters.
+     * 3. Updates mistake count if the guess is incorrect.
+     * 4. Updates the game status (won, lost or in_progress).
+     * 5. Records corresponding game events (letter guessed, and gama ended if applicable).
+     *
+     * @param letter letter the guessed {@link Letter}
+     * @return a {@link GuessResult} containing the updated game state and guess outcome
+     * @throws IllegalStateException if the game is already over.
+     * @throws IllegalArgumentException if the letter was already guessed
+     */
     public GuessResult guessResult(Letter letter) {
         validateGameInProgress();
         validateLetterNotGuessed(letter);
@@ -76,22 +120,46 @@ public class HangmanGame {
         );
     }
 
+    /**
+     * Ensures that the game is still in progress.
+     *
+     * @throws InvalidGameStatusException if the game has already ended
+     */
     private void validateGameInProgress() {
         if (status != GameStatus.IN_PROGRESS) {
             throw new InvalidGameStatusException("Game is already finished");
         }
     }
 
+    /**
+     * Ensures that the given letter has not been guessed before in the current game.
+     *
+     * @param letter the letter to validate
+     * @throws LetterAlreadyGuessedException if the letter was already guessed
+     */
     private void validateLetterNotGuessed (Letter letter) {
         if (hasGuessedLetter(letter)) {
             throw new LetterAlreadyGuessedException(letter.getValue());
         }
     }
 
+    /**
+     * Check if the letter has already been guessed in the current game.
+     *
+     * @param letter the letter to check
+     * @return {@code ture} if the letter has been guessed, {@code false} otherwise
+     */
     public boolean hasGuessedLetter(Letter letter) {
         return guessedLetters.contains(letter);
     }
 
+    /**
+     * Updated the status of the game based on the current state.
+     *
+     * Sets the status to {@link GameStatus#LOST} if the number of mistakes
+     * has reached the maximum allowed. Sets the status to {@link  GameStatus#WON}
+     * if the word has been completely guessed. Otherwise, the game remains in progress.h
+     */
     private void updateGameStatus() {
         if (mistakeCount >= MAX_MISTAKES) {
             status = GameStatus.LOST;
@@ -100,6 +168,11 @@ public class HangmanGame {
         }
     }
 
+    /**
+     * Checks if all letters in the word have been guessed.
+     *
+     * @return {@code ture} if every letter in the word has been guessed, {@code false} otherwise
+     */
     private boolean isWordCompletelyGuessed() {
         for (int i = 0; i < word.getLength(); i++) {
             Letter wordLetter = new Letter(word.getCharAt(i));
@@ -110,6 +183,14 @@ public class HangmanGame {
         return true;
     }
 
+    /**
+     * Returns the current state of the word being guessed.
+     *
+     * Letters that have been guessed correctly are shown, while unguessed letters
+     * are represented as underscores ('_')
+     *
+     * @return a string representing the current state of the word
+     */
     public String getCurrentState() {
         StringBuilder state = new StringBuilder();
         for (int i = 0; i < word.getLength(); i++) {
@@ -124,6 +205,10 @@ public class HangmanGame {
         return state.toString();
     }
 
+    /**
+     * Records a domain event for the current game.
+     * @param event
+     */
     private void addEvent(GameEvent event) {
         events.add(event);
     }
@@ -164,6 +249,14 @@ public class HangmanGame {
         return status == GameStatus.IN_PROGRESS;
     }
 
+    /**
+     * Returns a list of uncommitted domain events for the current game.
+     *
+     * These events represent actions that have occurred but have not yet been
+     * persisted or publisher
+     *
+     * @return a new {@link List} containing the uncommited {@link GameEvent} instance
+     */
     public List<GameEvent> getUncommittedEvents() {
         return new ArrayList<>(events);
     }
@@ -172,7 +265,19 @@ public class HangmanGame {
         events.clear();
     }
 
-    // value object for guess result
+    /**
+     * Value object representing the result of a letter guess in a Hangman game.
+     *
+     * Contains information about the current state of the word, remaining tires,
+     * game status, and whether the guess was correct or already guessed.
+     *
+     * Usage
+     * <pre>
+     *     GuessResult result = game.guessResult(new Letter('a'));
+     *     boolean correct = result.isWasCorrect();
+     *     int remaining = result.getRemainingTries();
+     * </pre>
+     */
     public static class GuessResult {
 
         private final String currentState;
@@ -181,6 +286,15 @@ public class HangmanGame {
         private final boolean wasCorrect;
         private final boolean wasAlreadyGuessed;
 
+        /**
+         * Creates a new GuessResult.
+         *
+         * @param currentState the current state of the word (letters guessed and underscores)
+         * @param remainingTries the number of remining incorrect guessed allowed
+         * @param gameStatus the current status of the game
+         * @param wasCorrect {@code ture} if the guessed letter was correct
+         * @param wasAlreadyGuessed {@code true} if the letter was had already been guessed
+         */
         public GuessResult(
                 String currentState, int remainingTries, GameStatus gameStatus,
                 boolean wasCorrect, boolean wasAlreadyGuessed) {

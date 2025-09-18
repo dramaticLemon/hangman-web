@@ -3,6 +3,13 @@ package com.join.tab.application.dto;
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.enums.GameStatus;
 
+/**
+ * Data Transfer Object (DTO) representing the result of a single guess in a Hangman game.
+ *
+ * Encapsulates the updated state of the word, remaining tries, game status,
+ * the full word (if the game is finished), whether the guess was correct,
+ * and the guessed letter itself.
+ */
 public class GuessDto {
     private final String currentState;
     private final int remainingTries;
@@ -11,6 +18,16 @@ public class GuessDto {
     private final boolean wasCorrect;
     private final char guessedLetter;
 
+    /**
+     * Constructs a new GuessDto.
+     *
+     * @param currentState the current masked state of the word
+     * @param remainingTries number of remaining incorrect guesses allowed
+     * @param status the current {@link GameStatus}
+     * @param word the full word, exposed only if the game has ended
+     * @param wasCorrect whether the last guessed letter was correct
+     * @param guessedLetter the letter that was guessed
+     */
     public GuessDto(String currentState, int remainingTries, GameStatus status,
                     String word, boolean wasCorrect, char guessedLetter) {
         this.currentState = currentState;
