@@ -6,6 +6,8 @@ import com.join.tab.application.dto.GameDto;
 import com.join.tab.application.dto.GuessDto;
 import com.join.tab.application.service.HangmanGameService;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/hangman")
 public class HangmanController {
-
+    private final static Logger log = LoggerFactory.getLogger(HangmanController.class);
     private final HangmanGameService gameService;
 
     public HangmanController(HangmanGameService gameService) {
@@ -27,7 +29,6 @@ public class HangmanController {
     public ResponseEntity<Map<String, Object>> startGame(HttpSession session) {
         try {
             GameDto game = gameService.startNewGame(session.getId());
-
             Map<String, Object> response = new HashMap<>();
             response.put("currentState", game.getCurrentState());
             response.put("remainingTries", game.getRemainingTries());

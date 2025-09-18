@@ -2,8 +2,12 @@ package com.join.tab.application.dto;
 
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.enums.GameStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GameDto {
+    private final static Logger log = LoggerFactory.getLogger(GameDto.class);
+
     private final String currentState;
     private final int remainingTries;
     private final GameStatus status;
@@ -17,6 +21,7 @@ public class GameDto {
     }
 
     public static GameDto fromDomain (HangmanGame game) {
+        log.info(game.getWord());
         String word = game.isInProgress() ? null : game.getWord();
         return new GameDto(
                 game.getCurrentState(),

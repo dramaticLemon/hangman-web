@@ -6,17 +6,51 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Hangman</title>
 </head>
+
 <body>
+<nav class="navbar">
+    <span class="navbar-text">
+        <span>H</span>
+        <span>A</span>
+        <span>N</span>
+        <span>G</span>
+        <span>M</span>
+        <span>A</span>
+        <span>N</span>
+    </span>
+</nav>
+<div class="scene">
     <div class="left">
-        <img id="hangman" src="/images/0.png" alt="Hangman" width="250">
+        <div class="lamppost-wrapper">
+            <div class="lamppost">
+                <div class="light-chain"></div>
+                <div class="pole"></div>
+                <div class="light-cap"></div>
+                <div class="light street-light"></div>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <img id="hangman" src="images/stage-0.png" alt="Hangman">
+        </div>
+
         <div id="word">_ _ _ _ _</div>
     </div>
-    <div id="game-over" style="display:none; text-align:center; margin-top:20px;">
-        <p id="game-over-message" style="font-size:1.5em; font-weight:bold;"></p>
-        <button id="restart-btn" onclick="restartGame()">Continue</button>
+
+    <div class="right">
+        <button class="letter-btn language-btn">EN</button>
+
+        <div id="letters" class="letters-grid"></div>
     </div>
-    <div class="right" id="letters">
-    </div>
-    <script th:src="@{/js/script.js}"></script>
+
+</div>
+
+<button id="game-over" type="button">
+    <span id="game-over-message">You LOSE!</span>
+</button>
+<div id="confetti-container"></div>
+<script src="/js/script.js"></script>
 </body>
+
+
 </html>
