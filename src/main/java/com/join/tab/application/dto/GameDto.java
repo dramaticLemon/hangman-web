@@ -6,12 +6,10 @@ import com.join.tab.domain.model.valueobject.Letter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.Set;
 
 /**
  * Data Transfer Object (DTO) representing the state of a Hangman game.
- *
  * Encapsulates information about the current state of the word, remaining tries,
  * game status, and (optionally) the full word when the game has finished.
  */
@@ -29,7 +27,6 @@ public class GameDto {
 
     /**
      * Data Transfer Object (DTO) representing the state of a Hangman game.
-     *
      * Encapsulates information about the current state of the word, remaining tries,
      * game status, and (optionally) the full word when the game has finished.
      */
