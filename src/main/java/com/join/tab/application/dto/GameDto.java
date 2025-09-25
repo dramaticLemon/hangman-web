@@ -2,7 +2,7 @@ package com.join.tab.application.dto;
 
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.enums.GameStatus;
-import com.join.tab.domain.model.valueobject.Letter;
+import com.join.tab.domain.valueobject.Letter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

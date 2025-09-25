@@ -6,10 +6,10 @@ import com.join.tab.domain.event.GameStartedEvent;
 import com.join.tab.domain.event.LetterGuessedEvent;
 import com.join.tab.domain.exception.InvalidGameStatusException;
 import com.join.tab.domain.exception.LetterAlreadyGuessedException;
-import com.join.tab.domain.model.valueobject.GameId;
-import com.join.tab.domain.model.valueobject.GamePreferences;
-import com.join.tab.domain.model.valueobject.Language;
-import com.join.tab.domain.model.valueobject.Letter;
+import com.join.tab.domain.valueobject.GameId;
+import com.join.tab.domain.valueobject.GamePreferences;
+import com.join.tab.domain.valueobject.Language;
+import com.join.tab.domain.valueobject.Letter;
 import com.join.tab.domain.model.Word;
 import com.join.tab.domain.enums.GameStatus;
 

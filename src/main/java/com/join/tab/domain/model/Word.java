@@ -1,7 +1,6 @@
 package com.join.tab.domain.model;
 
-import com.join.tab.domain.model.valueobject.Language;
-import lombok.Getter;
+import com.join.tab.domain.valueobject.Language;
 
 import java.util.Objects;
 

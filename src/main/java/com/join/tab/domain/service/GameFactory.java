@@ -1,12 +1,11 @@
 package com.join.tab.domain.service;
 
 import com.join.tab.domain.aggregate.HangmanGame;
-import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.valueobject.GameId;
 import com.join.tab.domain.model.Word;
-import com.join.tab.domain.model.valueobject.GamePreferences;
-import com.join.tab.domain.model.valueobject.Language;
+import com.join.tab.domain.valueobject.GamePreferences;
+import com.join.tab.domain.valueobject.Language;
 import com.join.tab.domain.repository.WordRepository;
-import com.join.tab.infra.repository.jpa.impl.JpaWordRepository;
 
 /**
  * Factory class for creating new {@link HangmanGame} instances.

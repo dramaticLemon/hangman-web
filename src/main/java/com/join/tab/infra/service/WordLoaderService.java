@@ -1,6 +1,6 @@
 package com.join.tab.infra.service;
 
-import com.join.tab.domain.model.valueobject.Language;
+import com.join.tab.domain.valueobject.Language;
 import com.join.tab.infra.entity.WordEntity;
 import com.join.tab.infra.repository.jpa.WordJpaRepository;
 

@@ -1,6 +1,6 @@
 package com.join.tab.domain.event;
 
-import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.valueobject.GameId;
 import lombok.Getter;
 
 /**

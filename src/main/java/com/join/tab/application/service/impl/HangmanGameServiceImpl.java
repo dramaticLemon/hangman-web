@@ -2,18 +2,18 @@ package com.join.tab.application.service.impl;
 
 import com.join.tab.application.dto.LanguageInfoDto;
 import com.join.tab.domain.aggregate.HangmanGame;
+import com.join.tab.domain.enums.DifficultyLevel;
 import com.join.tab.domain.exception.GameNotFoundException;
 import com.join.tab.domain.exception.UnsupportedLanguageException;
-import com.join.tab.domain.model.valueobject.GameId;
-import com.join.tab.domain.model.valueobject.GamePreferences;
-import com.join.tab.domain.model.valueobject.Language;
-import com.join.tab.domain.model.valueobject.Letter;
+import com.join.tab.domain.valueobject.GameId;
+import com.join.tab.domain.valueobject.GamePreferences;
+import com.join.tab.domain.valueobject.Language;
+import com.join.tab.domain.valueobject.Letter;
 import com.join.tab.domain.repository.GameRepository;
 import com.join.tab.domain.service.GameFactory;
 import com.join.tab.application.dto.GameDto;
 import com.join.tab.application.dto.GuessDto;
 import com.join.tab.application.service.HangmanGameService;
-import com.join.tab.infra.entity.WordEntity;
 import com.join.tab.infra.repository.jpa.impl.JpaWordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,15 +55,15 @@ public class HangmanGameServiceImpl implements HangmanGameService {
     /**
      * Starts a new Hangman game for the given session with the specific language.
      * This method performs th following steps:
-     * 1. Creates a {@link GameID} based on the provided session ID.
+     * 1. Creates a {@link GameId} based on the provided session ID.
      * 2. Validate the {@code languageCode} and construct a {@link Language} object.
-     * 3. Dektes any existing game accosiated with the session to start fresh.
+     * 3. Detekt any existing game accosted with the session to start fresh.
      * 4. Saves the new game to the {@link GameRepository}. 
      * 5. Logs the creation and returns a {@link GameDto} representing the new game.
      * 
-     * @param sessionId the unique identifier of the user's sessin
+     * @param sessionId the unique identifier of the user's session
      * @param languageCode the ISo code of the language to use for the gam
-     * @return a {@link GamgeDto} representing the new game
+     * @return a {@link GameDto} representing the new game
      * @throws UnsupportedLanguageException if the provided {@code languageCode} is invalid or not supported
      */
     @Override
@@ -91,10 +91,10 @@ public class HangmanGameServiceImpl implements HangmanGameService {
             GameId gameId = new GameId(sessionId);
             Language language  = new Language(languageCode);
 
-            WordEntity.DifficultyLevel difficultyLevel = null;
+            DifficultyLevel difficultyLevel = null;
 
             if (difficulty != null && !difficulty.trim().isEmpty()) {
-                difficultyLevel = WordEntity.DifficultyLevel.valueOf(difficulty.toUpperCase());
+                difficultyLevel = DifficultyLevel.valueOf(difficulty.toUpperCase());
             }
 
             GamePreferences preferences = new GamePreferences(language, category, difficultyLevel);

@@ -1,4 +1,4 @@
-package com.join.tab.domain.model.valueobject;
+package com.join.tab.domain.valueobject;
 
 import java.util.Objects;
 import java.util.Set;

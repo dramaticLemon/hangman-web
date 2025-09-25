@@ -1,7 +1,7 @@
 package com.join.tab.domain.event;
 
-import com.join.tab.domain.model.valueobject.GameId;
-import com.join.tab.domain.model.valueobject.Language;
+import com.join.tab.domain.valueobject.GameId;
+import com.join.tab.domain.valueobject.Language;
 
 /**
  * Domain event that represents the start of a new HangmanGame

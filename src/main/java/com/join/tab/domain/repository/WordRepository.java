@@ -1,9 +1,7 @@
 package com.join.tab.domain.repository;
 
 import com.join.tab.domain.model.Word;
-import com.join.tab.domain.model.valueobject.GamePreferences;
-
-import java.util.prefs.Preferences;
+import com.join.tab.domain.valueobject.GamePreferences;
 
 /**
  * Repository interface for accessing {@link Word} entities.

@@ -2,7 +2,7 @@ package com.join.tab.controller;
 
 import com.join.tab.application.dto.GameDto;
 import com.join.tab.application.service.HangmanGameService;
-import com.join.tab.domain.model.valueobject.Language;
+import com.join.tab.domain.valueobject.Language;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;

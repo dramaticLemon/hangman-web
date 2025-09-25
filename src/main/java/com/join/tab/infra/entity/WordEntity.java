@@ -1,5 +1,6 @@
 package com.join.tab.infra.entity;
 
+import com.join.tab.domain.enums.DifficultyLevel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -130,6 +131,7 @@ public class WordEntity {
             default -> normalized.toLowerCase();
         };
     }
+
     /**
      * Determines difficulty level based on word length
      *
@@ -140,11 +142,6 @@ public class WordEntity {
         if (wordLength <= 4) return DifficultyLevel.EASY;
         if (wordLength <= 7) return DifficultyLevel.MEDIUM;
         return DifficultyLevel.HARD;
-    }
-
-    /** Enum representation word difficulty levels. **/
-    public enum DifficultyLevel {
-        EASY, MEDIUM, HARD;
     }
 
     public Long getId () {

@@ -1,8 +1,8 @@
 package com.join.tab.infra.repository.memory;
 
 import com.join.tab.domain.model.Word;
-import com.join.tab.domain.model.valueobject.GamePreferences;
-import com.join.tab.domain.model.valueobject.Language;
+import com.join.tab.domain.valueobject.GamePreferences;
+import com.join.tab.domain.valueobject.Language;
 import com.join.tab.domain.repository.WordRepository;
 import org.springframework.stereotype.Repository;
 

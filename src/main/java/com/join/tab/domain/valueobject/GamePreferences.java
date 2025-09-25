@@ -1,6 +1,6 @@
-package com.join.tab.domain.model.valueobject;
+package com.join.tab.domain.valueobject;
 
-import com.join.tab.infra.entity.WordEntity;
+import com.join.tab.domain.enums.DifficultyLevel;
 
 import java.util.Objects;
 
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class GamePreferences {
     private final Language language;
     private final String category;
-    private final WordEntity.DifficultyLevel difficulty;
+    private final DifficultyLevel difficulty;
 
     /**
      * Create preferences with a language only.
@@ -41,7 +41,7 @@ public class GamePreferences {
      * @param category tha word category.
      * @param difficulty the difficulty level(can be null)
      */
-    public GamePreferences(Language language, String category, WordEntity.DifficultyLevel difficulty) {
+    public GamePreferences(Language language, String category, DifficultyLevel difficulty) {
         this.language = language != null ? language : Language.defaultLanguage();
         this.category = category;
         this.difficulty = difficulty;
@@ -72,7 +72,7 @@ public class GamePreferences {
         return category;
     }
 
-    public WordEntity.DifficultyLevel getDifficulty() {
+    public DifficultyLevel getDifficulty() {
         return difficulty;
     }
 

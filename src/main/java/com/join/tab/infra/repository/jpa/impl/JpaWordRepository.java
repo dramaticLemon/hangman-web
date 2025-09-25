@@ -1,8 +1,9 @@
 package com.join.tab.infra.repository.jpa.impl;
 
+import com.join.tab.domain.enums.DifficultyLevel;
 import com.join.tab.domain.model.Word;
-import com.join.tab.domain.model.valueobject.GamePreferences;
-import com.join.tab.domain.model.valueobject.Language;
+import com.join.tab.domain.valueobject.GamePreferences;
+import com.join.tab.domain.valueobject.Language;
 import com.join.tab.domain.repository.WordRepository;
 import com.join.tab.infra.entity.WordEntity;
 import com.join.tab.infra.repository.jpa.WordJpaRepository;
@@ -119,7 +120,7 @@ public class JpaWordRepository implements WordRepository {
      * @param difficulty the difficulty level
      * @return a {@link Word} form the database
      */
-    public Word getRandomWordByDifficulty(WordEntity.DifficultyLevel difficulty) {
+    public Word getRandomWordByDifficulty( DifficultyLevel difficulty) {
         Optional<WordEntity> randomWord = jpaRepository.findRandomWordByDifficulty(difficulty.name());
         return randomWord.map(this::convertToDomain).orElse(getRandomWord());
     }

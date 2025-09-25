@@ -1,14 +1,14 @@
 package com.join.tab.infra.repository.memory;
 
 import com.join.tab.domain.aggregate.HangmanGame;
-import com.join.tab.domain.model.valueobject.GameId;
-import com.join.tab.domain.model.valueobject.GamePreferences;
-import com.join.tab.domain.model.valueobject.Language;
-import com.join.tab.domain.model.valueobject.Letter;
+import com.join.tab.domain.enums.DifficultyLevel;
+import com.join.tab.domain.valueobject.GameId;
+import com.join.tab.domain.valueobject.GamePreferences;
+import com.join.tab.domain.valueobject.Language;
+import com.join.tab.domain.valueobject.Letter;
 import com.join.tab.domain.model.Word;
 import com.join.tab.domain.repository.GameRepository;
 import com.join.tab.domain.enums.GameStatus;
-import com.join.tab.infra.entity.WordEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
@@ -57,7 +57,7 @@ public class InMemoryGameRepository implements GameRepository {
         GamePreferences preferences = new GamePreferences(
                 new Language(gameData.getLanguage()),
                 gameData.getCategory(),
-                gameData.getDifficulty() != null ? WordEntity.DifficultyLevel.valueOf(gameData.getDifficulty()) : null
+                gameData.getDifficulty() != null ? DifficultyLevel.valueOf(gameData.getDifficulty()) : null
         );
 
         HangmanGame game = new HangmanGame(

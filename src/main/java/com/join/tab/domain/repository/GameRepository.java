@@ -1,7 +1,7 @@
 package com.join.tab.domain.repository;
 
 import com.join.tab.domain.aggregate.HangmanGame;
-import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.valueobject.GameId;
 
 import java.util.Optional;
 
