@@ -1,7 +1,6 @@
 package com.join.tab.application.service.impl;
 
 import com.join.tab.application.dto.LanguageInfoDto;
-import com.join.tab.controller.HangmanController;
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.exception.GameNotFoundException;
 import com.join.tab.domain.exception.UnsupportedLanguageException;
@@ -18,7 +17,6 @@ import com.join.tab.infra.entity.WordEntity;
 import com.join.tab.infra.repository.jpa.impl.JpaWordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +52,20 @@ public class HangmanGameServiceImpl implements HangmanGameService {
         return startNewGameWithLanguage(sessionId, "en");
     }
 
+    /**
+     * Starts a new Hangman game for the given session with the specific language.
+     * This method performs th following steps:
+     * 1. Creates a {@link GameID} based on the provided session ID.
+     * 2. Validate the {@code languageCode} and construct a {@link Language} object.
+     * 3. Dektes any existing game accosiated with the session to start fresh.
+     * 4. Saves the new game to the {@link GameRepository}. 
+     * 5. Logs the creation and returns a {@link GameDto} representing the new game.
+     * 
+     * @param sessionId the unique identifier of the user's sessin
+     * @param languageCode the ISo code of the language to use for the gam
+     * @return a {@link GamgeDto} representing the new game
+     * @throws UnsupportedLanguageException if the provided {@code languageCode} is invalid or not supported
+     */
     @Override
     public GameDto startNewGameWithLanguage(String sessionId, String languageCode) {
         try {

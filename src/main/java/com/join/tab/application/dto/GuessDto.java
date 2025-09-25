@@ -6,7 +6,6 @@ import com.join.tab.domain.enums.GameStatus;
 
 /**
  * Data Transfer Object (DTO) representing the result of a single guess in a Hangman game.
- *
  * Encapsulates the updated state of the word, remaining tries, game status,
  * the full word (if the game is finished), whether the guess was correct,
  * and the guessed letter itself.
@@ -23,16 +22,16 @@ public class GuessDto {
     /**
      * Constructs a new GuessDto.
      *
-     * @param currentState the current masked state of the word
+     * @param currentState   the current masked state of the word
      * @param remainingTries number of remaining incorrect guesses allowed
-     * @param status the current {@link GameStatus}
-     * @param word the full word, exposed only if the game has ended
-     * @param wasCorrect whether the last guessed letter was correct
-     * @param guessedLetter the letter that was guessed
+     * @param status         the current {@link GameStatus}
+     * @param word           the full word, exposed only if the game has ended
+     * @param wasCorrect     whether the last guessed letter was correct
+     * @param guessedLetter  the letter that was guessed
      */
-    public GuessDto(String currentState, int remainingTries, GameStatus status,
-                    String word, String language, boolean wasCorrect, char guessedLetter
-                    ) {
+    public GuessDto (String currentState, int remainingTries, GameStatus status,
+                     String word, String language, boolean wasCorrect, char guessedLetter
+    ) {
         this.currentState = currentState;
         this.remainingTries = remainingTries;
         this.status = status;
@@ -42,7 +41,7 @@ public class GuessDto {
         this.guessedLetter = guessedLetter;
     }
 
-    public static GuessDto fromDomain(
+    public static GuessDto fromDomain (
             HangmanGame game,
             HangmanGame.GuessResult result) {
         String word = game.isInProgress() ? null : game.getWord();
@@ -57,27 +56,27 @@ public class GuessDto {
         );
     }
 
-    public String getCurrentState() {
+    public String getCurrentState () {
         return this.currentState;
     }
 
-    public int getRemainingTries() {
+    public int getRemainingTries () {
         return this.remainingTries;
     }
 
-    public GameStatus getStatus() {
+    public GameStatus getStatus () {
         return this.status;
     }
 
-    public String getWord() {
+    public String getWord () {
         return this.word;
     }
 
-    public boolean isWasCorrect() {
+    public boolean isWasCorrect () {
         return this.wasCorrect;
     }
 
-    public char getGuessedLetter() {
+    public char getGuessedLetter () {
         return this.guessedLetter;
     }
 

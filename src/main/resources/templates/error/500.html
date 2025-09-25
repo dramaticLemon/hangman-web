@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>500 — Server Error</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root{
+          --bg:#000;
+          --card-bg: rgba(255,255,255,0.03);
+          --accent:#e74c3c;
+          --muted:#9aa0a6;
+          --text:#ffffff;
+        }
+
+        *{box-sizing:border-box}
+        html,body{height:100%;margin:0;font-family:"Roboto Mono",monospace;background:linear-gradient(180deg,#111,#000);color:var(--text);}
+
+        .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+
+        .card{
+          width:100%;
+          max-width:820px;
+          padding:32px;
+          border-radius:12px;
+          text-align:center;
+          background:transparent;
+        }
+
+        .marker{
+          width:18px;
+          height:36px;
+          margin:0 auto 18px;
+          background:var(--accent);
+          border-radius:4px;
+          box-shadow:0 6px 20px rgba(231,76,60,0.08);
+          animation:blink 1.6s ease-in-out infinite;
+        }
+        @keyframes blink{
+          0%{transform:translateY(0)}
+          50%{transform:translateY(4px)}
+          100%{transform:translateY(0)}
+        }
+
+        h1{font-size:96px;margin:0;line-height:.9;color:var(--accent);font-weight:700}
+        h3{font-size:22px;margin:14px 0 6px;color:#ddd;font-weight:500}
+        p.lead{margin:0 0 18px;color:var(--muted);font-weight:300;font-size:16px}
+
+        .actions{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+        .btn{
+          display:inline-block;padding:10px 18px;border-radius:8px;text-decoration:none;
+          font-weight:600;border:2px solid var(--accent);color:var(--accent);background:transparent;
+          transition:all .14s ease;
+        }
+        .btn:hover{background:var(--accent);color:#111;transform:translateY(-3px)}
+
+        .secondary{border-color:transparent;color:var(--muted);background:transparent;font-weight:400}
+        .secondary:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+
+        @media (max-width:480px){
+          h1{font-size:64px}
+          h3{font-size:18px}
+        }
+    </style>
+</head>
+<body>
+<div class="wrap" role="main" aria-labelledby="title">
+    <div class="card">
+        <span class="marker" aria-hidden="true"></span>
+        <h1 id="title">500</h1>
+        <h3>Server Error</h3>
+        <p class="lead">Something went wrong on our side. We are fixing it.</p>
+
+        <div class="actions" aria-hidden="false">
+            <a class="btn" href="/" onclick="history.back(); return false;">Back</a>
+            <a class="btn secondary" href="/">Home</a>
+        </div>
+
+        <p style="color:var(--muted);margin-top:18px;font-size:13px">
+            If the error persists, try refreshing the page or returning to the home page.
+        </p>
+    </div>
+</div>
+</body>
+</html>

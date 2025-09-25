@@ -3,6 +3,15 @@ package com.join.tab.application.dto;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Data transfer Object representing information about language(s) in the system.
+ * This DTO can be used in two modes;
+ * 1. Single language info - provides details about a specific language,
+ * including code, display name, number of categories, word cound, and whether
+ * it is supported.
+ * 2.Multiple languages info - provides a list of all supported languages and a
+ * map of language-specific data.
+ */
 public class LanguageInfoDto {
     private final String languageCode;
     private final String displayName;
@@ -48,7 +57,7 @@ public class LanguageInfoDto {
 
     /**
      * Count categories
-     * @return
+     * @return count of categories
      */
     public long getCategories () {
         return categories;
