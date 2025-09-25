@@ -3,7 +3,10 @@ package com.join.tab.domain.service;
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.model.valueobject.GameId;
 import com.join.tab.domain.model.Word;
+import com.join.tab.domain.model.valueobject.GamePreferences;
+import com.join.tab.domain.model.valueobject.Language;
 import com.join.tab.domain.repository.WordRepository;
+import com.join.tab.infra.repository.jpa.impl.JpaWordRepository;
 
 /**
  * Factory class for creating new {@link HangmanGame} instances.
@@ -24,14 +27,23 @@ public class GameFactory {
     }
 
     /**
-     * Creates a new game with a random selected word.
+     * Creates a new game with a random selected default language word.
      *
      * @param gameId the unique ID for the new game
      * @return a new {@link HangmanGame} instance
      */
     public HangmanGame createNewGame(GameId gameId) {
-        Word randomWord = wordRepository.getRandomWord();
-        return new HangmanGame(gameId, randomWord);
+        return createNewGameWithPreferences(gameId, GamePreferences.defaultPreferences());
+    }
+
+    public HangmanGame createNewGameWithLanguage(GameId gameId, Language language) {
+        GamePreferences preferences = GamePreferences.withLanguage(language);
+        return createNewGameWithPreferences(gameId, preferences);
+    }
+
+    public HangmanGame createNewGameWithPreferences(GameId gamId, GamePreferences preferences) {
+        Word randomWord = wordRepository.getRandomWordByPreferences(preferences);
+        return new HangmanGame(gamId, randomWord, preferences);
     }
 
     /**
@@ -41,8 +53,9 @@ public class GameFactory {
      * @param wordValue the word to use in the game
      * @return a new {@link HangmanGame} instance
      */
-    public HangmanGame createGameWithWord(GameId gameId, String wordValue){
-        Word word = new Word(wordValue);
-        return new HangmanGame(gameId, word);
+    public HangmanGame createGameWithWord(GameId gameId, String wordValue, Language language){
+        Word word = new Word(wordValue, language);
+        GamePreferences preferences = GamePreferences.withLanguage(language);
+        return new HangmanGame(gameId, word, preferences);
     }
 }

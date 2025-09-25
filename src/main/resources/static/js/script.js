@@ -1,10 +1,11 @@
 let initialTries = 0;
 
 window.addEventListener('DOMContentLoaded', () => {
-    // EN UA
+    // en ua
     const englishLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     const uaLetters = 'АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'.split('');
     let currentLetters = englishLetters; // current
+    let currentLang = 'en';
     let usedLetters = new Set();
 
     const wordEl = document.getElementById('word');
@@ -42,13 +43,17 @@ window.addEventListener('DOMContentLoaded', () => {
     // ======== Language switch with flip animation ========
     languageBtn.addEventListener('click', () => {
       const nextLetters = currentLetters === englishLetters ? uaLetters : englishLetters;
+      currentLang = currentLang === 'en' ? 'ua' : 'en'; // change lang
 
-      // Переворачиваем контейнер
+      // flip container
       lettersInner.style.transform = 'rotateY(180deg)';
 
       setTimeout(() => {
         renderLetterButtons(nextLetters);
         lettersInner.style.transform = 'rotateY(0deg)';
+
+        // start new game on server with chosen language
+        startGame(currentLang);
       }, 300);
 
       currentLetters = nextLetters;
@@ -56,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     // ======== Restart game ========
-        gameOverEl.addEventListener('click', () => {
+    gameOverEl.addEventListener('click', () => {
             gameOverEl.style.display = 'none';
             document.querySelectorAll('.letter-btn').forEach(btn => btn.disabled = false);
             startGame();
@@ -73,10 +78,10 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.letter-btn').forEach(btn => btn.disabled = false);
     }
 
-    // start new game
-    async function startGame() {
+    // ======== start new game ========
+    async function startGame(lang = currentLang) {
         try {
-            const response = await fetch('/api/hangman/start', { method: 'POST' });
+            const response = await fetch(`/api/hangman/start?lang=${lang}`, { method: 'POST' });
             if (!response.ok) throw new Error('Fail start a new game');
 
             const result = await response.json();
@@ -85,6 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
             wordEl.innerHTML = result.currentState.split('').join(' ');
             hangmanEl.src = `/images/stage-0.png`;
             enableAllButtons();
+            usedLetters.clear();
         } catch (e) {
             console.error('Error start a new game:', e);
         }
@@ -238,7 +244,7 @@ window.addEventListener('DOMContentLoaded', () => {
         btn.disabled = true;
 
         try {
-            const response = await fetch(`/api/hangman/guess?letter=${encodeURIComponent(letter)}`, { method: 'POST' });
+            const response = await fetch(`/api/hangman/guess?letter=${encodeURIComponent(letter)}&lang=${currentLang}`, { method: 'POST' });
             if (!response.ok) throw new Error('response error');
 
             const result = await response.json();

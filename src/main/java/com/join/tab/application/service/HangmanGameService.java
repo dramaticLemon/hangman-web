@@ -2,6 +2,7 @@ package com.join.tab.application.service;
 
 import com.join.tab.application.dto.GameDto;
 import com.join.tab.application.dto.GuessDto;
+import com.join.tab.application.dto.LanguageInfoDto;
 
 /**
  * Service interface for managing Hangman games.
@@ -20,6 +21,8 @@ public interface HangmanGameService {
      */
     GameDto startNewGame(String sessionId);
 
+    GameDto startNewGameWithLanguage(String sessionId, String languageCode);
+    GameDto startNewGameWithPreferences(String sessionId, String languageCode, String category, String difficulty);
     /**
      * Makes a guess for the specified session's current game.
      *
@@ -44,4 +47,6 @@ public interface HangmanGameService {
      * @param sessionId the unique session identifier
      */
     void endGame(String sessionId);
+    LanguageInfoDto getLanguageInfo(String languageCode);
+    LanguageInfoDto getAllLanguagesInfo();
 }

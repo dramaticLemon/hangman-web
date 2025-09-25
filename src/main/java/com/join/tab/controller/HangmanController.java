@@ -1,10 +1,12 @@
 package com.join.tab.controller;
 
+import com.join.tab.application.dto.LanguageInfoDto;
 import com.join.tab.domain.exception.GameNotFoundException;
 import com.join.tab.domain.exception.LetterAlreadyGuessedException;
 import com.join.tab.application.dto.GameDto;
 import com.join.tab.application.dto.GuessDto;
 import com.join.tab.application.service.HangmanGameService;
+import com.join.tab.domain.exception.UnsupportedLanguageException;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,21 +44,97 @@ public class HangmanController {
      * @return a {@link ResponseEntity} containing game details or an error message.
      */
     @PostMapping("/start")
-    public ResponseEntity<Map<String, Object>> startGame(HttpSession session) {
-        try {
-            GameDto game = gameService.startNewGame(session.getId());
-            Map<String, Object> response = new HashMap<>();
-            response.put("currentState", game.getCurrentState());
-            response.put("remainingTries", game.getRemainingTries());
-            response.put("status", game.getStatus());
+    public ResponseEntity<Map<String, Object>> startGame(
+            HttpSession session,
+            @RequestParam(value = "lang", defaultValue = "en") String language) {
 
+        try {
+            GameDto game = gameService.startNewGameWithLanguage(session.getId(), language);
+
+            Map<String, Object> response = createGameResponse(game);
+            response.put("message", "Game started successfully");
+
+            log.info("New game started for session {} with languages {}", session.getId(), language);
             return ResponseEntity.ok(response);
+        } catch (UnsupportedLanguageException e) {
+            log.warn("Attempted to start game with unsupported language: {}", language);
+            return ResponseEntity.badRequest().body(Map.of("error", "Unsupported language: " + language));
+
         } catch (Exception e) {
+            log.error("Failed to start game for session {}", session.getId(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Failed to start game"));
         }
     }
 
+    @PostMapping("/start-with-preferences")
+    public ResponseEntity<Map<String, Object>> startGameWithPreferences(
+            @RequestParam(value = "language", defaultValue = "en") String language,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "difficult", required = false) String difficult,
+            HttpSession session) {
+        try {
+            GameDto game = gameService.startNewGameWithPreferences(
+                    session.getId(), language, category, difficult
+            );
+            Map<String, Object> response = createGameResponse(game);
+            response.put("message", "Game started with preferences");
+            response.put("preferences", Map.of(
+                    "language", language,
+                    "category", category != null ? category : "any",
+                    "difficulty", difficult != null ? difficult: "any"
+            ));
+
+            log.info("New game started for session {} with preferences: lang={} ,cat={}, diff={}",
+                    session.getId(), language, category, difficult);
+            return ResponseEntity.ok(response);
+        } catch (UnsupportedLanguageException e) {
+            log.warn("Attempted to start game with unsupported language: {}", language);
+            return ResponseEntity.badRequest()
+                    .body(Map.of("error", "Unsupported language: " + language));
+        } catch (IllegalArgumentException e) {
+            log.warn("Invalid game preferences provided: {}", e.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(Map.of("error", "Invalid preferences: " + e.getMessage()));
+        } catch (Exception e) {
+            log.error("Failed to start game with preferences for session {}", session.getId(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Failed to start game"));
+        }
+    }
+
+    private Map<String, Object> createGameResponse(GameDto game) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("currentState", game.getCurrentState());
+        response.put("remainingTries", game.getRemainingTries());
+        response.put("status", game.getStatus());
+        response.put("language", game.getLanguage());
+
+        if (game.getCategory() != null) {
+            response.put("category", game.getCategory());
+        }
+
+        if (game.getWord() != null) {
+            response.put("word", game.getWord());
+        }
+
+        return response;
+    }
+
+    private Map<String, Object> createGuessResponse(GuessDto result) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("currentState", result.getCurrentState());
+        response.put("remainingTries", result.getRemainingTries());
+        response.put("status", result.getStatus());
+        response.put("language", result.getLanguage());
+        response.put("wasCorrect", result.isWasCorrect());
+
+        if (result.getWord() != null) {
+            response.put("word", result.getWord());
+        }
+
+        return response;
+    }
     /**
      * Processes a letter guess for the current Hangman game associated with the HTTp session.
      *
@@ -86,25 +164,23 @@ public class HangmanController {
         try {
             GuessDto result = gameService.guessLetter(session.getId(), letter);
 
-            Map<String, Object> response = new HashMap<>();
-            response.put("currentState", result.getCurrentState());
-            response.put("remainingTries", result.getRemainingTries());
-            response.put("status", result.getStatus());
-            response.put("wasCorrect", result.isWasCorrect());
-
-            if (result.getWord() != null) {
-                response.put("word", result.getWord());
-            }
-
+            Map<String, Object> response = createGuessResponse(result);
             return ResponseEntity.ok(response);
 
         } catch (GameNotFoundException e) {
+            log.warn("Guess attempted for non-existent game, session: {}", session.getId());
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Map.of("error", "Game not found. Please start a new game."));
         } catch (LetterAlreadyGuessedException e) {
+            log.info("Duplicate letter guess: {} for session {}", letter, session.getId());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("error", e.getMessage()));
+        } catch (IllegalArgumentException e) {
+            log.warn("Invalid letter '{}' guessed for session {}: {}", letter, session.getId(), e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Invalid letter for this language: " + letter));
         } catch (Exception e) {
+            log.error("Failed to process guess for session {}", session.getId(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Failed to process guess"));
         }
@@ -137,18 +213,11 @@ public class HangmanController {
                         .body(Map.of("error", "No active game found"));
             }
 
-            Map<String, Object> response = new HashMap<>();
-            response.put("currentState", game.getCurrentState());
-            response.put("remainingTries", game.getRemainingTries());
-            response.put("status", game.getStatus());
-
-            if (game.getWord() != null) {
-                response.put("word", game.getWord());
-            }
-
+            Map<String, Object> response = createGameResponse(game);
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
+            log.error("Failed to get game status for session: {}", session.getId());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Failed to get game status"));
         }
@@ -171,8 +240,52 @@ public class HangmanController {
             gameService.endGame(session.getId());
             return ResponseEntity.ok(Map.of("message", "Game ended successfully"));
         } catch (Exception e) {
+            log.error("Failed to end game for session: {}", session.getId(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Failed to end game"));
         }
     }
+
+    @GetMapping("/languages")
+    public ResponseEntity<Map<String, Object>> getSupportedLanguages() {
+        try {
+            LanguageInfoDto languagesInfo = gameService.getAllLanguagesInfo();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("supportedLanguages", languagesInfo.getAllLanguages());
+            response.put("languagesData", languagesInfo.getLanguagesData());
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            log.error("Failed to get supported languages", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Failed to get language information"));
+        }
+    }
+
+    @GetMapping("/languages/{languageCode}")
+    public ResponseEntity<Map<String, Object>> getLanguageInfo(@PathVariable String languageCode) {
+        try {
+            LanguageInfoDto languageInfo = gameService.getLanguageInfo(languageCode);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("language", languageInfo.getLanguageCode());
+            response.put("displayName", languageInfo.getDisplayName());
+            response.put("categories", languageInfo.getCategories());
+            response.put("wordCount", languageInfo.getWordCount());
+            response.put("supported", languageInfo.isSupported());
+
+            return ResponseEntity.ok(response);
+
+        } catch (UnsupportedLanguageException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "Language not supported: " + languageCode));
+        } catch (Exception e) {
+            log.error("Failed to get language info for: {}", languageCode, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Failed to get language information"));
+        }
+    }
+
 }

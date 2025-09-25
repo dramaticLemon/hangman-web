@@ -3,6 +3,7 @@ package com.join.tab.application.dto;
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.enums.GameStatus;
 
+
 /**
  * Data Transfer Object (DTO) representing the result of a single guess in a Hangman game.
  *
@@ -15,6 +16,7 @@ public class GuessDto {
     private final int remainingTries;
     private final GameStatus status;
     private final String word;
+    private final String language;
     private final boolean wasCorrect;
     private final char guessedLetter;
 
@@ -29,24 +31,29 @@ public class GuessDto {
      * @param guessedLetter the letter that was guessed
      */
     public GuessDto(String currentState, int remainingTries, GameStatus status,
-                    String word, boolean wasCorrect, char guessedLetter) {
+                    String word, String language, boolean wasCorrect, char guessedLetter
+                    ) {
         this.currentState = currentState;
         this.remainingTries = remainingTries;
         this.status = status;
         this.word = word;
+        this.language = language;
         this.wasCorrect = wasCorrect;
         this.guessedLetter = guessedLetter;
     }
 
-    public static GuessDto fromDomain(HangmanGame game, HangmanGame.GuessResult result) {
+    public static GuessDto fromDomain(
+            HangmanGame game,
+            HangmanGame.GuessResult result) {
         String word = game.isInProgress() ? null : game.getWord();
         return new GuessDto(
                 result.getCurrentState(),
                 result.getRemainingTries(),
                 result.getGameStatus(),
                 word,
+                result.getLanguage().getCode(),
                 result.isWasCorrect(),
-                ' ' // You'd need to pass the guessed letter here
+                ' '
         );
     }
 
@@ -74,4 +81,7 @@ public class GuessDto {
         return this.guessedLetter;
     }
 
+    public String getLanguage () {
+        return language;
+    }
 }

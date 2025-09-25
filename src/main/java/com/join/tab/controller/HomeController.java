@@ -2,6 +2,7 @@ package com.join.tab.controller;
 
 import com.join.tab.application.dto.GameDto;
 import com.join.tab.application.service.HangmanGameService;
+import com.join.tab.domain.model.valueobject.Language;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * HomeController is responsible for handling requests to the home page ("/api")
@@ -50,17 +52,52 @@ public class HomeController {
      * @param session the current HTTP session (used to identity the game)
      * @return the name of view template ("index")
      */
-    @GetMapping("/api")
-    public String index(Model model, HttpSession session) {
-        GameDto game = gameService.getCurrentGame(session.getId());
+    @GetMapping("/api/game")
+    public String index(
+            @RequestParam(value = "language", defaultValue = "en") String language,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "difficulty", required = false) String difficulty,
+            Model model,
+            HttpSession session) {
+        try {
+            GameDto game;
 
-        if (game == null) {
-            game = gameService.startNewGame(session.getId());
+            if (category != null || difficulty != null) {
+                game = gameService.startNewGameWithPreferences(session.getId(), language, category, difficulty);
+            } else {
+                game = gameService.startNewGameWithLanguage(session.getId(), language);
+            }
+
+            model.addAttribute("currentState", game.getCurrentState());
+            model.addAttribute("remainingTries", game.getRemainingTries());
+            model.addAttribute("status", game.getStatus());
+            model.addAttribute("languages", game.getLanguage());
+            model.addAttribute("guessedLetters", game.getGuessedLetters());
+
+            if (game.getWord() != null) {
+                model.addAttribute("word", game.getWord());
+            }
+
+            model.addAttribute("preferences", java.util.Map.of(
+                    "language", language,
+                    "category", category != null ? category : "any",
+                    "difficulty", difficulty != null ? difficulty : "any"
+            ));
+
+        } catch (Exception e) {
+            log.error("Error loading home page for session {}", session.getId(), e);
+            // Fallback to English if there's an error
+            try {
+                GameDto fallbackGame = gameService.startNewGameWithLanguage(session.getId(), Language.defaultLanguage().getCode());
+                model.addAttribute("remainingTries", fallbackGame.getRemainingTries());
+                model.addAttribute("status", fallbackGame.getStatus());
+                model.addAttribute("language", "en");
+                model.addAttribute("error", "Failed to load game in selected language, switched to default");
+            } catch (Exception fallbackError) {
+                log.error("Even fallback failed for session {}", session.getId(), fallbackError);
+                model.addAttribute("error", "Failed to load game");
+            }
         }
-
-        model.addAttribute("currentState", game.getCurrentState());
-        model.addAttribute("remainingTries", game.getRemainingTries());
-        model.addAttribute("status", game.getStatus());
 
         return "index";
     }

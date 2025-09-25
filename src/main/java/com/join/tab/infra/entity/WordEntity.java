@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 /**
  * JPA entity representing a word in the Hangman game database.
  *
@@ -28,8 +30,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "words", indexes = {
         @Index(name = "idx_word_length", columnList = "length"),
-        @Index(name = "idx_word_category", columnList = "category")
-})
+        @Index(name = "idx_word_category", columnList = "category"),
+        @Index(name = "idx_word_language", columnList = "language"),
+        @Index(name = "idx_word_language_category", columnList = "language, category"),
+        @Index(name = "idx_word_active_language", columnList =  "is_active, language")
+    },
+    uniqueConstraints = {
+        @UniqueConstraint(name = "uk_word_language", columnNames = {"value", "language"})
+    })
 @NoArgsConstructor
 @AllArgsConstructor
 public class WordEntity {
@@ -48,8 +56,13 @@ public class WordEntity {
     @Column(name = "value", nullable = false, unique = true, length = 50)
     @NotBlank(message = "Word value cannot be blank")
     @Size(min = 3, max = 50, message = "Word must be between 3 and 50 characters")
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "Word must contain only letters")
+    @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ]+$", message = "Word must contain only letters")
     private String value;
+
+    @Column(name = "language", nullable = false, length = 5)
+    @NotBlank(message = "Language cannot be blank")
+    @Pattern(regexp = "^[a-z]{2}$", message = "Language must be a valid 2-letter code")
+    private String language;
 
     /** Length of the word, automatically set based on value **/
     @Column(name = "length", nullable = false)
@@ -65,19 +78,31 @@ public class WordEntity {
     @Enumerated(EnumType.STRING)
     private DifficultyLevel difficultlyLevel;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "update_at")
+    private LocalDateTime updateAt;
+
     /** Whether the word is active and available for use. Defaults to true. **/
     @Column(name = "is_active")
     private Boolean isActive = true;
 
-    /**
-     * Lifecycle callback to normalize the word and set derived fields
-     * before persisting ur updating.
-     */
     @PrePersist
+    protected void onCreate() {
+        validateAndNormalize();
+        this.createdAt = LocalDateTime.now();
+        this.updateAt = LocalDateTime.now();
+    }
     @PreUpdate
+    protected void onUpdate() {
+        validateAndNormalize();
+        this.updateAt = LocalDateTime.now();
+    }
+
     private void validateAndNormalize() {
         if (value != null) {
-            this.value = value.toLowerCase().trim();
+            this.value = normalizeWordByLanguage(value, language);
             this.length = this.value.length();
 
             // Set difficulty based on length if not specified
@@ -85,8 +110,26 @@ public class WordEntity {
                 this.difficultlyLevel = determineDifficultyLevel(this.length);
             }
         }
+
+        if (language != null) {
+            this.language = language.toLowerCase().trim();
+        }
+
+        if (category != null) {
+            this.category = category.toLowerCase().trim();
+        }
     }
 
+    private String normalizeWordByLanguage(String word, String lang) {
+        if (word == null || lang == null ) return word;
+
+        String normalized = word.trim();
+        return switch (lang.toLowerCase()) {
+            case "ua" -> normalized.toLowerCase();
+            case "en", "de", "fr", "es" -> normalized.toLowerCase();
+            default -> normalized.toLowerCase();
+        };
+    }
     /**
      * Determines difficulty level based on word length
      *
@@ -150,5 +193,13 @@ public class WordEntity {
 
     public void setIsActive (Boolean active) {
         isActive = active;
+    }
+
+    public String getLanguage () {
+        return language;
+    }
+
+    public void setLanguage (String language) {
+        this.language = language;
     }
 }

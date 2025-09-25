@@ -1,5 +1,6 @@
 package com.join.tab.infra.service;
 
+import com.join.tab.domain.model.valueobject.Language;
 import com.join.tab.infra.entity.WordEntity;
 import com.join.tab.infra.repository.jpa.WordJpaRepository;
 
@@ -16,23 +17,33 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @Service
-public class WordLoadersService {
-    private static final Logger log = LoggerFactory.getLogger(WordLoadersService.class);
+public class WordLoaderService {
+    private static final Logger log = LoggerFactory.getLogger(WordLoaderService.class);
 
+    // interface
     private final WordJpaRepository wordJpaRepository;
-    private final Pattern validWordPattern = Pattern.compile("^[a-zA-Z]{3,50}$");
-    private final Set<String> bannedWords = Set.of(
-            "badword1", "badword2"
+    // Language-specific validation patterns
+    private final Map<String, Pattern> validationPatterns = Map.of(
+            "en", Pattern.compile("^[a-zA-Z]{3,50}$"),
+            "ua", Pattern.compile("^[А-ЯІЇЄҐа-яіїєґ]{3,50}$"),
+            "de", Pattern.compile("^[a-zA-ZäöüÄÖÜß]{3,50}$"),
+            "fr", Pattern.compile("^[a-zA-ZàâäéèêëïîôöùûüÿçÀÂÄÉÈÊËÏÎÔÖÙÛÜŸÇ]{3,50}$"),
+            "es", Pattern.compile("^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]{3,50}$")
+    );
+    // Language-specific banned words
+    private final Map<String, Set<String>> bannedWords = Map.of(
+            "en", Set.of("badword", "inappropriate"),
+            "ru", Set.of("поганеслово"),
+            "de", Set.of("schlechtesWort"),
+            "fr", Set.of("motinterdit"),
+            "es", Set.of("palabramala")
     );
 
-    public WordLoadersService(WordJpaRepository wordJpaRepository) {
+    public WordLoaderService (WordJpaRepository wordJpaRepository) {
         this.wordJpaRepository = wordJpaRepository;
     }
 
@@ -49,14 +60,29 @@ public class WordLoadersService {
     public void loadWordsOnStartup() {
         if (wordJpaRepository.countByIsActiveTrue() == 0) {
             log.info("No words found in database, loading from file");
-            loadWordsFromFile("words/default-words.txt", "general");
-            loadWordsFromFile("words/programming-words.txt", "programming");
-            loadWordsFromFile("words/animals-words.txt", "animals");
+
+            loadDefaultWords();
 
         } else {
             log.info("Words already exists in database : {} active words",
                     wordJpaRepository.countByIsActiveTrue());
         }
+    }
+
+    private void loadDefaultWords() {
+        // load English words
+        loadWordsFromFile("words/english/general-words.txt", "en", "general");
+        loadWordsFromFile("words/english/programming-words.txt", "en", "programming");
+        loadWordsFromFile("words/english/animals-words.txt", "en", "animals");
+        loadWordsFromFile("words/english/technology-words.txt", "en", "technology");
+
+        // Load Ukrainian words
+        loadWordsFromFile("words/ukrainian/general-words.txt", "ua", "general");
+        loadWordsFromFile("words/ukrainian/programming-words.txt", "ua", "programming");
+        loadWordsFromFile("words/ukrainian/animals-words.txt", "ua", "animals");
+        loadWordsFromFile("words/ukrainian/technology-words.txt", "ua", "technology");
+
+        logLanguageStatistics();
     }
 
     /**
@@ -73,10 +99,14 @@ public class WordLoadersService {
      * @return a {@link WordLoadResult} containing counts of loaded, skipped words and any errors
      */
     @Transactional
-    public WordLoadResult loadWordsFromFile(String filePath, String category) {
-        WordLoadResult result = new WordLoadResult();
+    public WordLoadResult loadWordsFromFile(String filePath, String language, String category) {
+        WordLoadResult result = new WordLoadResult(language, category);
 
         try {
+
+            // validate language
+            new Language(language);
+
             ClassPathResource resource = new ClassPathResource(filePath);
 
             if (!resource.exists()) {
@@ -97,13 +127,15 @@ public class WordLoadersService {
 
                 while ((line = reader.readLine()) != null) {
                     lineNumber++;
-                    processWord(line.trim(), category, lineNumber, processWords, result);
+                    processWord(line.trim(), language, category, lineNumber, processWords, result);
                 }
             }
 
            log.info("Word loading completed for: {}: {} loaded, {} skipped, {} errors",
                    filePath, result.getLoadedCount(), result.getSkippedCount(), result.getErrors().size());
-
+        } catch (IllegalArgumentException e) {
+            log.error("Invalid language: {}", language, e);
+            result.addError("Invalid language: " + language);
         } catch (IOException e) {
             log.error("Error loading words form file: {}", filePath, e);
             result.addError("IO Error: " + e.getMessage());
@@ -134,18 +166,20 @@ public class WordLoadersService {
      * @param processedWords a set of words already processed in the current batch
      * @param result the {@link WordLoadResult} object to track success, skips, and errors
      */
-    private void processWord(String word, String category, int lineNumber,
-                             Set<String> processedWords, WordLoadResult result) {
+    private void processWord(String word, String language, String category,
+                             int lineNumber, Set<String> processedWords,
+                             WordLoadResult result) {
         try {
+
             if (word.isEmpty() || word.startsWith("#")) {
                 return; // skip empty lines ans comments
             }
 
             String cleanWord = word.toLowerCase().trim();
 
-            // Validate word format
-            if (!isValidWord(cleanWord)) {
-                result.addError("Line " + lineNumber + ": Invalid word format: " + word);
+            // Validate word format for specific language
+            if (!isValidWordForLanguage(cleanWord, language)) {
+                result.addError("Line " + lineNumber + ": Invalid word format for language: " + language + ": " + word);
                 result.incrementSkipped();
                 return;
             }
@@ -157,46 +191,59 @@ public class WordLoadersService {
             }
 
             // Check if word already exists in database
-            if (wordJpaRepository.findByValueIgnoreCase(cleanWord).isPresent()) {
+            if (wordJpaRepository.findByValueIgnoreCaseAndLanguage(cleanWord, language).isPresent()) {
                 result.incrementSkipped();
                 return;
             }
 
             // Check banned words
-            if (bannedWords.contains(cleanWord)) {
-                result.addError("Lina " + lineNumber + ": Banned word: " + word);
+            if (isBannedWord(cleanWord, language)) {
+                result.addError("Line " + lineNumber + ": Banned word for " + language + ": " + word);
                 result.incrementSkipped();
                 return;
             }
 
-
             // Create and save word entity
-            WordEntity entity = createWordEntity(cleanWord, category);
+            WordEntity entity = createWordEntity(cleanWord, language, category);
             wordJpaRepository.save(entity);
 
             processedWords.add(cleanWord);
             result.incrementLoaded();
+
         } catch (Exception e) {
             log.error("Error processing word '{}' at line '{}'", word, lineNumber, e);
             result.addError("Line " + lineNumber + ": Error processing '" + word + "': " + e.getMessage());
         }
     }
 
-    /**
-     * Check if a word is valid based on format and length.
-     *
-     * A valid word:
-     * - is not null
-     * - matches the allowed pettern (letters only)
-     * - has length between 3 and 50 char
-     * @param word the word to validate
-     * @return {@code true} if the word is valid, {@code false} otherwise
-     */
-    private boolean isValidWord(String word) {
-        return word != null
-                && validWordPattern.matcher(word).matches()
-                && word.length() >= 3
-                && word.length() <= 50;
+    private String normalizeWordForLanguage(String word, String language) {
+        if (word == null) return  null;
+
+        return switch (language) {
+            case "ua" -> word.toLowerCase().trim(); // Cyrillic normalization
+            case "de" -> word.toLowerCase().trim(); // German with umlauts
+            case "fr" -> word.toLowerCase().trim(); // French with accents
+            case "es" -> word.toLowerCase().trim(); // Spanish with accents
+            default -> word.toLowerCase().trim(); // Default Latin
+        };
+    }
+
+    private boolean isValidWordForLanguage(String word, String language) {
+        if (word == null || word.trim().isEmpty()) return false;
+
+        Pattern pattern = validationPatterns.get(language);
+        if (pattern == null) {
+            // Default validation for unsupported languages
+            pattern = Pattern.compile("^[\\p{L}]{3,50}$"); // Unicode letters
+        }
+
+        return pattern.matcher(word).matches();
+    }
+
+
+    private boolean isBannedWord(String word, String language) {
+        Set<String> languageBannedWords = bannedWords.get(language);
+        return languageBannedWords != null && languageBannedWords.contains(word.toLowerCase());
     }
 
     /**
@@ -210,13 +257,12 @@ public class WordLoadersService {
      * @param category the category to assign
      * @return a new {@link WordEntity} ready for saving
      */
-    private WordEntity createWordEntity(String word, String category) {
+    private WordEntity createWordEntity(String word, String language, String category) {
         WordEntity entity = new WordEntity();
         entity.setValue(word);
+        entity.setLanguage(language);
         entity.setCategory(category);
         entity.setIsActive(true);
-        // Length and difficulty will be set by @PrePersist
-
         return entity;
     }
 
@@ -241,10 +287,64 @@ public class WordLoadersService {
         wordJpaRepository.saveAll(allWords);
 
         // Load fresh words
-        loadWordsFromFile("words/default-words.txt", "general");
-        loadWordsFromFile("words/programming-words.txt", "programming");
-        loadWordsFromFile("words/animals-words.txt", "animals");
+        loadDefaultWords();
+    }
 
+    @Transactional
+    public WordLoadResult loadWordsForLanguageFromContent(
+            String content, String language, String category) {
+
+        WordLoadResult result = new WordLoadResult(language, category);
+
+        try {
+            // validate language
+            new Language(language);
+
+            Set<String> processedWords = new HashSet<>();
+            String[] lines = content.split("\n");
+
+            for (int i = 0; i < lines.length; i++) {
+                String line = lines[i].trim();
+                processWord(line, language, category, i + 1, processedWords, result);
+            }
+
+            log.info("Word loading from content completed for language {}: {} loaded, {} skipped",
+                    language, result.getLoadedCount(), result.getSkippedCount());
+
+        } catch (IllegalArgumentException e) {
+            log.error("Invalid language: {}", language, e);
+            result.addError("Invalid language: " + language);
+        } catch (Exception e) {
+            log.error("Error loading words from content for language {}", language, e);
+            result.addError("Error processing content: " + e.getMessage());
+        }
+
+        return result;
+    }
+
+    public Map<String, Long> getLanguageStatistics () {
+        Map<String, Long> stats = new HashMap<>();
+        List<String> languages = wordJpaRepository.findSupportedLanguages();
+        for (String lang: languages) {
+            long count = wordJpaRepository.countByLanguageAndIsActiveTrue(lang);
+            stats.put(lang, count);
+        }
+
+
+        return stats;
+    }
+
+    private void logLanguageStatistics() {
+        Map<String, Long> stats = getLanguageStatistics();
+        log.info("Language statistics:");
+        stats.forEach((lang, count) -> {
+            try {
+                Language language = new Language(lang);
+                log.info("  {} ({}): {} words", language.getDisplayName(), lang, count);
+            } catch (Exception e) {
+                log.info("  {}: {} words", lang, count);
+            }
+        });
     }
 
     /**
@@ -254,9 +354,21 @@ public class WordLoadersService {
      * and any errors encountered during processing.
      */
     public static class WordLoadResult {
+
+        private final String language;
+        private final String category;
         private int loadedCount = 0;
         private int skippedCount = 0;
         private final List<String> errors = new ArrayList<>();
+
+        public WordLoadResult() {
+            this(null, null);
+        }
+
+        public WordLoadResult(String language, String category) {
+            this.language = language;
+            this.category = category;
+        }
 
         public void incrementLoaded() { loadedCount++; }
         public void incrementSkipped() { skippedCount++; }
@@ -276,6 +388,14 @@ public class WordLoadersService {
 
         public boolean hasErrors() {
             return !errors.isEmpty();
+        }
+
+        public String getLanguage () {
+            return language;
+        }
+
+        public String getCategory () {
+            return category;
         }
     }
 

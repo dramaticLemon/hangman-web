@@ -1,7 +1,7 @@
 package com.join.tab.controller;
 
 import com.join.tab.application.service.WordManagementService;
-import com.join.tab.infra.service.WordLoadersService;
+import com.join.tab.infra.service.WordLoaderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -59,7 +59,7 @@ public class WordManagementController {
      *
      * Steps performed:
      * 1. Check if the uploaded file is empty and return HTTP 400 Bad Request if it is.
-     * 2. Process the file and loads words into the specified category using {@link WordLoadersService}.
+     * 2. Process the file and loads words into the specified category using {@link WordLoaderService}.
      * 3. Prepares a response containing:
      *  - "loaded": number of words successfully loaded
      *  - "skipped: number of words skipped
@@ -83,7 +83,7 @@ public class WordManagementController {
         }
 
         try {
-            WordLoadersService.WordLoadResult result = processUpdatedFile(file, category);
+            WordLoaderService.WordLoadResult result = processUpdatedFile(file, category);
 
             Map<String, Object> response = new HashMap<>();
             response.put("loaded", result.getLoadedCount());
@@ -96,6 +96,33 @@ public class WordManagementController {
             log.error("Failed to upload words form file: {}", file.getOriginalFilename(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Failed to process uploaded file"));
+        }
+    }
+
+    @PostMapping("/{language}/upload-words")
+    public ResponseEntity<Map<String, Object>> uploadWordsForLanguage(
+            @PathVariable String language,
+            @RequestParam("file") MultipartFile file,
+            @RequestParam(value = "category", defaultValue = "general") String category) {
+
+        try {
+            // This would require extending WordManagementService to handle language-specific uploads
+            WordLoaderService.WordLoadResult result = wordManagementService.loadWordsFromFile(
+                    file.getOriginalFilename(), category);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("language", language);
+            response.put("loaded", result.getLoadedCount());
+            response.put("skipped", result.getSkippedCount());
+            response.put("errors", result.getErrors());
+            response.put("success", !result.hasErrors());
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            log.error("Failed to upload words for language: {}", language, e);
+            return ResponseEntity.status(500)
+                    .body(Map.of("error", "Failed to upload words for " + language));
         }
     }
 
@@ -136,6 +163,30 @@ public class WordManagementController {
            log.error("Failed to add word: {}", word, e);
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                    .body(Map.of("error", "Failed to add word"));
+        }
+    }
+
+    @PostMapping("/{language}/add-word")
+    public ResponseEntity<Map<String, Object>> addWordForLanguage(
+            @PathVariable String language,
+            @RequestParam String word,
+            @RequestParam(value = "category", defaultValue = "general") String category) {
+
+        try {
+            // This would require extending WordManagementService to handle language-specific word addition
+            boolean success = wordManagementService.addWord(word, category);
+
+            return ResponseEntity.ok(Map.of(
+                    "success", success,
+                    "language", language,
+                    "word", word,
+                    "message", success ? "Word added successfully" : "Failed to add word"
+            ));
+
+        } catch (Exception e) {
+            log.error("Failed to add word '{}' for language: {}", word, language, e);
+            return ResponseEntity.status(500)
+                    .body(Map.of("error", "Failed to add word"));
         }
     }
 
@@ -237,16 +288,16 @@ public class WordManagementController {
      * 2. Ignores empty lines and lines starting with "#" (treated as comments).
      * 3. Trims each line and attempts to add as a word to the specified category via {@link WordManagementService#addWord(String, String)}
      * 4. Tracks the number of words successfully loaded adn skipped.
-     * 5. Returns a {@link WordLoadersService.WordLoadResult} containing the result.
+     * 5. Returns a {@link WordLoaderService.WordLoadResult} containing the result.
      *
      * @param file the uploaded file containing words.
      * @param category the category to assign the words.
-     * @return a {@link WordLoadersService.WordLoadResult} with counts of loaded and skipped words
+     * @return a {@link WordLoaderService.WordLoadResult} with counts of loaded and skipped words
      * @throws IOException if an I/O error occurs while reading the file.
      */
-    private WordLoadersService.WordLoadResult processUpdatedFile(
+    private WordLoaderService.WordLoadResult processUpdatedFile(
             MultipartFile file, String category) throws IOException {
-        WordLoadersService.WordLoadResult result = new WordLoadersService.WordLoadResult();
+        WordLoaderService.WordLoadResult result = new WordLoaderService.WordLoadResult();
 
         try(BufferedReader reader = new BufferedReader(
                 new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {

@@ -2,10 +2,13 @@ package com.join.tab.infra.repository.memory;
 
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.model.valueobject.GamePreferences;
+import com.join.tab.domain.model.valueobject.Language;
 import com.join.tab.domain.model.valueobject.Letter;
 import com.join.tab.domain.model.Word;
 import com.join.tab.domain.repository.GameRepository;
 import com.join.tab.domain.enums.GameStatus;
+import com.join.tab.infra.entity.WordEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
@@ -34,12 +37,7 @@ public class InMemoryGameRepository implements GameRepository {
      */
     @Override
     public void save(HangmanGame game) {
-        GameData gameData = new GameData(
-                game.getWord(),
-                game.getGuessedLetters(),
-                game.getMistakeCount(),
-                game.getStatus()
-        );
+        GameData gameData = new GameData(game);
         games.put(game.getGameId(), gameData);
     }
 
@@ -55,10 +53,17 @@ public class InMemoryGameRepository implements GameRepository {
             return Optional.empty();
         }
 
-        Word word = new Word(gameData.getWord());
+        Word word = new Word(gameData.getWord(), new Language(gameData.getLanguage()));
+        GamePreferences preferences = new GamePreferences(
+                new Language(gameData.getLanguage()),
+                gameData.getCategory(),
+                gameData.getDifficulty() != null ? WordEntity.DifficultyLevel.valueOf(gameData.getDifficulty()) : null
+        );
+
         HangmanGame game = new HangmanGame(
                 gameId,
                 word,
+                preferences,
                 gameData.getGuessedLetters(),
                 gameData.getMistakeCount(),
                 gameData.getStatus()
@@ -82,17 +87,29 @@ public class InMemoryGameRepository implements GameRepository {
         private final Set<Letter> guessedLetters;
         private final int mistakeCount;
         private final GameStatus status;
+        private final String language;     // новый
+        private final String category;     // новый
+        private final String difficulty;   // новый
 
-        public GameData(String word, Set<Letter> guessedLetters, int mistakeCount, GameStatus status) {
-            this.word = word;
-            this.guessedLetters = new HashSet<>(guessedLetters);
-            this.mistakeCount = mistakeCount;
-            this.status = status;
+        public GameData(HangmanGame game) {
+            this.word = game.getWord();
+            this.guessedLetters = new HashSet<>(game.getGuessedLetters());
+            this.mistakeCount = game.getMistakeCount();
+            this.status = game.getStatus();
+            this.language = game.getPreferences().getLanguage().getCode();
+            this.category = game.getPreferences().getCategory();
+            this.difficulty = game.getPreferences().getDifficulty() != null
+                    ? game.getPreferences().getDifficulty().name()
+                    : null;
         }
 
         public String getWord() { return word; }
         public Set<Letter> getGuessedLetters() { return guessedLetters; }
         public int getMistakeCount() { return mistakeCount; }
         public GameStatus getStatus() { return status; }
+        public String getLanguage() { return language; }
+        public String getCategory() { return category; }
+        public String getDifficulty() { return difficulty; }
     }
+
 }

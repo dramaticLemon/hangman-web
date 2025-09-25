@@ -1,6 +1,8 @@
 package com.join.tab.infra.repository.jpa.impl;
 
 import com.join.tab.domain.model.Word;
+import com.join.tab.domain.model.valueobject.GamePreferences;
+import com.join.tab.domain.model.valueobject.Language;
 import com.join.tab.domain.repository.WordRepository;
 import com.join.tab.infra.entity.WordEntity;
 import com.join.tab.infra.repository.jpa.WordJpaRepository;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -52,11 +55,46 @@ public class JpaWordRepository implements WordRepository {
      */
     @Override
     public Word getRandomWord(){
-        Optional<WordEntity> randomWord = jpaRepository.findRandomWord();
+        return getRandomWordByPreferences(GamePreferences.defaultPreferences());
+    }
+
+    public Word getRandomWordByPreferences(GamePreferences preferences) {
+        String categoryParam = preferences.hasCategory() ? preferences.getCategory() : null;
+        String difficultyParam = preferences.hasDifficulty() ? preferences.getDifficulty().name() : null;
+
+        Optional<WordEntity> randomWord = jpaRepository.findRandomWordByCriteria(
+                preferences.getLanguage().getCode(),
+                categoryParam,
+                difficultyParam
+        );
 
         if (randomWord.isEmpty()) {
-            log.warn("No words found in database, using fallback");
-            throw new IllegalStateException("No words available in the database");
+            log.warn("No words found for preferences: {}, trying language only", preferences);
+            return getRandomWordByLanguage(preferences.getLanguage());
+        }
+
+
+        return convertToDomain(randomWord.get());
+    }
+
+    public Word getRandomWordByLanguageAndCategory(Language language, String category) {
+        Optional<WordEntity> randomWord = jpaRepository.findRandomWordByLanguageAndCategory(language.getCode(), category);
+
+        if (randomWord.isEmpty()) {
+            log.warn("No words found for language: {} and category: {}, trying language only",
+                    language.getCode(), category);
+            return getRandomWordByLanguage(language);
+        }
+
+        return convertToDomain(randomWord.get());
+    }
+
+    public Word getRandomWordByLanguage(Language language) {
+        Optional<WordEntity> randomWord = jpaRepository.findRandomWordByLanguage(language.getCode());
+
+        if (randomWord.isEmpty()) {
+            log.warn("No words found for language: {}, trying fallback", language.getCode());
+            return getFallbackWord();
         }
 
         return convertToDomain(randomWord.get());
@@ -81,7 +119,7 @@ public class JpaWordRepository implements WordRepository {
      * @param difficulty the difficulty level
      * @return a {@link Word} form the database
      */
-    public Word getRandomWordByDiffuculty(WordEntity.DifficultyLevel difficulty) {
+    public Word getRandomWordByDifficulty(WordEntity.DifficultyLevel difficulty) {
         Optional<WordEntity> randomWord = jpaRepository.findRandomWordByDifficulty(difficulty.name());
         return randomWord.map(this::convertToDomain).orElse(getRandomWord());
     }
@@ -105,6 +143,32 @@ public class JpaWordRepository implements WordRepository {
         return jpaRepository.countByIsActiveTrue();
     }
 
+    public boolean wordExistsForLanguage(String value, Language language) {
+        return jpaRepository.findByValueIgnoreCaseAndLanguage(value, language.getCode()).isPresent();
+    }
+    public List<String> getSupportedLanguages() {
+        return jpaRepository.findSupportedLanguages();
+    }
+
+    public long getCategoriesByLanguage(Language language) {
+        return jpaRepository.countByLanguageAndIsActiveTrue(language.getCode());
+    }
+
+    public long getWordCountByLanguage(Language language) {
+        return jpaRepository.countByLanguageAndIsActiveTrue(language.getCode());
+    }
+    private Word getFallbackWord() {
+        Optional<WordEntity> fallback = jpaRepository.findAnyRandomWord();
+        if (fallback.isEmpty()) {
+            log.error("No words available in database at all!");
+            throw new IllegalStateException("No words available in the database");
+        }
+
+        log.info("Using fallback word: {} in language: {}",
+                fallback.get().getValue(), fallback.get().getLanguage());
+        return convertToDomain(fallback.get());
+    }
+
     /**
      * Convert a {@link WordEntity} to the domain {@link Word} object.
      *
@@ -112,7 +176,8 @@ public class JpaWordRepository implements WordRepository {
      * @return the corresponding domain object
      */
     private Word convertToDomain(WordEntity entity) {
-        return new Word(entity.getValue());
+        Language language = new Language(entity.getLanguage());
+        return new Word(entity.getValue(), language);
     }
 
     /**
@@ -121,9 +186,11 @@ public class JpaWordRepository implements WordRepository {
      * @param domain the domain word
      * @return the corresponding entity object
      */
-    private WordEntity convertToEntity(Word domain) {
+    private WordEntity convertToEntity(Word domain, String category) {
         WordEntity entity = new WordEntity();
         entity.setValue(domain.getValue());
+        entity.setLanguage(domain.getLanguage().getCode());
+        entity.setCategory(category);
         entity.setIsActive(true);
 
         return entity;

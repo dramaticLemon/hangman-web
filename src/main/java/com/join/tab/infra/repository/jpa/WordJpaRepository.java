@@ -74,6 +74,55 @@ public interface WordJpaRepository extends JpaRepository<WordEntity, Long> {
      */
     List<WordEntity> findByIsActiveTrueOrderByValueAsc();
 
+    // Random word by language
+    @Query(value = "SELECT * FROM words WHERE is_active = true AND language = :language ORDER BY RANDOM() LIMIT 1",
+            nativeQuery = true)
+    Optional<WordEntity> findRandomWordByLanguage(@Param("language") String language);
+
+    // Random word by language and difficulty
+    @Query(value = "SELECT * FROM words WHERE is_active = true AND language = :language AND difficulty_level = :level ORDER BY RANDOM() LIMIT 1",
+            nativeQuery = true)
+    Optional<WordEntity> findRandomWordByLanguageAndDifficulty(@Param("language") String language,
+                                                               @Param("level") String level);
+
+    // Random word by language and category
+    @Query(value = "SELECT * FROM words WHERE is_active = true AND language = :language AND category = :category ORDER BY RANDOM() LIMIT 1",
+            nativeQuery = true)
+    Optional<WordEntity> findRandomWordByLanguageAndCategory(@Param("language") String language,
+                                                             @Param("category") String category);
+
+    // Random word by all criteria
+    @Query(value = "SELECT * FROM words WHERE is_active = true AND language = :language " +
+            "AND (:category IS NULL OR category = :category) " +
+            "AND (:level IS NULL OR difficulty_level = :level) " +
+            "ORDER BY RANDOM() LIMIT 1",
+            nativeQuery = true)
+    Optional<WordEntity> findRandomWordByCriteria(@Param("language") String language,
+                                                  @Param("category") String category,
+                                                  @Param("level") String level);
+
+    // Find words by language and length range
+    @Query("SELECT w FROM WordEntity w WHERE w.isActive = true AND w.language = :language " +
+            "AND w.length BETWEEN :minLength AND :maxLength ORDER BY FUNCTION('RANDOM')")
+    List<WordEntity> findWordsByLanguageAndLength(@Param("language") String language,
+                                                  @Param("minLength") int minLength,
+                                                  @Param("maxLength") int maxLength);
+
+    // Check if word exists for specific language
+    Optional<WordEntity> findByValueIgnoreCaseAndLanguage(String value, String language);
+
+    // Get all active words by language
+    List<WordEntity> findByLanguageAndIsActiveTrueOrderByValueAsc(String language);
+
+    // Get categories for specific language
+    @Query("SELECT DISTINCT w.category FROM WordEntity w WHERE w.category IS NOT NULL " +
+            "AND w.isActive = true AND w.language = :language")
+    List<String> findCategoriesByLanguage(@Param("language") String language);
+
+    //get supported languages
+    @Query("SELECT DISTINCT w.language FROM WordEntity w WHERE w.isActive = true ORDER BY w.language")
+    List<String> findSupportedLanguages();
+
     /**
      * Retrieves all distinct active categories.
      *
@@ -87,5 +136,17 @@ public interface WordJpaRepository extends JpaRepository<WordEntity, Long> {
      *
      * @return the count of active word
      */
+
     long countByIsActiveTrue();
+
+    // count words by language
+    long countByLanguageAndIsActiveTrue(String language);
+
+    // count words be language and category
+    long countByLanguageAndCategoryAndIsActiveTrue(String language, String category);
+
+    // fallback - get any random word if no words found for specific language
+    @Query(value = "SELECT * FROM words WHERE is_active = true ORDER BY RANDOM() LIMIT 1",
+    nativeQuery = true)
+    Optional<WordEntity> findAnyRandomWord();
 }

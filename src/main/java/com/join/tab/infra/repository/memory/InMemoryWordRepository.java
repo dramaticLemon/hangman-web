@@ -1,6 +1,8 @@
 package com.join.tab.infra.repository.memory;
 
 import com.join.tab.domain.model.Word;
+import com.join.tab.domain.model.valueobject.GamePreferences;
+import com.join.tab.domain.model.valueobject.Language;
 import com.join.tab.domain.repository.WordRepository;
 import org.springframework.stereotype.Repository;
 
@@ -31,7 +33,12 @@ public class InMemoryWordRepository implements WordRepository {
     @Override
     public Word getRandomWord() {
         String randomWord = words.get(random.nextInt(words.size()));
-        return new Word(randomWord);
+        return new Word(randomWord, Language.defaultLanguage());
+    }
+
+    @Override
+    public Word getRandomWordByPreferences (GamePreferences preferences) {
+        return null;
     }
 
     /**
@@ -44,7 +51,7 @@ public class InMemoryWordRepository implements WordRepository {
     public Word findById(Long id) {
         // For demo purposes, just return a word by index
         if (id >= 0 && id < words.size()) {
-            return new Word(words.get(id.intValue()));
+            return new Word(words.get(id.intValue()), Language.defaultLanguage());
         }
         return getRandomWord();
     }

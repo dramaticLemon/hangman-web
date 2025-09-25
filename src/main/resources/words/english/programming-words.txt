@@ -1,0 +1,56 @@
+# Programming words
+# Easy words
+code
+bug
+app
+data
+test
+loop
+java
+html
+sql
+git
+api
+css
+dev
+cli
+var
+log
+if
+run
+net
+key
+
+# Medium words
+array
+stack
+queue
+class
+object
+while
+linux
+build
+input
+output
+token
+debug
+error
+cloud
+proxy
+
+# Hard words
+function
+variable
+operator
+compiler
+database
+framework
+software
+hardware
+protocol
+algorithm
+encryption
+iteration
+recursion
+container
+microservice

@@ -1,5 +1,6 @@
 package com.join.tab.domain.model;
 
+import com.join.tab.domain.model.valueobject.Language;
 import lombok.Getter;
 
 import java.util.Objects;
@@ -25,6 +26,7 @@ import java.util.Objects;
  */
 public class Word {
     private final String value;
+    private final Language language;
 
     /**
      * Create a new Word.
@@ -32,13 +34,32 @@ public class Word {
      * @param value the string value of the word; must not be null or empty
      * @throws IllegalArgumentException if the values is null or empty
      */
-    public Word(String value) {
+    public Word(String value, Language language) {
         if (value == null || value.trim().isEmpty()) {
             throw new IllegalArgumentException("Word cannot be null or empty");
         }
+        if (language == null) {
+            throw new IllegalArgumentException("Language cannot be null");
+        }
+
         this.value = value;
+        this.language = language;
     }
 
+    private void validateWordForLanguage() {
+        if (!isValidForLanguage(value, language)) {
+            throw  new IllegalArgumentException(
+                    String.format("Word '%s' is not valid for language '%s' ", value, language.getCode()));
+        }
+    }
+
+    private boolean isValidForLanguage(String word, Language lang) {
+        return switch (lang.getCode()) {
+            case "ua" -> word.matches("^[а-щьюяґєіїА-ЩЬЮЯҐЄІЇ]+$");
+            case "en", "de", "fr", "es" -> word.matches("^[a-z]+$");
+            default -> word.matches("^[a-zA-Zа-яёА-ЯЁґєіїҐЄІЇ]+$"); // mixed
+        };
+    }
     /**
      * Returns the string value of this Word.
      *
@@ -46,6 +67,10 @@ public class Word {
      */
     public String getValue() {
         return this.value;
+    }
+
+    public Language getLanguage() {
+        return this.language;
     }
 
     /**
@@ -89,5 +114,10 @@ public class Word {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Word{value='%s', language='%s'}", value, language.getCode());
     }
 }

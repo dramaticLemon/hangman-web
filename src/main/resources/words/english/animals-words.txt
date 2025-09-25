@@ -1,0 +1,57 @@
+# Animals words
+# Easy words
+cat
+dog
+cow
+pig
+rat
+bat
+fox
+owl
+bee
+ant
+hen
+duck
+lion
+wolf
+fish
+frog
+bear
+goat
+deer
+bird
+
+# Medium words
+tiger
+zebra
+horse
+sheep
+mouse
+snake
+whale
+shark
+panda
+camel
+eagle
+rhino
+koala
+monkey
+spider
+rabbit
+
+# Hard words
+elephant
+giraffe
+crocodile
+kangaroo
+dolphin
+penguin
+buffalo
+cheetah
+leopard
+octopus
+squirrel
+alligator
+hedgehog
+chimpanzee
+hippopotamus

@@ -29,10 +29,34 @@ public class Letter {
      * @throws IllegalArgumentException if the character is not a valid letter
      */
     public Letter(char value) {
-        if (! Character.isLetter(value)) {
+        if (!isValidLetter(value)) {
             throw new IllegalArgumentException("Must be a valid letter");
         }
         this.value = Character.toLowerCase(value);
+    }
+
+    private boolean isValidLetter(char letter) {
+        return isLatinLetter(letter) || isCyrillicLetter(letter);
+    }
+
+    private boolean isLatinLetter(char letter) {
+        return (letter >= 'a' && letter <= 'z') || (letter >= 'A' && letter <= 'Z');
+    }
+
+    private boolean isCyrillicLetter(char letter) {
+        Character.UnicodeBlock block = Character.UnicodeBlock.of(letter);
+        return block == Character.UnicodeBlock.CYRILLIC
+                || block == Character.UnicodeBlock.CYRILLIC_SUPPLEMENTARY
+                || block == Character.UnicodeBlock.CYRILLIC_EXTENDED_A
+                || block == Character.UnicodeBlock.CYRILLIC_EXTENDED_B;
+    }
+
+    public boolean isLatinAlphabet() {
+        return isLatinLetter(value);
+    }
+
+    public boolean isCyrillicAlphabet() {
+        return isCyrillicLetter(value);
     }
 
     /**
@@ -54,6 +78,11 @@ public class Letter {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 
 }

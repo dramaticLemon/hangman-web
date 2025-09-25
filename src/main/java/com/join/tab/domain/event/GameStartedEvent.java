@@ -1,6 +1,7 @@
 package com.join.tab.domain.event;
 
 import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.model.valueobject.Language;
 
 /**
  * Domain event that represents the start of a new HangmanGame
@@ -18,15 +19,21 @@ import com.join.tab.domain.model.valueobject.GameId;
 public class GameStartedEvent extends GameEvent{
 
     private final String word;
+    private final Language language;
+    private final String category;
 
     /**
      * Creates a new GameStartedEvent
      * @param gameId the ID of the game that was started
      * @param word the word chosen for the game
      */
-    public GameStartedEvent(GameId gameId, String word) {
+    public GameStartedEvent(GameId gameId, String word, Language language, String category) {
         super(gameId);
+
         this.word = word;
+        this.language = language;
+        this.category = category;
+
     }
 
     /**
@@ -34,7 +41,15 @@ public class GameStartedEvent extends GameEvent{
      *
      * @return the game word as a string
      */
-    public String gameWord() {
+    public String getWord() {
         return word;
+    }
+
+    public Language getLanguage() {
+        return this.language;
+    }
+
+    public String getCategory() {
+        return this.category;
     }
 }

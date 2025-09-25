@@ -1,6 +1,9 @@
 package com.join.tab.domain.repository;
 
 import com.join.tab.domain.model.Word;
+import com.join.tab.domain.model.valueobject.GamePreferences;
+
+import java.util.prefs.Preferences;
 
 /**
  * Repository interface for accessing {@link Word} entities.
@@ -16,6 +19,7 @@ public interface WordRepository {
      */
     Word getRandomWord();
 
+    Word getRandomWordByPreferences(GamePreferences preferences);
     /**
      * Finds a word by its unique ID.
      *

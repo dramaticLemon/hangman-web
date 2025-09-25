@@ -1,6 +1,6 @@
 package com.join.tab.application.service;
 
-import com.join.tab.infra.service.WordLoadersService;
+import com.join.tab.infra.service.WordLoaderService;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ public interface WordManagementService {
      *
      * @param filePath the path to the file containing words
      * @param category the category to assign to the words
-     * @return a {@link WordLoadersService.WordLoadResult} with the results of the loading process
+     * @return a {@link WordLoaderService.WordLoadResult} with the results of the loading process
      */
-    WordLoadersService.WordLoadResult loadWordsFromFile(String filePath, String category);
+    WordLoaderService.WordLoadResult loadWordsFromFile(String filePath, String category);
 
     /**
      * Reloads all words from predefined files, replacing the current active words.

@@ -7,6 +7,8 @@ import com.join.tab.domain.event.LetterGuessedEvent;
 import com.join.tab.domain.exception.InvalidGameStatusException;
 import com.join.tab.domain.exception.LetterAlreadyGuessedException;
 import com.join.tab.domain.model.valueobject.GameId;
+import com.join.tab.domain.model.valueobject.GamePreferences;
+import com.join.tab.domain.model.valueobject.Language;
 import com.join.tab.domain.model.valueobject.Letter;
 import com.join.tab.domain.model.Word;
 import com.join.tab.domain.enums.GameStatus;
@@ -37,6 +39,7 @@ public class HangmanGame {
 
     private final GameId gameId;
     private final Word word;
+    private final GamePreferences preferences;
     private final Set<Letter> guessedLetters;
     private final List<GameEvent> events;
     private int mistakeCount;
@@ -48,15 +51,21 @@ public class HangmanGame {
      * @param gameId the unique ID for the game.
      * @param word the word to guess in the game.
      */
-    public HangmanGame(GameId gameId, Word word) {
+    public HangmanGame(GameId gameId, Word word, GamePreferences gamePreferences) {
         this.gameId = gameId;
         this.word = word;
+        this.preferences = gamePreferences;
         this.guessedLetters = new HashSet<>();
         this.events = new ArrayList<>();
         this.mistakeCount = 0;
         this.status = GameStatus.IN_PROGRESS;
 
-        addEvent(new GameStartedEvent(gameId, word.getValue()));
+        addEvent(new GameStartedEvent(
+                gameId,
+                word.getValue(),
+                word.getLanguage(),
+                preferences.getCategory()
+                ));
     }
 
     /**
@@ -68,10 +77,11 @@ public class HangmanGame {
      * @param mistakeCount the number of incorrect guessed so far
      * @param status the current status of game.
      */
-    public HangmanGame (GameId gameId, Word word, Set<Letter> guessedLetters,
+    public HangmanGame (GameId gameId, Word word, GamePreferences preferences, Set<Letter> guessedLetters,
                         int mistakeCount, GameStatus status) {
         this.gameId = gameId;
         this.word = word;
+        this.preferences = preferences;
         this.guessedLetters = new HashSet<>(guessedLetters);
         this.events = new ArrayList<>();
         this.mistakeCount = mistakeCount;
@@ -95,6 +105,7 @@ public class HangmanGame {
      */
     public GuessResult guessResult(Letter letter) {
         validateGameInProgress();
+        validateLetterForLanguage(letter);
         validateLetterNotGuessed(letter);
 
         guessedLetters.add(letter);
@@ -116,7 +127,8 @@ public class HangmanGame {
                 getRemainingTries(),
                 status,
                 isCorrect,
-                hasGuessedLetter(letter)
+                hasGuessedLetter(letter),
+                word.getLanguage()
         );
     }
 
@@ -131,6 +143,33 @@ public class HangmanGame {
         }
     }
 
+    private void validateLetterForLanguage(Letter letter) {
+        if (!isValidLetterForLanguage(letter.getValue(), word.getLanguage())) {
+            throw new IllegalArgumentException(
+                    String.format("Letter '%c' is not valid for language '%s'",
+                            letter.getValue(), word.getLanguage().getCode()));
+        }
+    }
+
+    private boolean isValidLetterForLanguage(char letter, Language language) {
+        return switch (language.getCode()) {
+            case "ua" -> isCyrillicLetter(letter);
+            case "en", "de", "fr", "es" -> isLatinLetter(letter);
+            default  -> isLatinLetter(letter) || isCyrillicLetter(letter);
+        };
+    }
+
+    private boolean isLatinLetter(char letter) {
+        return (letter >= 'a' && letter <= 'z') || (letter >= 'A' && letter <= 'Z');
+    }
+
+    private boolean isCyrillicLetter(char letter) {
+        Character.UnicodeBlock block = Character.UnicodeBlock.of(letter);
+        return block == Character.UnicodeBlock.CYRILLIC
+                || block == Character.UnicodeBlock.CYRILLIC_SUPPLEMENTARY
+                || block == Character.UnicodeBlock.CYRILLIC_EXTENDED_A
+                || block == Character.UnicodeBlock.CYRILLIC_EXTENDED_B;
+    }
     /**
      * Ensures that the given letter has not been guessed before in the current game.
      *
@@ -233,6 +272,10 @@ public class HangmanGame {
         return mistakeCount;
     }
 
+    public GamePreferences getPreferences() {
+        return preferences;
+    }
+
     public Set<Letter> getGuessedLetters() {
         return new HashSet<>(guessedLetters);
     }
@@ -285,6 +328,7 @@ public class HangmanGame {
         private final GameStatus gameStatus;
         private final boolean wasCorrect;
         private final boolean wasAlreadyGuessed;
+        private final Language language;
 
         /**
          * Creates a new GuessResult.
@@ -297,12 +341,13 @@ public class HangmanGame {
          */
         public GuessResult(
                 String currentState, int remainingTries, GameStatus gameStatus,
-                boolean wasCorrect, boolean wasAlreadyGuessed) {
+                boolean wasCorrect, boolean wasAlreadyGuessed, Language language) {
             this.currentState = currentState;
             this.remainingTries = remainingTries;
             this.gameStatus = gameStatus;
             this.wasCorrect = wasCorrect;
             this.wasAlreadyGuessed = wasAlreadyGuessed;
+            this.language = language;
         }
 
         public String getCurrentState () {
@@ -323,6 +368,10 @@ public class HangmanGame {
 
         public boolean isWasAlreadyGuessed () {
             return wasAlreadyGuessed;
+        }
+
+        public Language getLanguage() {
+            return this.language;
         }
     }
 

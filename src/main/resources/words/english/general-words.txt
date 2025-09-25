@@ -1,0 +1,52 @@
+# English general words
+# Easy words
+cat
+dog
+sun
+moon
+book
+door
+fish
+bird
+tree
+house
+water
+fire
+light
+green
+happy
+quick
+small
+large
+bright
+clean
+
+# Medium words
+family
+friend
+school
+garden
+animal
+flower
+summer
+winter
+spring
+autumn
+kitchen
+bedroom
+computer
+internet
+telephone
+
+# Hard words
+beautiful
+wonderful
+adventure
+knowledge
+butterfly
+dictionary
+government
+education
+technology
+development
+
