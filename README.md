@@ -1,19 +1,42 @@
 # Hangman Game - Multilingual Web Application
 
-- A modern, multilingual Hangman game build with Spring Boot, following
+A modern, multilingual Hangman game build with Spring Boot, following
 Domain-Driven Design (DDD) principles and SOLID architecture patterns.
 The game supports multiple languages, categories, difficulty levels, and
 provides both REST API and web interface.
+---
 
+![alt text](src/main/resources/static/images/title.png)
 ## Features
-### Core Game Features
-    - Multilingual Support: English, Ukrainian, German, French, Spanish
-    - Category-based Words: Programming, Animals, Technology, General, etc.
-    - Difficulty Levels: Easy (3-4 letters), Medium (5-7 letters), Hard (8+ letters)
-    - Language-specific Validation: Proper alphabet validation for each language
-    - Virtual Keyboard: Adaptive keyboard based on selected language
+*Core Game Features*
+
+    - Multilingual Support: 
+        * English
+        * Ukrainian
+        * German
+        * French
+        * Spanish
+
+    - Category-based Words:
+        * Programming
+        * Animals
+        * Technology
+        * General
+
+    - Difficulty Levels:
+        * Easy (3-4 letters)
+        * Medium (5-7 letters)
+        * Hard (8+ letters)
+
+    - Language-specific Validation: 
+        * Proper alphabet validation for each language
+
+    - Virtual Keyboard:
+        * Adaptive keyboard based on selected language
+
     - Real-time Game State: Session-based game persistence
-### Technical Features
+*Technical Features*
+
     - Domain-Driven Design (DDD) architecture
     - SOLID Principles implementation
     - Clean Architecture with separated layers
@@ -24,7 +47,8 @@ provides both REST API and web interface.
     - Comprehensive Error Handling
     - Logging and Monitoring
 ## 🏗️ Architecture
-```courseignore
+*domain layer*
+```bash
 domain/
 ├── aggregate/
 │   └── HangmanGame.java          # Main game aggregate
@@ -47,8 +71,9 @@ domain/
     ├── WordRepository.java       # Domain repository interfaces
     └── GameRepository.java
 ```
-## Application Layer
-```courseignore
+
+*application layer*
+```bash
 application/
 ├── service/
 │   ├── HangmanGameService.java   # Main game service
@@ -58,8 +83,8 @@ application/
     ├── GuessDto.java
     └── LanguageInfoDto.java
 ```
-## Infrastructure Layer
-```courseignore
+*infrastructure layer*
+```bash
 infra
 ├── entity/
 │   └── WordEntity.java           # JPA entities
@@ -72,8 +97,8 @@ infra
 └── service/
     └── WordLoaderService.java    # File loading service
 ```
-## Controller Layer
-```courseignore
+*controller layer*
+```bash
 controller/
 ├── HangmanController.java        # Main game API
 ├── HomeController.java           # Web interface
@@ -82,6 +107,7 @@ controller/
 ```
 
 ## 🚀 Quick Start
+
 Prerequisites
 
 - Java 17 or later
@@ -113,10 +139,10 @@ mvn spring-boot:run
 | :--- | :---: | :---: | :--- |
 | English | `en` | Latin | computer, algorithm, spring |
 | Ukrainian | `uk` | Cyrillic | комп'ютер, алгоритм, програма |
-
+---
 ### Adding New Languages
 1. Create ford files:
-```courseignore
+```bash
 src/main/resources/words/[language]/
 ├── general-words.txt
 ├── programming-words.txt
@@ -135,21 +161,21 @@ private static final Set<String> SUPPORTED_LANGUAGES = Set.of(
 validationPatterns.put("it", Pattern.compile("^[a-zA-Zàèéìíîòóù]{3,50}$"));
 ```
 ## 📡 API Endpoints
-Game Management
-```courseignore
+*Game Management*
+```bash
 POST /api/hangman/start
 POST /api/hangman/start-with-preferences?language=en&category=programming&difficulty=medium
 POST /api/hangman/guess?letter=a
 GET  /api/hangman/status
 DELETE /api/hangman/end
 ```
-Language Support
-```courseignore
+*Language Support*
+```bash
 GET /api/hangman/languages
 GET /api/hangman/languages/{languageCode}
 ```
-Admin Endpoints
-```courseignore
+*Admin Endpoints*
+```bash
 GET    /api/admin/words/stats
 POST   /api/admin/words/upload
 POST   /api/admin/words/add?word=example&category=general
@@ -157,11 +183,11 @@ DELETE /api/admin/words/{word}
 POST   /api/admin/words/reload
 ```
 ### Example API Usage
-Start a new game in English:
+*Start a new game in English:*
 ```bash
 curl -X POST "http://localhost:8081/api/hangman/start?language=en"
 ```
-Guess a letter:
+*Guess a letter:*
 ```bash
 curl -X POST "http://localhost:8081/api/hangman/guess?letter=а"
 ```
@@ -179,8 +205,8 @@ Response:
   "message": "Correct!"
 }
 ```
-🗄️ Database Schema
-Words Table
+## 🗄️ Database Schema
+*Words Table*
 ```sql
 CREATE TABLE words (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -195,14 +221,14 @@ CREATE TABLE words (
     UNIQUE KEY uk_word_language (value, language)
 );
 ```
-Indexes
+*Indexes*
 - idx_word_language on language
 - idx_word_language_category on (language, category)
 - idx_word_active_language on (is_active, language)
 
-📝 Configuration
-Production (PostgreSQL):
-```courseignore
+## 📝 Configuration
+*Production (PostgreSQL):*
+```yml
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/hangman_db
@@ -214,9 +240,9 @@ spring:
       ddl-auto: validate
     show-sql: false
 ```
-🧪 Testing
-Run Tests
-```
+## 🧪 Testing
+*Run Tests*
+``` bash
 # Run all tests
 mvn test
 
@@ -226,13 +252,14 @@ mvn test -Dtest=HangmanGameServiceTest
 # Run integration tests
 mvn integration-test
 ```
-Test Coverage
+*Test Coverage*
 ```
 mvn jacoco:report
 ```
 
 ## 📊 Word File Format
-```Basic Format
+``` bash
+Basic Format
 # Comments start with #
 # Category: general
 # Language: en
@@ -254,8 +281,8 @@ development
 ```
 
 ## 🛠️ Development
-Running in Development Mode
-```
+*Running in Development Mode*
+```bash
 # With hot reload
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 
@@ -263,30 +290,30 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
 ```
 ### Adding New Features
-
+--- 
 1. Domain First: Start with domain model
 2. Test-Driven: Write tests before implementation
 3. API Design: Design REST endpoints
-4. Database Migration: Create Flyway scripts
+4. Database Migration: Create liquibase scripts
 5. Frontend Integration: Update JavaScript client
 
-Code Style
-
+### Code Style
+--- 
 * Follow Google Java Style Guide
 * Use meaningful variable names
 * Document public APIs
 * Write comprehensive tests
 
 ### 🔧 Production Deployment
-Docker Support
-```courseignore
+*Docker Support*
+```docker
 FROM openjdk:17-jdk-slim
 COPY target/hangman-game-*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 ```
-Build and Deploy
-```courseignore
+*Build and Deploy*
+```bash
 # Build JAR
 mvn clean package -Pprod
 
@@ -297,8 +324,8 @@ docker build -t hangman-game .
 docker-compose up -d
 
 ```
-Environment Variables
-```courseignore
+*Environment Variables*
+```yml
 DB_URL=jdbc:postgresql://db:5432/hangman
 DB_USERNAME=hangman_user
 DB_PASSWORD=secure_password
@@ -306,50 +333,51 @@ JAVA_OPTS=-Xmx512m
 SPRING_PROFILES_ACTIVE=prod
 
 ```
-📈 Monitoring and Logging
+## 📈 Monitoring and Logging
+
 * /actuator/health - Application health
 * /actuator/metrics - Application metrics
 * /actuator/info - Application info
 
 ### Logging Configuration
-```
+``` yml
 logging:
-level:
-com.join.tab: DEBUG
-org.springframework.web: INFO
-org.hibernate.SQL: DEBUG
-pattern:
-console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    level:
+        com.join.tab: DEBUG
+        org.springframework.web: INFO
+        org.hibernate.SQL: DEBUG
+    pattern:
+        console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
 ```
 
-🤝 Contributing
+## 🤝 Contributing
 1. Fork the repository
 2. Create a feature branch (git checkout -b feature/new-language)
 3. Commit your changes (git commit -am 'Add Italian language support')
 4. Push to the branch (git push origin feature/new-language)
 5. Create a Pull Request
 
-Development Guidelines
+## Development Guidelines
 
-Follow DDD principles
-Maintain SOLID architecture
-Write comprehensive tests
-Update documentation
-Add language-specific word files
+* Follow DDD principles
+* Maintain SOLID architecture
+* Write comprehensive tests
+* Update documentation
+* Add language-specific word files
 
-📄 License
-This project is licensed under the MIT License - see the [LICENSE.md]() file for details.
+## 📄 License
+This project is licensed under the MIT License - see the [text](LICENSE) file for details.
 
 
-🙏 Acknowledgments
+## 🙏 Acknowledgments
 
-Spring Boot team for the excellent framework
-Contributors to the multilingual word datasets
-Community feedback and suggestions
+* Spring Boot team for the excellent framework
+* Contributors to the multilingual word datasets
+* Community feedback and suggestions
 
-📞 Support
+## 📞 Support
 For questions, issues, or contributions:
 
-Create an Issue
-Start a Discussion
-Contact: chebandima27@gmail.com
+* Create an Issue
+* Start a Discussion
+* Contact: chebandima27@gmail.com
