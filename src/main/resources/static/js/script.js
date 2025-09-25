@@ -59,6 +59,14 @@ window.addEventListener('DOMContentLoaded', () => {
       currentLetters = nextLetters;
     });
 
+    // =========== go to home page ==================
+    const letters = document.querySelectorAll('.navbar-text span');
+
+    letters.forEach(letter => {
+        letter.addEventListener('click', () => {
+            window.location.href = '/api/game';
+        });
+    });
 
     // ======== Restart game ========
     gameOverEl.addEventListener('click', () => {
@@ -290,4 +298,6 @@ window.addEventListener('DOMContentLoaded', () => {
             lightEl.style.setProperty('--current-glow-rgb', '255,222,156'); // base
         }, 1000);
     }
+
+
 });
