@@ -34,8 +34,7 @@ import java.util.Set;
  */
 public class HangmanGame {
 
-    @Value("${game.max-mistakes")
-    private int maxMistakes;
+    private final static int MAXMISTAKE = 6;
 
     private final GameId gameId;
     private final Word word;
@@ -232,7 +231,7 @@ public class HangmanGame {
      * if the word has been completely guessed. Otherwise, the game remains in progress.h
      */
     private void updateGameStatus() {
-        if (mistakeCount >= maxMistakes) {
+        if (mistakeCount >= MAXMISTAKE) {
             status = GameStatus.LOST;
         } else if(isWordCompletelyGuessed()){
             status = GameStatus.WON;
@@ -296,7 +295,7 @@ public class HangmanGame {
     }
 
     public int getRemainingTries() {
-        return maxMistakes - mistakeCount;
+        return MAXMISTAKE - mistakeCount;
     }
 
     public int getMistakeCount() {

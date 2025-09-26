@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 /**
  * JPA-based implementation of the {@link WordRepository} interface
@@ -34,7 +33,6 @@ public class JpaWordRepository implements WordRepository {
 
     private static final Logger log = LoggerFactory.getLogger(JpaWordRepository.class);
     private final WordJpaRepository jpaRepository;
-    private final Random random = new Random();
 
     /**
      * Constructor a new JpaWordRepository using the underlying Jpa repository.
