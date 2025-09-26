@@ -1,0 +1,2 @@
+{"@timestamp":"2025-09-26T13:36:28.203875423Z","level":"ERROR","logger_name":"com.join.tab.monitoring.logging.GameLoggingAspect","message":"Service method HangmanGameServiceImpl.guessLetter failed after 2 ms: Game not found for session: 8F91D2056E45CA2F6C375EBAE3EA5F74"}
+{"@timestamp":"2025-09-26T13:36:36.090175676Z","level":"ERROR","logger_name":"com.join.tab.monitoring.logging.GameLoggingAspect","message":"Service method HangmanGameServiceImpl.guessLetter failed after 0 ms: Game not found for session: 83608CE59AA9940DF6474EE5ABFF588A"}

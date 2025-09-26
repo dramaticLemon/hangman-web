@@ -143,7 +143,6 @@ public class HangmanController {
 
     /**
      * Processes a letter guess for the current Hangman game associated with the HTTp session.
-     *
      * Steps performed:
      * 1. Retrieves the session ID and guessed letter form the request.
      * 2. Calls {@link HangmanGameService#guessLetter(String, char)} to process the guess.

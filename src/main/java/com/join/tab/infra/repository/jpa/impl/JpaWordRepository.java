@@ -128,7 +128,7 @@ public class JpaWordRepository implements WordRepository {
      * @return {@code true } if the word exists, {@code false} otherwise
      */
     public boolean wordExists(String value) {
-        return jpaRepository.findByValueIgnoreCase(value).isPresent();
+        return jpaRepository.findByContentIgnoreCase(value).isPresent();
     }
 
     /**
@@ -141,7 +141,7 @@ public class JpaWordRepository implements WordRepository {
     }
 
     public boolean wordExistsForLanguage(String value, Language language) {
-        return jpaRepository.findByValueIgnoreCaseAndLanguage(value, language.getCode()).isPresent();
+        return jpaRepository.findByContentIgnoreCaseAndLanguage(value, language.getCode()).isPresent();
     }
     public List<String> getSupportedLanguages() {
         return jpaRepository.findSupportedLanguages();
@@ -162,7 +162,7 @@ public class JpaWordRepository implements WordRepository {
         }
 
         log.info("Using fallback word: {} in language: {}",
-                fallback.get().getValue(), fallback.get().getLanguage());
+                fallback.get().getContent(), fallback.get().getLanguage());
         return convertToDomain(fallback.get());
     }
 
@@ -174,7 +174,7 @@ public class JpaWordRepository implements WordRepository {
      */
     private Word convertToDomain(WordEntity entity) {
         Language language = new Language(entity.getLanguage());
-        return new Word(entity.getValue(), language);
+        return new Word(entity.getContent(), language);
     }
 
     /**
@@ -185,7 +185,7 @@ public class JpaWordRepository implements WordRepository {
      */
     private WordEntity convertToEntity(Word domain, String category) {
         WordEntity entity = new WordEntity();
-        entity.setValue(domain.getValue());
+        entity.setContent(domain.getContent());
         entity.setLanguage(domain.getLanguage().getCode());
         entity.setCategory(category);
         entity.setIsActive(true);

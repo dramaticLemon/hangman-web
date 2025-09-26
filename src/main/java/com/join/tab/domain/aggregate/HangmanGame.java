@@ -61,7 +61,7 @@ public class HangmanGame {
 
         addEvent(new GameStartedEvent(
                 gameId,
-                word.getValue(),
+                word.getContent(),
                 word.getLanguage(),
                 preferences.getCategory()
                 ));
@@ -118,7 +118,7 @@ public class HangmanGame {
 
         if (status != GameStatus.IN_PROGRESS) {
             addEvent(new GameEndedEvent(
-                    gameId, status == GameStatus.WON, word.getValue())
+                    gameId, status == GameStatus.WON, word.getContent())
             );
         }
 
@@ -287,7 +287,7 @@ public class HangmanGame {
     }
 
     public String getWord() {
-        return word.getValue();
+        return word.getContent();
     }
 
     public GameStatus getStatus() {

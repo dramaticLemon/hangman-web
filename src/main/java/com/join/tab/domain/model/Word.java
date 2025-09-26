@@ -21,31 +21,31 @@ import java.util.Objects;
  * </pre>
  */
 public class Word {
-    private final String value;
+    private final String content;
     private final Language language;
 
     /**
      * Create a new Word.
      *
-     * @param value the string value of the word; must not be null or empty
+     * @param content the string value of the word; must not be null or empty
      * @throws IllegalArgumentException if the values is null or empty
      */
-    public Word(String value, Language language) {
-        if (value == null || value.trim().isEmpty()) {
+    public Word(String content, Language language) {
+        if (content == null || content.trim().isEmpty()) {
             throw new IllegalArgumentException("Word cannot be null or empty");
         }
         if (language == null) {
             throw new IllegalArgumentException("Language cannot be null");
         }
 
-        this.value = value;
+        this.content = content;
         this.language = language;
     }
 
     private void validateWordForLanguage() {
-        if (!isValidForLanguage(value, language)) {
+        if (!isValidForLanguage(content, language)) {
             throw  new IllegalArgumentException(
-                    String.format("Word '%s' is not valid for language '%s' ", value, language.getCode()));
+                    String.format("Word '%s' is not valid for language '%s' ", content, language.getCode()));
         }
     }
 
@@ -62,8 +62,8 @@ public class Word {
      *
      * @return the word as a string
      */
-    public String getValue() {
-        return this.value;
+    public String getContent() {
+        return this.content;
     }
 
     public Language getLanguage() {
@@ -76,7 +76,7 @@ public class Word {
      * @return the number of characters if the word
      */
     public int getLength() {
-        return value.length();
+        return content.length();
     }
 
     /**
@@ -87,7 +87,7 @@ public class Word {
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     public char getCharAt(int index) {
-        return value.charAt(index);
+        return content.charAt(index);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Word {
      * @return {@code true} if the letter exists in the word; {@code false} otherwise
      */
     public boolean contains(char letter) {
-        return value.indexOf(Character.toLowerCase(letter)) >= 0;
+        return content.indexOf(Character.toLowerCase(letter)) >= 0;
     }
 
     @Override
@@ -105,16 +105,16 @@ public class Word {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Word word = (Word) o;
-        return Objects.equals(value, word.value);
+        return Objects.equals(content, word.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(content);
     }
 
     @Override
     public String toString() {
-        return String.format("Word{value='%s', language='%s'}", value, language.getCode());
+        return String.format("Word{value='%s', language='%s'}", content, language.getCode());
     }
 }

@@ -13,7 +13,7 @@ public class WordTest {
         Language en = new Language("en");
         Word word = new Word("hello", en);
 
-        assertEquals("hello", word.getValue());
+        assertEquals("hello", word.getContent());
         assertEquals(en, word.getLanguage());
         assertEquals(5, word.getLength());
     }

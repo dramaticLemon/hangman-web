@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: ../01-create-word-table.sql
+      relativeToChangelogFile: true

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  * JPA entity representing a word in the Hangman game database.
- * Stores the word value, its length, category, difficulty level, and active status.
+ * Stores the word content, its length, category, difficulty level, and active status.
  * Include validation and normalization logic before persisting or updating.
  * Database mapping:
  * - Table name: "words"
@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  *  - idx_word_length on "length"
  *  - idx_word_category on "category"
  *  Features:
- *  - Enforces non-black, alphabetic word value of 3 - 50 characters.
- *  - Automatically calculates word length and normalizes value to lowercase.
+ *  - Enforces non-black, alphabetic word content of 3 - 50 characters.
+ *  - Automatically calculates word length and normalizes content to lowercase.
  *  - Determined difficulty level based on word length if not explicitly set.
  *  - Supports options category and active status.
  */
@@ -32,7 +32,7 @@ import java.time.LocalDateTime;
         @Index(name = "idx_word_active_language", columnList =  "is_active, language")
     },
     uniqueConstraints = {
-        @UniqueConstraint(name = "uk_word_language", columnNames = {"value", "language"})
+        @UniqueConstraint(name = "uk_word_language", columnNames = {"content", "language"})
     })
 public class WordEntity {
 
@@ -44,21 +44,21 @@ public class WordEntity {
     private Long id;
 
     /**
-     * The word value.
+     * The word content.
      * Must be alphabetic, 3-50 char, and unique.
      */
-    @Column(name = "value", nullable = false, unique = true, length = 50)
-    @NotBlank(message = "Word value cannot be blank")
+    @Column(name = "content", nullable = false, unique = true, length = 50)
+    @NotBlank(message = "Word content cannot be blank")
     @Size(min = 3, max = 50, message = "Word must be between 3 and 50 characters")
     @Pattern(regexp = "^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ]+$", message = "Word must contain only letters")
-    private String value;
+    private String content;
 
     @Column(name = "language", nullable = false, length = 5)
     @NotBlank(message = "Language cannot be blank")
     @Pattern(regexp = "^[a-z]{2}$", message = "Language must be a valid 2-letter code")
     private String language;
 
-    /** Length of the word, automatically set based on value **/
+    /** Length of the word, automatically set based on content **/
     @Column(name = "length", nullable = false)
     private Integer length;
 
@@ -75,7 +75,7 @@ public class WordEntity {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "update_at")
+    @Column(name = "updated_at")
     private LocalDateTime updateAt;
 
     /** Whether the word is active and available for use. Defaults to true. **/
@@ -87,7 +87,7 @@ public class WordEntity {
     public WordEntity (
             Boolean isActive, LocalDateTime updateAt, LocalDateTime createdAt,
             DifficultyLevel difficultlyLevel, String category, Integer length,
-            String language, String value, Long id) {
+            String language, String content, Long id) {
         this.isActive = isActive;
         this.updateAt = updateAt;
         this.createdAt = createdAt;
@@ -95,7 +95,7 @@ public class WordEntity {
         this.category = category;
         this.length = length;
         this.language = language;
-        this.value = value;
+        this.content = content;
         this.id = id;
     }
 
@@ -112,9 +112,9 @@ public class WordEntity {
     }
 
     private void validateAndNormalize() {
-        if (value != null) {
-            this.value = normalizeWordByLanguage(value, language);
-            this.length = this.value.length();
+        if (content != null) {
+            this.content = normalizeWordByLanguage(content, language);
+            this.length = this.content.length();
 
             // Set difficulty based on length if not specified
             if (this.difficultlyLevel == null) {
@@ -162,12 +162,12 @@ public class WordEntity {
         this.id = id;
     }
 
-    public String getValue () {
-        return value;
+    public String getContent () {
+        return content;
     }
 
-    public void setValue (String value) {
-        this.value = value;
+    public void setContent (String content) {
+        this.content = content;
     }
 
     public Integer getLength () {

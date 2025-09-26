@@ -129,13 +129,13 @@ public class WordManagementServiceImpl implements WordManagementService {
 
             String cleanWord = word.toLowerCase().trim();
 
-            if (wordJpaRepository.findByValueIgnoreCaseAndLanguage(cleanWord, language).isPresent()) {
+            if (wordJpaRepository.findByContentIgnoreCaseAndLanguage(cleanWord, language).isPresent()) {
                 log.info("Word already exists for language {}: {}", language, cleanWord);
                 return false;
             }
 
             WordEntity entity = new WordEntity();
-            entity.setValue(cleanWord);
+            entity.setContent(cleanWord);
             entity.setLanguage(language);
             entity.setCategory(category);
             entity.setIsActive(true);
@@ -160,7 +160,7 @@ public class WordManagementServiceImpl implements WordManagementService {
 
     public boolean removeWordForLanguage(String word, String language) {
         try {
-            Optional<WordEntity> entity = wordJpaRepository.findByValueIgnoreCaseAndLanguage(word.trim(), language);
+            Optional<WordEntity> entity = wordJpaRepository.findByContentIgnoreCaseAndLanguage(word.trim(), language);
 
             if (entity.isPresent()) {
                 entity.get().setIsActive(false);
@@ -184,7 +184,7 @@ public class WordManagementServiceImpl implements WordManagementService {
     }
 
     public boolean wordExistsForLanguage(String word, String language) {
-        return wordJpaRepository.findByValueIgnoreCaseAndLanguage(word.trim(), language).isPresent();
+        return wordJpaRepository.findByContentIgnoreCaseAndLanguage(word.trim(), language).isPresent();
     }
 
     private boolean isValidWordForLanguage(String word, String language) {

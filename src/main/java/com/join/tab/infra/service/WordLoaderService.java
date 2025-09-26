@@ -229,7 +229,7 @@ public class WordLoaderService {
             }
 
             // Check if word already exists in database
-            if (wordJpaRepository.findByValueIgnoreCaseAndLanguage(cleanWord, language).isPresent()) {
+            if (wordJpaRepository.findByContentIgnoreCaseAndLanguage(cleanWord, language).isPresent()) {
                 result.incrementSkipped();
                 return;
             }
@@ -296,7 +296,7 @@ public class WordLoaderService {
      */
     private WordEntity createWordEntity(String word, String language, String category) {
         WordEntity entity = new WordEntity();
-        entity.setValue(word);
+        entity.setContent(word);
         entity.setLanguage(language);
         entity.setCategory(category);
         entity.setIsActive(true);

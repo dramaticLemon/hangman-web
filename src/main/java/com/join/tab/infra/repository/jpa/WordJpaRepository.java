@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * JPA repository for managing {@link WordEntity} objects in the database.
  * Provides methods to fetch random words, filter by difficulty, length, or category,
- * find by value, list active words, and retrieve statistics such as categories or total count.
+ * find by content, list active words, and retrieve statistics such as categories or total count.
  * Extend {@link  JpaRepository} to provide standard CRUD operation.
  */
 public interface WordJpaRepository extends JpaRepository<WordEntity, Long> {
@@ -51,19 +51,19 @@ public interface WordJpaRepository extends JpaRepository<WordEntity, Long> {
     List<WordEntity> findRandomWordByCategory(@Param("category") String category);
 
     /**
-     * Finds a word by its value, ignoring case.
+     * Finds a word by its content, ignoring case.
      *
-     * @param value the word to search for
+     * @param content the word to search for
      * @return an {@link Optional} containing the {@link WordEntity}, or empty if not found
      */
-    Optional<WordEntity> findByValueIgnoreCase(String value);
+    Optional<WordEntity> findByContentIgnoreCase(String content);
 
     /**
-     * Retrieves all active words ordered alphabetically by value.
+     * Retrieves all active words ordered alphabetically by content.
      *
-     * @return a list of active {@link WordEntity} objects ordered by value
+     * @return a list of active {@link WordEntity} objects ordered by content
      */
-    List<WordEntity> findByIsActiveTrueOrderByValueAsc();
+    List<WordEntity> findByIsActiveTrueOrderByContentAsc();
 
     /** Random word by language */
     @Query(value = """
@@ -144,11 +144,11 @@ public interface WordJpaRepository extends JpaRepository<WordEntity, Long> {
     );
 
     /**  Check if word exists for specific language */
-    Optional<WordEntity> findByValueIgnoreCaseAndLanguage(
-            String value, String language);
+    Optional<WordEntity> findByContentIgnoreCaseAndLanguage(
+            String content, String language);
 
     /** Get all active words by language */
-    List<WordEntity> findByLanguageAndIsActiveTrueOrderByValueAsc(String language);
+    List<WordEntity> findByLanguageAndIsActiveTrueOrderByContentAsc(String language);
 
     /**  Get categories for specific language */
     @Query("""
