@@ -6,17 +6,14 @@ import java.util.Objects;
 
 /**
  * Represents a word used in the Hangman game.
- *
  * This is a domain model that encapsulates the string value of a word.
  * It provides utility methods to access the word's characters and check
  * if a letter exists within the word.
- *
  * Features:
  *  - Immutability: The word cannot be changed once created.
  *  - Provides character-level access and length information
  *  - Proper {@link #equals(Object)} and {@link #hashCode()} implementations
  *    for use in collection and comparisons.
- *
  * Usage:
  * <pre>
  *     Word word = new Word("test");
@@ -59,6 +56,7 @@ public class Word {
             default -> word.matches("^[a-zA-Zа-яёА-ЯЁґєіїҐЄІЇ]+$"); // mixed
         };
     }
+
     /**
      * Returns the string value of this Word.
      *

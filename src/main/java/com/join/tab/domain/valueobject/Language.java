@@ -13,11 +13,11 @@ public class Language {
         if (code == null || code.trim().isEmpty()) {
             this.code = DEFAULT_LANGUAGE;
         } else {
-            String noramalizedCode = code.toLowerCase().trim();
-            if (!SUPPORTED_LANGUAGE.contains(noramalizedCode)) {
+            String normalizedCode = code.toLowerCase().trim();
+            if (!SUPPORTED_LANGUAGE.contains(normalizedCode)) {
                 throw new IllegalArgumentException("Unsupported language: " + code + ". Supported languages: " + SUPPORTED_LANGUAGE);
             }
-            this.code = noramalizedCode;
+            this.code = normalizedCode;
         }
 
     }

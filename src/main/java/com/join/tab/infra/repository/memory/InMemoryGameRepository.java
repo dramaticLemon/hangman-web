@@ -19,10 +19,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * In-memory implementation of {@link GameRepository}.
- *
  * Stores Hangman games in a concurrent hash map, suitable for testing or
  * temporary storage without a persistent database.
- *
  * Provides basic CRUD operations for saving, retrieving, and deleting games.
  * Uses an internal ({@link GameData}) class to hold the game states.
  */

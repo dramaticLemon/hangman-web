@@ -20,10 +20,8 @@ import java.util.Random;
 
 /**
  * JPA-based implementation of the {@link WordRepository} interface
- *
  * Provides methods to fetch words from the database and convert them
  * between the JPA entity ({@link WordEntity}) and the domain model ({@link Word}).
- *
  * Features:
  * - Retrieves random words, by ID, or by difficulty level.
  * - Check if a word exists and counts active words.

@@ -12,16 +12,13 @@ import java.time.LocalDateTime;
 
 /**
  * JPA entity representing a word in the Hangman game database.
- *
  * Stores the word value, its length, category, difficulty level, and active status.
  * Include validation and normalization logic before persisting or updating.
- *
  * Database mapping:
  * - Table name: "words"
  * - Indexes:
  *  - idx_word_length on "length"
  *  - idx_word_category on "category"
- *
  *  Features:
  *  - Enforces non-black, alphabetic word value of 3 - 50 characters.
  *  - Automatically calculates word length and normalizes value to lowercase.

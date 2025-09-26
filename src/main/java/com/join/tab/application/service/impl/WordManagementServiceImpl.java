@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -37,6 +38,18 @@ public class WordManagementServiceImpl implements WordManagementService {
             return wordLoadersService.loadWordsFromFile(filePath, language, category);
         } catch (Exception e) {
             log.error("Failed to load words form file: {} for language: {}", filePath, language, e);
+            WordLoaderService.WordLoadResult result = new WordLoaderService.WordLoadResult(language, category);
+            result.addError("Failed to load words: " + e.getMessage());
+            return result;
+        }
+    }
+
+    @Override
+    public WordLoaderService.WordLoadResult loadWordsFromStream(InputStream inputStream, String language, String category) {
+        try {
+            return wordLoadersService.loadWordsFromStream(inputStream, language, category);
+        } catch (Exception e) {
+            log.error("Failed to load words for language: {}", language);
             WordLoaderService.WordLoadResult result = new WordLoaderService.WordLoadResult(language, category);
             result.addError("Failed to load words: " + e.getMessage());
             return result;
@@ -101,13 +114,13 @@ public class WordManagementServiceImpl implements WordManagementService {
     }
 
     @Override
-    public boolean addWord(String word, String category) {
-        return addWordWithLanguage(word, "en", category); // Default to English
+    public boolean addWord(String word, String language, String category) {
+        return addWordWithLanguage(word, language, category);
     }
 
     public boolean addWordWithLanguage(String word, String language, String category) {
         try {
-            Language lang = new Language(language); // Validate language
+            new Language(language); // Validate language
 
             if (!isValidWordForLanguage(word, language)) {
                 log.warn("Attempted to add invalid word for language {}: {}", language, word);
@@ -140,11 +153,9 @@ public class WordManagementServiceImpl implements WordManagementService {
         }
     }
 
-
-
     @Override
-    public boolean removeWord(String word) {
-        return removeWordForLanguage(word, "en"); // Default to English
+    public boolean removeWord(String word, String language) {
+        return removeWordForLanguage(word, language);
     }
 
     public boolean removeWordForLanguage(String word, String language) {
@@ -168,8 +179,8 @@ public class WordManagementServiceImpl implements WordManagementService {
     }
 
     @Override
-    public boolean wordExists(String word) {
-        return wordExistsForLanguage(word, "en"); // Default to English
+    public boolean wordExists(String word, String language) {
+        return wordExistsForLanguage(word, language); // Default to English
     }
 
     public boolean wordExistsForLanguage(String word, String language) {

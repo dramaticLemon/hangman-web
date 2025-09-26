@@ -1,19 +1,19 @@
 package com.join.tab.application.service.impl;
 
+import com.join.tab.application.dto.GameDto;
+import com.join.tab.application.dto.GuessDto;
 import com.join.tab.application.dto.LanguageInfoDto;
+import com.join.tab.application.service.HangmanGameService;
 import com.join.tab.domain.aggregate.HangmanGame;
 import com.join.tab.domain.enums.DifficultyLevel;
 import com.join.tab.domain.exception.GameNotFoundException;
 import com.join.tab.domain.exception.UnsupportedLanguageException;
+import com.join.tab.domain.repository.GameRepository;
+import com.join.tab.domain.service.GameFactory;
 import com.join.tab.domain.valueobject.GameId;
 import com.join.tab.domain.valueobject.GamePreferences;
 import com.join.tab.domain.valueobject.Language;
 import com.join.tab.domain.valueobject.Letter;
-import com.join.tab.domain.repository.GameRepository;
-import com.join.tab.domain.service.GameFactory;
-import com.join.tab.application.dto.GameDto;
-import com.join.tab.application.dto.GuessDto;
-import com.join.tab.application.service.HangmanGameService;
 import com.join.tab.infra.repository.jpa.impl.JpaWordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,34 +40,21 @@ public class HangmanGameServiceImpl implements HangmanGameService {
     }
 
     /**
-     * Starts a new Hangman game for the given session.
-     * Delete any existing game for the session.
-     * Creates a new game using the GameFactory.
-     * Saves the new game to the repository.
-     * @param sessionId the unique identifier of the user's session.
-     * @return a GameDto representing the new game.
-     */
-    @Override
-    public GameDto startNewGame(String sessionId) {
-        return startNewGameWithLanguage(sessionId, "en");
-    }
-
-    /**
      * Starts a new Hangman game for the given session with the specific language.
      * This method performs th following steps:
      * 1. Creates a {@link GameId} based on the provided session ID.
      * 2. Validate the {@code languageCode} and construct a {@link Language} object.
      * 3. Detekt any existing game accosted with the session to start fresh.
-     * 4. Saves the new game to the {@link GameRepository}. 
+     * 4. Saves the new game to the {@link GameRepository}.
      * 5. Logs the creation and returns a {@link GameDto} representing the new game.
-     * 
-     * @param sessionId the unique identifier of the user's session
+     *
+     * @param sessionId    the unique identifier of the user's session
      * @param languageCode the ISo code of the language to use for the gam
      * @return a {@link GameDto} representing the new game
      * @throws UnsupportedLanguageException if the provided {@code languageCode} is invalid or not supported
      */
     @Override
-    public GameDto startNewGameWithLanguage(String sessionId, String languageCode) {
+    public GameDto startNewGameWithLanguage (String sessionId, String languageCode) {
         try {
             GameId gameId = new GameId(sessionId);
             Language language = new Language(languageCode);
@@ -85,15 +72,33 @@ public class HangmanGameServiceImpl implements HangmanGameService {
         }
     }
 
+    /**
+     * Starts a new Hangman game with the specified preferences.
+     *
+     * <p>The method performs the following steps:
+     * <ul>
+     *   <li>Validates the session ID and language code.</li>
+     *   <li>Parses the difficulty level if provided.</li>
+     *   <li>Removes any existing game for the session.</li>
+     *   <li>Creates and saves a new game with the given language, category, and difficulty.</li>
+     * </ul>
+     *
+     * @param sessionId    the unique session identifier
+     * @param languageCode the language code for the game
+     * @param category     the word category for the game
+     * @param difficulty   the difficulty level (optional, e.g., "EASY", "MEDIUM", "HARD")
+     * @return a {@link GameDto} representing the newly created game
+     * @throws UnsupportedLanguageException if the language code is invalid or unsupported
+     */
     @Override
-    public GameDto startNewGameWithPreferences(String sessionId, String languageCode, String category, String difficulty) {
+    public GameDto startNewGameWithPreferences (String sessionId, String languageCode, String category, String difficulty) {
         try {
             GameId gameId = new GameId(sessionId);
-            Language language  = new Language(languageCode);
+            Language language = new Language(languageCode);
 
             DifficultyLevel difficultyLevel = null;
 
-            if (difficulty != null && !difficulty.trim().isEmpty()) {
+            if (difficulty != null && ! difficulty.trim().isEmpty()) {
                 difficultyLevel = DifficultyLevel.valueOf(difficulty.toUpperCase());
             }
 
@@ -113,9 +118,9 @@ public class HangmanGameServiceImpl implements HangmanGameService {
             throw new UnsupportedLanguageException(languageCode);
         }
     }
+
     /**
      * Mekes a guess in the current Hangman game for the given session.
-     *
      * Steps performed:
      * 1. Finds the game associated with the session ID.
      * 2. Throws {@link GameNotFoundException} if no game is found.
@@ -125,12 +130,12 @@ public class HangmanGameServiceImpl implements HangmanGameService {
      * 6. Returns a {@link GuessDto} containing the updated game state and the result of the guess.
      *
      * @param sessionId the unique identifier of the user's session.
-     * @param letter the character being guessed.
+     * @param letter    the character being guessed.
      * @return a {@link GuessDto} containing the updated game and guess result
-     * @throws  GameNotFoundException if not game exists for the given session
+     * @throws GameNotFoundException if not game exists for the given session
      */
     @Override
-    public GuessDto guessLetter(String sessionId, char letter) {
+    public GuessDto guessLetter (String sessionId, char letter) {
         GameId gameId = new GameId(sessionId);
         HangmanGame game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new GameNotFoundException("Game not found for session: " + sessionId));
@@ -146,13 +151,12 @@ public class HangmanGameServiceImpl implements HangmanGameService {
         } catch (IllegalArgumentException e) {
             log.warn("Invalid letter '{}' form game language '{}' in session {}",
                     letter, game.getPreferences().getLanguage().getCode(), sessionId);
-            throw  e;
+            throw e;
         }
     }
 
     /**
      * Retrieves the current Hangman game for the given session.
-     *
      * Steps performed:
      * 1. Finds the game associated with the session ID.
      * 2. Returns the game wrapped as a {@link GameDto} if it exists.
@@ -162,7 +166,7 @@ public class HangmanGameServiceImpl implements HangmanGameService {
      * @return a {@link GameDto} representing the current game, or {@code null} if no game exists.
      */
     @Override
-    public GameDto getCurrentGame(String sessionId) {
+    public GameDto getCurrentGame (String sessionId) {
         GameId gameId = new GameId(sessionId);
         HangmanGame game = gameRepository.findById(gameId)
                 .orElse(null);
@@ -172,7 +176,6 @@ public class HangmanGameServiceImpl implements HangmanGameService {
 
     /**
      * Ends the current Hangman game for the given session.
-     *
      * Steps performed:
      * 1. Finds the game associated with the session ID
      * 2. Deleted the game form the repository.
@@ -180,7 +183,7 @@ public class HangmanGameServiceImpl implements HangmanGameService {
      * @param sessionId the unique identifier of the user's session.
      */
     @Override
-    public void endGame(String sessionId) {
+    public void endGame (String sessionId) {
         GameId gameId = new GameId(sessionId);
         gameRepository.delete(gameId);
     }
@@ -190,20 +193,20 @@ public class HangmanGameServiceImpl implements HangmanGameService {
      * This method the following:
      * - Creates a {@link Language} objet from the given language code
      * - Retrieves the number of categories available for this language form the
-     *   repository
+     * repository
      * - Retrieves the total number of words available for this language.
      * - Builds and returns a {@link LanguageInfoDto} containing the lang code,
-     *   display name, category count, word count, and whether the language is
-     *   supported
+     * display name, category count, word count, and whether the language is
+     * supported
      *
      * @param languageCode the code of the language to retrieve information for
      *                     (e.g., "en", "ua", "fr")
      * @return a {@link LanguageInfoDto} with details about the language
      * @throws UnsupportedLanguageException if the language code is invalid or not
-     * supported
+     *                                      supported
      */
     @Override
-    public LanguageInfoDto getLanguageInfo(String languageCode) {
+    public LanguageInfoDto getLanguageInfo (String languageCode) {
         try {
             Language language = new Language(languageCode);
             long categories = wordRepository.getCategoriesByLanguage(language);
@@ -234,7 +237,7 @@ public class HangmanGameServiceImpl implements HangmanGameService {
      * @return the data in a {@link LanguageInfoDto} object
      */
     @Override
-    public LanguageInfoDto getAllLanguagesInfo() {
+    public LanguageInfoDto getAllLanguagesInfo () {
         List<String> supportedLanguages = wordRepository.getSupportedLanguages();
         Map<String, Object> languagesData = supportedLanguages.stream()
                 .collect(Collectors.toMap(

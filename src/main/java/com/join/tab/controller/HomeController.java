@@ -52,7 +52,7 @@ public class HomeController {
      * @param session the current HTTP session (used to identity the game)
      * @return the name of view template ("index")
      */
-    @GetMapping("/api/game")
+    @GetMapping("/api/hangman")
     public String index(
             @RequestParam(value = "language", defaultValue = "en") String language,
             @RequestParam(value = "category", required = false) String category,

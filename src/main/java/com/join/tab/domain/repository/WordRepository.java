@@ -5,7 +5,6 @@ import com.join.tab.domain.valueobject.GamePreferences;
 
 /**
  * Repository interface for accessing {@link Word} entities.
- *
  * Provides methods to fetch random words or find a word by its ID.
  */
 public interface WordRepository {

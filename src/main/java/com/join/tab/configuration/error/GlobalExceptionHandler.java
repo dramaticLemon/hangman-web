@@ -15,15 +15,6 @@ import org.springframework.validation.BindException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-
-    @ExceptionHandler(NoHandlerFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleNotFound(NoHandlerFoundException ex, Model model) {
-        model.addAttribute("error", "Page not found: " + ex.getRequestURL());
-        return "error/404";
-    }
-
-
     @ExceptionHandler(ResponseStatusException.class)
     public String handleResponseStatusException(ResponseStatusException ex, Model model) {
         HttpStatus status = (HttpStatus) ex.getStatusCode();
@@ -35,6 +26,13 @@ public class GlobalExceptionHandler {
             case METHOD_NOT_ALLOWED: return "error/405";
             default: return "error/500";
         }
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleNotFound(NoHandlerFoundException ex, Model model) {
+        model.addAttribute("error", "Page not found: " + ex.getRequestURL());
+        return "error/404";
     }
 
     @ExceptionHandler({ MethodArgumentNotValidException.class,

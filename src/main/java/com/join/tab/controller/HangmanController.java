@@ -29,7 +29,6 @@ public class HangmanController {
 
     /**
      * Start a new Hangman game for the current HTTP session.
-     *
      * Steps performed:
      * 1. Uses the session ID to start a new game via the {@link HangmanGameService}.
      * 2. Prepares a response containing:
@@ -45,17 +44,19 @@ public class HangmanController {
      */
     @PostMapping("/start")
     public ResponseEntity<Map<String, Object>> startGame(
-            HttpSession session,
-            @RequestParam(value = "lang", defaultValue = "en") String language) {
+            @RequestParam(value = "lang", defaultValue = "en") String language,
+            HttpSession session) {
 
         try {
-            GameDto game = gameService.startNewGameWithLanguage(session.getId(), language);
+            GameDto game = gameService.startNewGameWithLanguage(
+                    session.getId(), language);
 
             Map<String, Object> response = createGameResponse(game);
             response.put("message", "Game started successfully");
-
             log.info("New game started for session {} with languages {}", session.getId(), language);
+
             return ResponseEntity.ok(response);
+
         } catch (UnsupportedLanguageException e) {
             log.warn("Attempted to start game with unsupported language: {}", language);
             return ResponseEntity.badRequest().body(Map.of("error", "Unsupported language: " + language));
@@ -87,15 +88,19 @@ public class HangmanController {
 
             log.info("New game started for session {} with preferences: lang={} ,cat={}, diff={}",
                     session.getId(), language, category, difficult);
+
             return ResponseEntity.ok(response);
+
         } catch (UnsupportedLanguageException e) {
-            log.warn("Attempted to start game with unsupported language: {}", language);
+            log.warn("Attempted to start-with-preferences game with unsupported language: {}", language);
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "Unsupported language: " + language));
+
         } catch (IllegalArgumentException e) {
             log.warn("Invalid game preferences provided: {}", e.getMessage());
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "Invalid preferences: " + e.getMessage()));
+
         } catch (Exception e) {
             log.error("Failed to start game with preferences for session {}", session.getId(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -135,6 +140,7 @@ public class HangmanController {
 
         return response;
     }
+
     /**
      * Processes a letter guess for the current Hangman game associated with the HTTp session.
      *
@@ -165,20 +171,24 @@ public class HangmanController {
             GuessDto result = gameService.guessLetter(session.getId(), letter);
 
             Map<String, Object> response = createGuessResponse(result);
+
             return ResponseEntity.ok(response);
 
         } catch (GameNotFoundException e) {
             log.warn("Guess attempted for non-existent game, session: {}", session.getId());
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Map.of("error", "Game not found. Please start a new game."));
+
         } catch (LetterAlreadyGuessedException e) {
             log.info("Duplicate letter guess: {} for session {}", letter, session.getId());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("error", e.getMessage()));
+
         } catch (IllegalArgumentException e) {
             log.warn("Invalid letter '{}' guessed for session {}: {}", letter, session.getId(), e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("error", "Invalid letter for this language: " + letter));
+
         } catch (Exception e) {
             log.error("Failed to process guess for session {}", session.getId(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -188,7 +198,6 @@ public class HangmanController {
 
     /**
      * Retrieves the current status of the Hangman game for the HTTP session.
-     *
      * Steps performed:
      * 1: Uses the session ID to get the current game via {@link HangmanGameService#getCurrentGame(String)}.
      * 2. If no game exists, returns HTTP 404 Not Found with an error message.
@@ -225,7 +234,6 @@ public class HangmanController {
 
     /**
      * Ends the current Hangman game for the HTTP session.
-     *
      * Steps performed:
      * 1. Uses the session ID to end the game via {@link HangmanGameService#endGame(String)}.
      * 2. Returns HTTP 200 ok with a success message if the game is ended successfully.
@@ -238,7 +246,9 @@ public class HangmanController {
     public ResponseEntity<Map<String, Object>> endGame(HttpSession session) {
         try {
             gameService.endGame(session.getId());
+
             return ResponseEntity.ok(Map.of("message", "Game ended successfully"));
+
         } catch (Exception e) {
             log.error("Failed to end game for session: {}", session.getId(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -246,6 +256,20 @@ public class HangmanController {
         }
     }
 
+    /**
+     * Handles GET request to retrieve supported language and their related data.
+     * <p>Returns a json response with</p>
+     * <ul>
+     *     <li><b>supportedLanguages</b> - list of available language codes</li>
+     *     <li><b>languagesData</b> - detailed information per language</li>
+     * </ul>
+     *
+     * @return {@link ResponseEntity} containing:
+     *      <ul>
+     *          <li>HTTP 200 with a map of supported languages and language data</li>
+     *          <li>HTTP 500 with an error message if retrieval fails</li>
+     *      </ul>
+     */
     @GetMapping("/languages")
     public ResponseEntity<Map<String, Object>> getSupportedLanguages() {
         try {
@@ -264,6 +288,24 @@ public class HangmanController {
         }
     }
 
+   /** Retrieves detailed information about a specific language by its code.
+    * <p>Response JSON includes:
+    * <ul>
+    * <li><b>language</b> – language code</li>
+    *   <li><b>displayName</b> – human-readable language name</li>
+    *   <li><b>categories</b> – list of available categories</li>
+    *   <li><b>wordCount</b> – total number of words</li>
+    *   <li><b>supported</b> – whether the language is supported</li>
+    * </ul>
+    *
+    * @param languageCode the ISO code of the language
+    * @return {@link ResponseEntity} with:
+    *         <ul>
+    *           <li>HTTP 200 (OK) and language info if found</li>
+    *           <li>HTTP 404 (Not Found) if the language is unsupported</li>
+    *           <li>HTTP 500 (Internal Server Error) on unexpected errors</li>
+    *         </ul>
+    */
     @GetMapping("/languages/{languageCode}")
     public ResponseEntity<Map<String, Object>> getLanguageInfo(@PathVariable String languageCode) {
         try {

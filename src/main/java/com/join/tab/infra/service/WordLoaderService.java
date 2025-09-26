@@ -49,7 +49,6 @@ public class WordLoaderService {
 
     /**
      * Loads default word into the database when the application starts.
-     *
      * Triggered on {@link ApplicationReadyEvent}.
      * If the database has no active words, it loads words from predefined files
      * and assigns them to appropriate categories.
@@ -87,19 +86,19 @@ public class WordLoaderService {
 
     /**
      * Loads word from a file into the database under the specified category
-     *
      * Each line in the represents a word. Lines thet are empty or duplicated
      * are skipped. Errors encountered during processing are colleted in the result.
-     *
      * This method is transactional, so all successfully processed are persisted
      * automatically.
      *
      * @param filePath the path to the file on the classpath
      * @param category the category to assign to the words
+     * @param language the language word file
      * @return a {@link WordLoadResult} containing counts of loaded, skipped words and any errors
      */
     @Transactional
-    public WordLoadResult loadWordsFromFile(String filePath, String language, String category) {
+    public WordLoadResult loadWordsFromFile(
+            String filePath, String language, String category) {
         WordLoadResult result = new WordLoadResult(language, category);
 
         try {
@@ -147,16 +146,54 @@ public class WordLoaderService {
         return result;
     }
 
+    @Transactional
+    public WordLoadResult loadWordsFromStream(
+            InputStream inputStream, String language, String category) {
+
+        WordLoadResult result = new WordLoadResult(language, category);
+        try {
+            // validate language
+            new Language(language);
+
+            Set<String> processedWords = new HashSet<>();
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+
+                String line;
+                int lineNumber = 0;
+
+                while ((line = reader.readLine()) != null) {
+                    lineNumber++;
+                    processWord(line.trim(), language, category, lineNumber, processedWords, result);
+                }
+            }
+
+            log.info("Word loading completed for language {}: {} loaded, {} skipped, {} errors",
+                    language, result.getLoadedCount(), result.getSkippedCount(), result.getErrors().size());
+
+        } catch (IllegalArgumentException e) {
+            log.error("Invalid language: {}", language, e);
+            result.addError("Invalid language: " + language);
+        } catch (IOException e) {
+            log.error("Error reading uploaded file for language: {}", language, e);
+            result.addError("IO Error: " + e.getMessage());
+        } catch (Exception e) {
+            log.error("Unexpected error loading words for language: {}", language, e);
+            result.addError("Unexpected error: " + e.getMessage());
+        }
+
+        return result;
+    }
+
     /**
      * Processes a single word from a file and attempts to save in the database.
-     *
      * The method performs the following checks:
      * - Skips empty lines and lines starting with '#'.
      * - Validates word format (alphabetic only, proper length).
      * - Skips duplicates within the current batch.
      * - Skips words already present in the database.
      * - Skips banned words.
-     *
      * Successfully validated words are saved as {@link WordEntity} in the database.
      * Updates the provided {@link  WordLoadResult} with counts of loaded, skipped words and errors.
      *
@@ -166,13 +203,14 @@ public class WordLoaderService {
      * @param processedWords a set of words already processed in the current batch
      * @param result the {@link WordLoadResult} object to track success, skips, and errors
      */
-    private void processWord(String word, String language, String category,
-                             int lineNumber, Set<String> processedWords,
-                             WordLoadResult result) {
+    private void processWord(
+            String word, String language, String category, int lineNumber,
+            Set<String> processedWords, WordLoadResult result) {
         try {
 
+            // skip empty lines and comments
             if (word.isEmpty() || word.startsWith("#")) {
-                return; // skip empty lines ans comments
+                return;
             }
 
             String cleanWord = word.toLowerCase().trim();
@@ -248,7 +286,6 @@ public class WordLoaderService {
 
     /**
      * Creates a new {@link WordEntity} for persistence.
-     *
      * Sets the word value, category, and marks it as active.
      * The length and difficulty level will be automatically set by
      * the {@code @PrePersist} method in {@link WordEntity}.
@@ -268,11 +305,9 @@ public class WordLoaderService {
 
     /**
      * Reloads words from predefined files into the database.
-     *
      * The method performs the following steps:
      * 1. Deactivates all existing words in the database.
      * 2. Loads fresh words from default, programming, and animals word files.
-     *
      * This method is transactional, so all changes are applied atomically.
      * It ensures the database has an up-to-date set of words while preserving
      * inactive words for historical or rollback purposes.
@@ -349,7 +384,6 @@ public class WordLoaderService {
 
     /**
      * Represents the result of loading words from a file or source.
-     *
      * Tracks the number of successfully loaded words, skipped words,
      * and any errors encountered during processing.
      */

@@ -6,23 +6,14 @@ import com.join.tab.application.dto.LanguageInfoDto;
 
 /**
  * Service interface for managing Hangman games.
- *
  * Provides methods to start a new game, make guesses, query the current game state,
  * and end a game for a given session.
  */
 public interface HangmanGameService {
 
-    /**
-     * Starts a new Hangman game for the specified session.
-     * If a game already exists for the session, it is replaced.
-     *
-     * @param sessionId the unique session identifier
-     * @return a {@link GameDto} representing the initial state of the game
-     */
-    GameDto startNewGame(String sessionId);
-
     GameDto startNewGameWithLanguage(String sessionId, String languageCode);
     GameDto startNewGameWithPreferences(String sessionId, String languageCode, String category, String difficulty);
+
     /**
      * Makes a guess for the specified session's current game.
      *
@@ -47,6 +38,18 @@ public interface HangmanGameService {
      * @param sessionId the unique session identifier
      */
     void endGame(String sessionId);
+
+    /**
+     * Returns detailed information about a specific language.
+     *
+     * @param languageCode the language code to retrieve info for
+     * @return a {@link LanguageInfoDto} containing language details
+     */
     LanguageInfoDto getLanguageInfo(String languageCode);
+
+    /**
+     * Returns information about all supported languages.
+     * @return a {@link LanguageInfoDto} containing details for all languages.
+     */
     LanguageInfoDto getAllLanguagesInfo();
 }

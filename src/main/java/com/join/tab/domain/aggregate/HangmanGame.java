@@ -12,6 +12,7 @@ import com.join.tab.domain.valueobject.Language;
 import com.join.tab.domain.valueobject.Letter;
 import com.join.tab.domain.model.Word;
 import com.join.tab.domain.enums.GameStatus;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,22 +21,21 @@ import java.util.Set;
 
 /**
  * Aggregate root representing a Hangman game.
- *
  * Encapsulate the game state, guessed letters. mistake count, and domain events.
  * Provides constructors for starting a new game or loading an existing game form a repository.
- *
  * Key features:
  * - Track the word to guess, guessed letters, mistakes, and game status.
  * - Publishes domain events such as {@link GameStartedEvent}, {@link LetterGuessedEvent}, and {@link GameEndedEvent}.
  * - Supports gameplay operations like guessing letters and retrieving the current word state.
- *
  * Usage:
  * <pre>
  *     HangmanGame game = new HangmanGame(new GameId("ex123"), new Word("ex"));
  * </pre>
  */
 public class HangmanGame {
-    private static final int MAX_MISTAKES = 6;
+
+    @Value("${game.max-mistakes")
+    private int maxMistakes;
 
     private final GameId gameId;
     private final Word word;
@@ -90,7 +90,6 @@ public class HangmanGame {
 
     /**
      * Process a player's guess for a letter in the current game.
-     *
      * Steps performed:
      * 1. Validated that the game is still in progress and the letter was not guessed before.
      * 2. Adds the letter to the set of guessed letters.
@@ -119,7 +118,9 @@ public class HangmanGame {
         addEvent(new LetterGuessedEvent(gameId, letter, isCorrect));
 
         if (status != GameStatus.IN_PROGRESS) {
-            addEvent(new GameEndedEvent(gameId, status == GameStatus.WON, word.getValue()));
+            addEvent(new GameEndedEvent(
+                    gameId, status == GameStatus.WON, word.getValue())
+            );
         }
 
         return new GuessResult(
@@ -143,6 +144,11 @@ public class HangmanGame {
         }
     }
 
+    /**
+     * Validates that a given letter belongs to the alphabet of the word's language
+     * Throws IllegalArgumentException if the letter is not valid for the language.
+     * @param letter the {@link Letter} to validate.
+     */
     private void validateLetterForLanguage(Letter letter) {
         if (!isValidLetterForLanguage(letter.getValue(), word.getLanguage())) {
             throw new IllegalArgumentException(
@@ -151,6 +157,21 @@ public class HangmanGame {
         }
     }
 
+    /**
+     * Check if a character is valid for the specified language.
+     *
+     * <p>Rules:</p>
+     * <ul>
+     *     <li>Ukrainian ("ua") -> Cyrillic letters only</li>
+     *     <li>English, German, French, Spanish ("en", "de", "fr", "es") ->
+     *         Latin letters only</li>
+     *     <li>Other languages -> Latin or Cyrillic letters</li>
+     * </ul>
+     *
+     * @param letter the character to check
+     * @param language the {@link Letter} to validate again
+     * @return true if the letter is valid for the language, false otherwise
+     */
     private boolean isValidLetterForLanguage(char letter, Language language) {
         return switch (language.getCode()) {
             case "ua" -> isCyrillicLetter(letter);
@@ -159,10 +180,21 @@ public class HangmanGame {
         };
     }
 
+    /**
+     * Check if the given character is a Latin letter(A-Z, a-z).
+     * @param letter the character to check
+     * @return true if the character is a Latin letter, false otherwise.
+     */
     private boolean isLatinLetter(char letter) {
         return (letter >= 'a' && letter <= 'z') || (letter >= 'A' && letter <= 'Z');
     }
 
+    /**
+     * Check if the given character is a Cyrillic letter
+     * @param letter the character to check
+     * @return true if the character belongs to any Cyrillic Unicode block, false
+     * otherwise.
+     */
     private boolean isCyrillicLetter(char letter) {
         Character.UnicodeBlock block = Character.UnicodeBlock.of(letter);
         return block == Character.UnicodeBlock.CYRILLIC
@@ -170,6 +202,7 @@ public class HangmanGame {
                 || block == Character.UnicodeBlock.CYRILLIC_EXTENDED_A
                 || block == Character.UnicodeBlock.CYRILLIC_EXTENDED_B;
     }
+
     /**
      * Ensures that the given letter has not been guessed before in the current game.
      *
@@ -194,13 +227,12 @@ public class HangmanGame {
 
     /**
      * Updated the status of the game based on the current state.
-     *
      * Sets the status to {@link GameStatus#LOST} if the number of mistakes
      * has reached the maximum allowed. Sets the status to {@link  GameStatus#WON}
      * if the word has been completely guessed. Otherwise, the game remains in progress.h
      */
     private void updateGameStatus() {
-        if (mistakeCount >= MAX_MISTAKES) {
+        if (mistakeCount >= maxMistakes) {
             status = GameStatus.LOST;
         } else if(isWordCompletelyGuessed()){
             status = GameStatus.WON;
@@ -224,7 +256,6 @@ public class HangmanGame {
 
     /**
      * Returns the current state of the word being guessed.
-     *
      * Letters that have been guessed correctly are shown, while unguessed letters
      * are represented as underscores ('_')
      *
@@ -265,7 +296,7 @@ public class HangmanGame {
     }
 
     public int getRemainingTries() {
-        return MAX_MISTAKES - mistakeCount;
+        return maxMistakes - mistakeCount;
     }
 
     public int getMistakeCount() {
@@ -294,7 +325,6 @@ public class HangmanGame {
 
     /**
      * Returns a list of uncommitted domain events for the current game.
-     *
      * These events represent actions that have occurred but have not yet been
      * persisted or publisher
      *
@@ -310,10 +340,8 @@ public class HangmanGame {
 
     /**
      * Value object representing the result of a letter guess in a Hangman game.
-     *
      * Contains information about the current state of the word, remaining tires,
      * game status, and whether the guess was correct or already guessed.
-     *
      * Usage
      * <pre>
      *     GuessResult result = game.guessResult(new Letter('a'));

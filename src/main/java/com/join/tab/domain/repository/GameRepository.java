@@ -7,7 +7,6 @@ import java.util.Optional;
 
 /**
  * Repository interface for managing {@link HangmanGame} aggregate.
- *
  * Provides basic CRUD operations for storing, retrieving, and deleting games.
  */
 public interface GameRepository {
