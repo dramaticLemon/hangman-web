@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "hangman_alerts.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+scrape_configs:
+  - job_name: 'hangman-game'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['hangman-game:8081']
+    scrape_interval: 30s
+    scrape_timeout: 10s
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

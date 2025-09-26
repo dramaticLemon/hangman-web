@@ -1,0 +1,73 @@
+{
+  "dashboard": {
+    "title": "Hangman Game Monitoring",
+    "panels": [
+      {
+        "title": "Games Statistics",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "hangman_games_started_total",
+            "legendFormat": "Games Started"
+          },
+          {
+            "expr": "hangman_games_won_total",
+            "legendFormat": "Games Won"
+          },
+          {
+            "expr": "hangman_games_lost_total",
+            "legendFormat": "Games Lost"
+          }
+        ]
+      },
+      {
+        "title": "Win Rate",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "hangman_games_won_total / (hangman_games_won_total + hangman_games_lost_total)",
+            "legendFormat": "Win Rate"
+          }
+        ]
+      },
+      {
+        "title": "Response Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "50th percentile"
+          }
+        ]
+      },
+      {
+        "title": "Memory Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "jvm_memory_used_bytes{area=\"heap\"}",
+            "legendFormat": "Heap Used"
+          },
+          {
+            "expr": "jvm_memory_max_bytes{area=\"heap\"}",
+            "legendFormat": "Heap Max"
+          }
+        ]
+      },
+      {
+        "title": "Active Games by Language",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "hangman_games_active_by_language",
+            "legendFormat": "{{language}}"
+          }
+        ]
+      }
+    ]
+  }
+}

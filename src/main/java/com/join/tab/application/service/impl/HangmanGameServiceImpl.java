@@ -15,6 +15,8 @@ import com.join.tab.domain.valueobject.GamePreferences;
 import com.join.tab.domain.valueobject.Language;
 import com.join.tab.domain.valueobject.Letter;
 import com.join.tab.infra.repository.jpa.impl.JpaWordRepository;
+import com.join.tab.monitoring.metrics.GameMetrics;
+import io.micrometer.core.instrument.Timer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,11 +34,15 @@ public class HangmanGameServiceImpl implements HangmanGameService {
     private final GameRepository gameRepository;
     private final GameFactory gameFactory;
     private final JpaWordRepository wordRepository;
+    private final GameMetrics gameMetrics;
 
-    public HangmanGameServiceImpl (GameRepository gameRepository, GameFactory gameFactory, JpaWordRepository wordRepository) {
+    public HangmanGameServiceImpl (
+            GameRepository gameRepository, GameFactory gameFactory,
+            JpaWordRepository wordRepository, GameMetrics gameMetrics) {
         this.gameRepository = gameRepository;
         this.gameFactory = gameFactory;
         this.wordRepository = wordRepository;
+        this.gameMetrics = gameMetrics;
     }
 
     /**
@@ -55,6 +61,7 @@ public class HangmanGameServiceImpl implements HangmanGameService {
      */
     @Override
     public GameDto startNewGameWithLanguage (String sessionId, String languageCode) {
+        Timer.Sample sample = gameMetrics.startGameTimer();
         try {
             GameId gameId = new GameId(sessionId);
             Language language = new Language(languageCode);
@@ -63,12 +70,19 @@ public class HangmanGameServiceImpl implements HangmanGameService {
             gameRepository.delete(gameId);
             HangmanGame game = gameFactory.createNewGameWithLanguage(gameId, language);
             gameRepository.save(game);
+
+            // record metrics
+            String category = game.getPreferences().hasCategory() ? game.getPreferences().getCategory() : null;
+            gameMetrics.recordGameStarted(languageCode, category);
+
             log.info("Started new game for session {} with language {}", sessionId, languageCode);
             return GameDto.fromDomain(game);
 
         } catch (IllegalArgumentException e) {
             log.error("Invalid language code: {}", languageCode, e);
             throw new UnsupportedLanguageException(languageCode);
+        } finally {
+            gameMetrics.recordGameDuration(sample);
         }
     }
 
@@ -91,7 +105,11 @@ public class HangmanGameServiceImpl implements HangmanGameService {
      * @throws UnsupportedLanguageException if the language code is invalid or unsupported
      */
     @Override
-    public GameDto startNewGameWithPreferences (String sessionId, String languageCode, String category, String difficulty) {
+    public GameDto startNewGameWithPreferences (
+            String sessionId, String languageCode, String category, String difficulty) {
+
+       Timer.Sample sample = gameMetrics.startGameTimer();
+
         try {
             GameId gameId = new GameId(sessionId);
             Language language = new Language(languageCode);
@@ -103,10 +121,13 @@ public class HangmanGameServiceImpl implements HangmanGameService {
             }
 
             GamePreferences preferences = new GamePreferences(language, category, difficultyLevel);
+
             // remove existing game if any
             gameRepository.delete(gameId);
             HangmanGame game = gameFactory.createNewGameWithPreferences(gameId, preferences);
             gameRepository.save(game);
+
+            gameMetrics.recordGameStarted(languageCode, category);
 
             log.info("Started new game for session {} with preferences: language={}, category={}, difficulty={}",
                     sessionId, languageCode, category, difficultyLevel);
@@ -116,6 +137,8 @@ public class HangmanGameServiceImpl implements HangmanGameService {
             log.error("Invalid game preferences: language={}, category={}, difficulty={}",
                     languageCode, category, difficulty, e);
             throw new UnsupportedLanguageException(languageCode);
+        } finally {
+            gameMetrics.recordGameDuration(sample);
         }
     }
 
@@ -145,9 +168,22 @@ public class HangmanGameServiceImpl implements HangmanGameService {
             HangmanGame.GuessResult result = game.guessResult(domainLetter);
 
             gameRepository.save(game);
+
+            // record metrics
+            gameMetrics.recordLetterGuessed(game.getPreferences().getLanguage().getCode(), result.isWasCorrect());
+
+            // record game completion metrics
+            if (game.isWon()) {
+                gameMetrics.recordGameWon(game.getPreferences().getLanguage().getCode());
+            } else if (game.isLost()) {
+                gameMetrics.recordGameLost(game.getPreferences().getLanguage().getCode());
+            }
+
             log.debug("Letter '{}' guessed for session {}, correct: {}",
                     letter, sessionId, result.isWasCorrect());
+
             return GuessDto.fromDomain(game, result);
+
         } catch (IllegalArgumentException e) {
             log.warn("Invalid letter '{}' form game language '{}' in session {}",
                     letter, game.getPreferences().getLanguage().getCode(), sessionId);

@@ -28,7 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class HomeController {
-    private static final Logger log = LoggerFactory.getLogger(HomeController.class); private final HangmanGameService gameService; /**
+    private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+    private final HangmanGameService gameService; /**
      * Creates a new HomeController with a given HangmanService.
      *
      * @param gameService the service that manages Hangman game logic.

@@ -1,0 +1,29 @@
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'chebandima27@gmail.com'
+  smtp_auth_username: 'chebandima27@gmail.com'
+  smtp_auth_password: 'your-app-password'
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'hangman-alerts'
+
+receivers:
+  - name: 'hangman-alerts'
+    email_configs:
+      - to: 'admin@yourdomain.com'
+        subject: 'Hangman Game Alert: {{ .GroupLabels.alertname }}'
+        body: |
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Labels: {{ .Labels }}
+          {{ end }}
+    slack_configs:
+      - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+        channel: '#alerts'
+        title: 'Hangman Game Alert'
+        text: '{{ .CommonAnnotations.summary }}'
