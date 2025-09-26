@@ -5,15 +5,12 @@ import java.util.Objects;
 
 /**
  * Represents a unique identifier for a Hangman game.
- *
  * This is a Value Object that encapsulates the game ID as a {@link String}.
  * Is ensures that the ID is not null or empty.
- *
  * Features:
  * - Immutability: Once created, the value cannot be changed.
  * - Proper {@link #equals(Object)} and {@link #hashCode()} implementations
  *   for use in collections and comparisons.
- *
  * Usage:
  * <pre>
  *     GameId gameId = new GameId("session134");

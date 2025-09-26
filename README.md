@@ -194,8 +194,8 @@ curl -X POST "http://localhost:8081/api/hangman/guess?letter=а"
 Response:
 ```json
 {
-  "currentState": "p_o___m",
-  "currentStateWithSpaces": "p _ о _ _ _ m",
+  "currentState": "p_o___mm___",
+  "currentStateWithSpaces": "p _ о _ _ _ m m _ _ _",
   "remainingTries": 5,
   "status": "IN_PROGRESS",
   "language": "en",

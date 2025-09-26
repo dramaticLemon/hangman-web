@@ -2,7 +2,6 @@ package com.join.tab.domain.event;
 
 import com.join.tab.domain.valueobject.GameId;
 import com.join.tab.domain.valueobject.Letter;
-import lombok.Getter;
 
 /**
  * Domain event that represents a letter guess made in a Hangman game.
@@ -16,7 +15,6 @@ import lombok.Getter;
  *     boolean correct = event.isWasCorrect();
  * </pre>
  */
-@Getter
 public class LetterGuessedEvent extends  GameEvent{
     private final Letter letter;
     private final boolean wasCorrect;
@@ -34,4 +32,11 @@ public class LetterGuessedEvent extends  GameEvent{
         this.wasCorrect = wasCorrect;
     }
 
+    public Letter getLetter () {
+        return letter;
+    }
+
+    public boolean isWasCorrect () {
+        return wasCorrect;
+    }
 }

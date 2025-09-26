@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -36,8 +34,6 @@ import java.time.LocalDateTime;
     uniqueConstraints = {
         @UniqueConstraint(name = "uk_word_language", columnNames = {"value", "language"})
     })
-@NoArgsConstructor
-@AllArgsConstructor
 public class WordEntity {
 
     /**
@@ -85,6 +81,23 @@ public class WordEntity {
     /** Whether the word is active and available for use. Defaults to true. **/
     @Column(name = "is_active")
     private Boolean isActive = true;
+
+    public WordEntity ()  { }
+
+    public WordEntity (
+            Boolean isActive, LocalDateTime updateAt, LocalDateTime createdAt,
+            DifficultyLevel difficultlyLevel, String category, Integer length,
+            String language, String value, Long id) {
+        this.isActive = isActive;
+        this.updateAt = updateAt;
+        this.createdAt = createdAt;
+        this.difficultlyLevel = difficultlyLevel;
+        this.category = category;
+        this.length = length;
+        this.language = language;
+        this.value = value;
+        this.id = id;
+    }
 
     @PrePersist
     protected void onCreate() {

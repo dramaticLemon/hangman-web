@@ -4,16 +4,13 @@ import java.util.Objects;
 
 /**
  * Represents a single letter used in the Hangman game.
- *
  * This is a Value Object that encapsulates a single character.
  * It ensures that only valid letters (a-z, A-Z) are allowed and stores
  * the value in lowercase for consistency.
- *
  * Features:
  *  - Immutability: Once create, the value cannot be changed.
  *  - Proper {@link #equals(Object)} and {@link #hashCode()} implementations
  *    for use in collections and comparisons.
- *
  * Usage:
  * <pre>
  *     Letter letter = new Letter('A'); // stored as 'a'
